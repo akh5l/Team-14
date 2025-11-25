@@ -8,8 +8,12 @@
 <body class="bg-gray-100 font-sans min-h-screen flex flex-col">
 
   <header class="bg-blue-600 p-4 flex justify-between items-center">
-    <div class="text-white font-bold text-2xl">
-      <a href="{{ url('/') }}">Bridge 14 Games</a></div>
+    <a href="{{ url('/') }}" class="flex items-center gap-2 text-white font-bold text-xl sm:text-2xl">
+      <img src="{{ asset('images/logo.png') }}" alt="Logo" class="h-12 sm:h-15 w-auto">
+      Bridge 14 Games
+    </a>
+
+
     <nav class="space-x-4 text-white font-semibold">
       <a href="{{ url('/product_details.blade.php') }}" class="hover:underline">Shop</a>
       <a href="#" class="hover:underline">Cart</a>
@@ -57,8 +61,8 @@
       <div class="flex flex-wrap justify-center gap-4">
         <div class="bg-blue-500 text-white p-4 rounded-lg cursor-pointer hover:bg-blue-600 transition">Tabletop Games</div>
         <div class="bg-green-500 text-white p-4 rounded-lg cursor-pointer hover:bg-green-600 transition">Video Games</div>
-        <div class="bg-purple-500 text-white p-4 rounded-lg cursor-pointer hover:bg-purple-600 transition">Video Gaming accessories</div>
-        <div class="bg-yellow-500 text-white p-4 rounded-lg cursor-pointer hover:bg-yellow-600 transition">Tabletop Gaming accessories</div>
+        <div class="bg-purple-500 text-white p-4 rounded-lg cursor-pointer hover:bg-purple-600 transition">Video Gaming Accessories</div>
+        <div class="bg-yellow-500 text-white p-4 rounded-lg cursor-pointer hover:bg-yellow-600 transition">Tabletop Gaming Accessories</div>
         <div class="bg-red-500 text-white p-4 rounded-lg cursor-pointer hover:bg-yellow-600 transition">Consoles</div>
 
       </div>
@@ -70,15 +74,15 @@
     <div class="flex flex-wrap justify-center gap-6">
       <div class="bg-gray-100 p-6 rounded-lg w-full md:w-1/3 shadow hover:shadow-xl transition">
         <h3 class="text-xl font-semibold mb-2">Wide Selection</h3>
-        <p>Explore our vast collection of tabletop and gaming paraphernalia. From tabletop games to video games and consoles, we're sure that we have something you'll love</p>
+        <p>Explore our vast collection of tabletop and gaming paraphernalia.<br>From tabletop games to video games and consoles, we're sure that we have something you'll love</p>
       </div>
       <div class="bg-gray-100 p-6 rounded-lg w-full md:w-1/3 shadow hover:shadow-xl transition">
         <h3 class="text-xl font-semibold mb-2">Expert Recommendations</h3>
         <p>Our team will help you find the perfect game for you based on your needs</p>
       </div>
       <div class="bg-gray-100 p-6 rounded-lg w-full md:w-1/3 shadow hover:shadow-xl transition">
-        <h3 class="text-xl font-semibold mb-2">fast Shipping</h3>
-        <p>Quick and reliable dispatch on all orders, with free shipping over £40</p>
+        <h3 class="text-xl font-semibold mb-2">Fast Shipping</h3>
+        <p>Quick and reliable dispatch on all orders, with free shipping on orders over £40</p>
       </div>
     </div>
   </section>
@@ -86,7 +90,7 @@
   <section class="bg-gray-600 text-white py-12">
     <div class="max-w-7xl mx-auto px-4 text-center">
       <h2 class="text-3xl mb-4">Join the Bridge 14 Community</h2>
-      <p class="mb-6">Subscribe to our newsletter and receive updates on new releases and exclusive deals</p>
+      <p class="mb-6">Subscribe to our newsletter and receive updates on new releases and exclusive deals!</p>
       <form class="flex max-w-md mx-auto space-x-2">
         <input type="email" placeholder="Enter your email" class="bg-gray-800 w-full p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
         <button class="bg-blue-500 hover:bg-blue-600 px-4 py-3 rounded-lg font-semibold transition">Subscribe</button>
