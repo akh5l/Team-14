@@ -116,8 +116,8 @@ class DatabaseSeeder extends Seeder
                 'image_url' => 'images/products/warhammer.png',
             ],
             [
-                'product_name' => 'Magic: the Gathering - Foundations Jumpstart Booster',
-                'description' => 'Quick and fun Magic: the Gathering boosters for beginners',
+                'product_name' => 'Magic: The Gathering - Foundations Jumpstart Booster',
+                'description' => 'Quick and fun Magic: The Gathering boosters for beginners',
                 'category_id' => 2,
                 'price' => 8.00,
                 'product_type' => 'tabletop_games',

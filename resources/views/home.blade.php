@@ -40,8 +40,7 @@
         @foreach ($featured as $product)
             <div class="bg-white rounded-lg shadow hover:shadow-lg transition p-4 flex flex-col">
                 <img src="{{ $product->image_url }}"
-                     alt="{{ $product->product_name }}"
-                     class="h-48 w-full object-cover mb-4 rounded" />
+                    class="h-48 w-full object-contain bg-gray-100 rounded mb-4" />
 
                 <h3 class="text-xl font-semibold mb-2">{{ $product->product_name }}</h3>
 
