@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: 'ZT Nature Variable';
+    src: url('/public/fonts/ZT-Nature-Variable-VF.ttf') format('truetype-variations'),
+         url('/public/fonts/ZT-Nature-Variable-VF.ttf') format('truetype') tech('variations');
+    font-weight: 100 1000;
+    font-stretch: 25% 151%;
+}
+
+body {
+    font-family: 'ZT Nature Variable', sans-serif;
+}
+
