@@ -23,16 +23,18 @@ class DatabaseSeeder extends Seeder
             ],
         ]);
 
+        $faker = fake('en_GB');
+
         $customers = [];
         for ($i = 1; $i <= 5; $i++) { // for loop -> demo customers
             $customers[] = [
                 'username' => "customer$i",
-                'email' => fake()->email(),
+                'email' => $faker->email(),
                 'password' => Hash::make('password'),
-                'first_name' => fake()->firstName(),
-                'last_name' => fake()->lastName(),
-                'phone' => fake()->phoneNumber(),
-                'address' => fake()->address(),
+                'first_name' => $faker->firstName(),
+                'last_name' => $faker->lastName(),
+                'phone' => $faker->phoneNumber(),
+                'address' => $faker->address(),
                 'role' => 'customer',
                 'created_at' => now(),
             ];
@@ -145,10 +147,10 @@ class DatabaseSeeder extends Seeder
                 $orderId = DB::table('orders')->insertGetId([
                     'user_id' => $customerId,
                     'total_amount' => 0,
-                    'order_status' => fake()->randomElement(['pending', 'processing', 'shipped']),
-                    'payment_method' => fake()->randomElement(['card', 'paypal']),
+                    'order_status' => $faker->randomElement(['pending', 'processing', 'shipped']),
+                    'payment_method' => $faker->randomElement(['card', 'paypal']),
                     'tracking_number' => Str::upper(Str::random(10)),
-                    'notes' => fake()->optional()->sentence(),
+                    'notes' => $faker->optional()->sentence(),
                     'created_at' => now(),
                 ]);
 
@@ -157,7 +159,7 @@ class DatabaseSeeder extends Seeder
                 $total = 0;
 
                 for ($j = 0; $j < $itemCount; $j++) {
-                    $productId = fake()->randomElement($productIDs);
+                    $productId = $faker->randomElement($productIDs);
                     $product = DB::table('products')->where('product_id', $productId)->first();
                     $quantity = rand(1, 3);
 
