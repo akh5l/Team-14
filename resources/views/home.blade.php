@@ -1,25 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Bridge 14 Games</title>
-  @vite('resources/css/app.css')
-</head>
-<body class="bg-gray-100 font-sans min-h-screen flex flex-col">
-
-  <header class="bg-blue-600 p-4 flex justify-between items-center">
-    <a href="{{ url('/') }}" class="flex items-center gap-2 text-white font-bold text-xl sm:text-2xl">
-      <img src="{{ asset('images/logo.png') }}" alt="Logo" class="h-12 sm:h-15 w-auto">
-      Bridge 14 Games
-    </a>
-
-
-    <nav class="space-x-4 text-white font-semibold">
-      <a href="{{ url('/product_details.blade.php') }}" class="hover:underline">Shop</a>
-      <a href="#" class="hover:underline">Cart</a>
-      <a href="#" class="hover:underline">Sign up / Sign in</a>
-    </nav>
-  </header>
+@extends('layouts.app')
+@section('content')
 
 <section class="bg-cover bg-center h-96 flex items-center justify-center text-center text-black px-4" style="background-image: url('/images/tabletop.jpg')">
     <div>
@@ -101,11 +81,5 @@
       </form>
     </div>
   </section>
-
-  <footer class="bg-gray-900 text-gray-300 p-6 mt-auto">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0">
-      <div>&copy; 2025 Bridge 14 Games</div>
-    </div>
-  </footer>
-</body>
-</html>
+  
+@endsection
