@@ -1,15 +1,20 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', [HomeController::class, 'index']);
 
-Route::get('/product1-details', function () {
-    return view('product1_details');
-});
+// Route::get('/product1-details', function () {
+//     return view('product1_details');
+// });
+
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
+
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');

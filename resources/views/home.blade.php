@@ -34,26 +34,31 @@
 
   <section class="max-w-7xl mx-auto px-4 py-12">
     <h2 class="text-3xl font-bold text-center mb-8">Featured Products</h2>
+
     <div class="grid md:grid-cols-3 gap-8">
-      <div class="bg-white rounded-lg shadow hover:shadow-lg transition p-4 flex flex-col">
-        <img src="#" alt="product 1" class="h-48 w-full object-cover mb-4 rounded"/>
-        <h3 class="text-xl font-semibold mb-2"> product 1</h3>
-        <p class="text-red-500 mb-4 text-lg">£49.99</p>
-        <a href="{{ url('/product1-details') }}" class="mt-auto bg-gray-800 text-white text-center py-2 px-4 rounded hover:bg-gray-700 font-semibold transition">View Product</a>      </div>
-      <div class="bg-white rounded-lg shadow hover:shadow-lg transition p-4 flex flex-col">
-        <img src="#" alt="product 2" class="h-48 w-full object-cover mb-4 rounded"/>
-        <h3 class="text-xl font-semibold mb-2">product 2</h3>
-        <p class="text-red-500 mb-4 text-lg">£59.99</p>
-        <a href="#" class="mt-auto bg-gray-800 text-white text-center py-2 px-4 rounded hover:bg-gray-700 font-semibold transition">Under Construction...</a>
-      </div>
-      <div class="bg-white rounded-lg shadow hover:shadow-lg transition p-4 flex flex-col">
-        <img src="#" alt="product 3" class="h-48 w-full object-cover mb-4 rounded"/>
-        <h3 class="text-xl font-semibold mb-2">product 3</h3>
-        <p class="text-red-500 mb-4 text-lg">£39.99</p>
-        <a href="#" class="mt-auto bg-gray-800 text-white text-center py-2 px-4 rounded hover:bg-gray-700 font-semibold transition">Under Construction...</a>
-      </div>
+
+        @foreach ($featured as $product)
+            <div class="bg-white rounded-lg shadow hover:shadow-lg transition p-4 flex flex-col">
+                <img src="{{ $product->image_url }}"
+                     alt="{{ $product->product_name }}"
+                     class="h-48 w-full object-cover mb-4 rounded" />
+
+                <h3 class="text-xl font-semibold mb-2">{{ $product->product_name }}</h3>
+
+                <p class="text-red-500 mb-4 text-lg">
+                    £{{ number_format($product->price, 2) }}
+                </p>
+
+                <a href="{{ route('products.show', $product->product_id) }}"
+                   class="mt-auto bg-gray-800 text-white text-center py-2 px-4 rounded hover:bg-gray-700 font-semibold transition">
+                    View Product
+                </a>
+            </div>
+        @endforeach
+
     </div>
   </section>
+
 
   <section class="bg-white py-12">
     <div class="max-w-7xl mx-auto px-4 text-center">
