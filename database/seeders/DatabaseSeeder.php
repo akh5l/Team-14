@@ -53,7 +53,7 @@ class DatabaseSeeder extends Seeder
         $products = [
             [ // non tabletop
                 'product_name' => 'The Legend of Zelda: Breath of the Wild',
-                'description' => 'Open-world adventure for Nintendo Switch.',
+                'description' => 'Open-world adventure for Nintendo Switch',
                 'category_id' => 2,
                 'price' => 49.99,
                 'product_type' => 'video_games',
@@ -61,7 +61,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'product_name' => 'PlayStation 5 Controller',
-                'description' => 'DualSense Wireless Controller.',
+                'description' => 'DualSense Wireless Controller',
                 'category_id' => 3,
                 'price' => 59.99,
                 'product_type' => 'video_games_accessories',
@@ -69,7 +69,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'product_name' => 'Xbox Series X',
-                'description' => 'Next-gen Microsoft console.',
+                'description' => 'Next-gen Microsoft console',
                 'category_id' => 4,
                 'price' => 449.99,
                 'product_type' => 'consoles',
