@@ -57,7 +57,7 @@ class DatabaseSeeder extends Seeder
                 'category_id' => 2,
                 'price' => 49.99,
                 'product_type' => 'video_games',
-                'image_url' => '/images/zelda.jpg',
+                'image_url' => 'images/products/zelda.png',
             ],
             [
                 'product_name' => 'PlayStation 5 Controller',
@@ -65,7 +65,7 @@ class DatabaseSeeder extends Seeder
                 'category_id' => 3,
                 'price' => 59.99,
                 'product_type' => 'video_games_accessories',
-                'image_url' => '/images/ps5-controller.jpg',
+                'image_url' => 'images/products/ps5-controller.png',
             ],
             [
                 'product_name' => 'Xbox Series X',
@@ -73,7 +73,7 @@ class DatabaseSeeder extends Seeder
                 'category_id' => 4,
                 'price' => 449.99,
                 'product_type' => 'consoles',
-                'image_url' => '/images/xbox.jpg',
+                'image_url' => 'images/products/xbox.png',
             ],
             [
                 'product_name' => 'Nintendo Switch 2',
@@ -81,7 +81,7 @@ class DatabaseSeeder extends Seeder
                 'category_id' => 4,
                 'price' => 395.99,
                 'product_type' => 'consoles',
-                'image_url' => '/images/switch.jpg',
+                'image_url' => 'images/products/switch2.png',
             ],
             [
                 'product_name' => 'Elden Ring',
@@ -89,7 +89,7 @@ class DatabaseSeeder extends Seeder
                 'category_id' => 2,
                 'price' => 50.00,
                 'product_type' => 'video_games',
-                'image_url' => '/images/eldenring.jpg',
+                'image_url' => 'images/products/eldenring-ps.png',
             ],
             [ // tabletop
                 'product_name' => 'Call of Cthulhu - Core Rulebook',
@@ -97,7 +97,7 @@ class DatabaseSeeder extends Seeder
                 'category_id' => 2,
                 'price' => 30.00,
                 'product_type' => 'tabletop_games',
-                'image_url' => '/images/cthulhu.jpg',
+                'image_url' => 'images/products/cthulhu.png',
             ],
             [
                 'product_name' => 'D&D Dragons of Stormwreck Isle Starter Set',
@@ -105,7 +105,7 @@ class DatabaseSeeder extends Seeder
                 'category_id' => 2,
                 'price' => 19.99,
                 'product_type' => 'tabletop_games',
-                'image_url' => '/images/stormwreck.jpg',
+                'image_url' => 'images/products/d&d.png',
             ],
             [
                 'product_name' => 'Warhammer 40,000: Ultimate Starter Set ',
@@ -113,7 +113,7 @@ class DatabaseSeeder extends Seeder
                 'category_id' => 2,
                 'price' => 113.00,
                 'product_type' => 'tabletop_games',
-                'image_url' => '/images/warhammer.jpg',
+                'image_url' => 'images/products/warhammer.png',
             ],
             [
                 'product_name' => 'Magic: the Gathering - Foundations Jumpstart Booster',
@@ -121,7 +121,7 @@ class DatabaseSeeder extends Seeder
                 'category_id' => 2,
                 'price' => 8.00,
                 'product_type' => 'tabletop_games',
-                'image_url' => '/images/magic.jpg',
+                'image_url' => 'images/products/magic.png',
             ],
             [
                 'product_name' => 'Citadel: 28.5mm Round Bases (x10)',
@@ -129,7 +129,7 @@ class DatabaseSeeder extends Seeder
                 'category_id' => 2,
                 'price' => 3.10,
                 'product_type' => 'tabletop_accessories',
-                'image_url' => '/images/citadel.jpg',
+                'image_url' => 'images/products/citadel.png',
             ]
         ];
 
