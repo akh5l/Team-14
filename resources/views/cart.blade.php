@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Bridge 14 Games - Cart</title>
-  @vite('resources/css/app.css')
-</head>
+@extends('layouts.app')
+@section('content')
+
 <!--Tailwind Cheat Sheet: https://nerdcave.com/tailwind-cheat-sheet*-->
 <body class="bg-gray-100 font-sans min-h-screen flex flex-col">
     <header class="bg-blue-600 p-4 flex justify-between items-center">
@@ -118,11 +114,6 @@
       <p class="mt-1 text-gray-500">We aim to proccess all orders within 24 of recieving the order although if there are any issues feel free to contact us!</p>
     </section>
   </main>
-  <footer class="bg-blue-600 text-white p-6 mt-auto">
-    <div class="max-w-7xl mx-auto text-center">
-      &copy; 2025 Bridge 14 Games <!-- trademark like -->
-    </div>
-  </footer>
 
    <!-- java script to categories the delivery options above -->
   <script>
