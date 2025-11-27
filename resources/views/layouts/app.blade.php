@@ -16,7 +16,7 @@
         </a>
         <nav class="space-x-4 text-white font-semibold">
             <a href="{{ url('/products') }}" class="hover:underline">Shop</a>
-            <a href="#" class="hover:underline">Cart</a>
+            <a href="{{ url('/cart') }}" class="hover:underline">Cart</a>
             <a href="#" class="hover:underline">Sign up / Sign in</a>
         </nav>
     </header>
