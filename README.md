@@ -1,4 +1,5 @@
 # First-Time Setup: Cloning the Repo into VS Code
+### (Windows)
 
 ## 1. Install the Tools
 - Watch this tutorial and follow the instructions to install php https://www.youtube.com/watch?v=n04w2SzGr_U
