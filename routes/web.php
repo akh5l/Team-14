@@ -11,7 +11,7 @@ Route::get('/', [HomeController::class, 'index']);
 //     return view('product1_details');
 // });
 
-Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::get('/products', [ProductController::class, 'products'])->name('products');
 Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
 Route::get('/cart', function () {
     return view('cart');

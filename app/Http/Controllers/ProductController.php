@@ -6,10 +6,16 @@ use App\Models\Product;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index() // categories
     {
         $products = Product::with('category')->paginate(9);
         return view('products.index', compact('products'));
+    }
+
+    public function products() // all products
+    {
+        $products = Product::all();
+        return view('products.products', compact('products'));
     }
 
     public function show($id)
