@@ -32,13 +32,7 @@ body {
   transform: translateZ(0);
 }
 
-.variable-text {
-  font-family: 'ZT Nature Variable', sans-serif;
-  font-variation-settings: "wght" 500; /* default weight */
-  transition: font-variation-settings 0.2s ease;
-}
-
-.exclude-var-text {
+.variable-text, .exclude-var-text {
   font-family: 'ZT Nature Variable', sans-serif;
   font-variation-settings: "wght" 500;
 }
