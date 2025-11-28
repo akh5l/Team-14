@@ -8,7 +8,7 @@
             <p class="mb-6 text-lg md:text-xl drop-shadow-lg">The first stop shop for all your tabletop and video gaming
                 needs</p>
             <div class="flex justify-center space-x-4">
-                <a href="#"
+                <a href="/products"
                     class="bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-6 rounded-lg transition">Shop Now</a>
             </div>
         </div>
