@@ -25,9 +25,9 @@
             </div>
 
             <div class="flex items-center space-x-2 bg-white/20 rounded-xl px-3 py-2">
-            <a href="#" class="hover:underline variable-heading">Sign up / Sign in</a>
-            <a href="{{ url('/cart') }}" class="hover:underline variable-heading">Cart</a>
-            <a href="{{ url('/products') }}" class="hover:underline variable-heading">Shop</a>
+                <a href="#" class="hover:underline variable-heading">Sign up / Sign in</a>
+                <a href="{{ url('/cart') }}" class="hover:underline variable-heading">Cart</a>
+                <a href="{{ url('/products') }}" class="hover:underline variable-heading">Shop</a>
             </div>
         </nav>
     </header>
@@ -44,12 +44,22 @@
 
 
     <script>
-        const slider = document.getElementById('weightSlider');
-        const text = document.querySelector('.variable-text');
+        document.getElementById("weightSlider").addEventListener("input", e => {
+            const w = e.target.value;
+            localStorage.setItem("fontWeight", w);
 
-        slider.addEventListener('input', () => {
-            const weight = slider.value;
-            text.style.fontVariationSettings = `"wght" ${weight}`;
+            document.querySelector('.variable-text').style.fontVariationSettings = `"wght" ${w}`;
+        });
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const saved = localStorage.getItem("fontWeight");
+
+            if (saved) {
+                const slider = document.getElementById("weightSlider");
+                if (slider) slider.value = saved;
+
+                document.querySelector('.variable-text').style.fontVariationSettings = `"wght" ${saved}`;
+            }
         });
     </script>
 
