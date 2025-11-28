@@ -7,45 +7,45 @@
         <div class="md:grid md:grid-cols-3 gap-6 items-start">
 
             <!-- added cart items will go here (on the left side of page)-->
-            <div class="bg-white rounded-lg shadow p-4 md:p-6">
-
-                <!--example for now tho -->
-                <div class="md:col-span2 space-y-4">
-                    <div class="flex gap-3 items-center justify-between">
-                        <img src="/images/tabletop.jpg" alt ="Product Image" class="w-32 h-32 object-cover rounded" />
-
-                        <div class="flex-1">
-                            <p class="font-semibold text-lg">Product Name "1"</p>
-                            <p class="text-gray-500 text-sm">Product Number: "#12345"</p>
+            <div class="bg-white rounded-lg shadow p-4 md:p-6 md:col-span-1 border border-gray-100">
+                    <div class="flex flex-col md:flex-row gap-4">
+                        <!-- the example image and the propterties of it too -->
+                         <div class="flex gap-4">
+                            <img src="/images/products/ps5-controller.png" alt="Product Image" class="w-24 h-28 object-contain rounded bg-gray-100">
+                            <div>
+                                <p class="font-semibold text-xl"> PS5 DualSense Wireless Controller</p>
+                                <p class="text-gray-600 text-sm"> Product #: 12345</p>
+                                <div class="mt-3 flex items-center gap-2">
+                                    <span class="text-sm">Quantity:</span>
+                                    <input
+                                        id="quantity"
+                                        type="number"
+                                        min="1"  
+                                        value="1"
+                                        class="w-16 border border-gray-300 rounded px-2 py-1 text-center text-sm">
+                                </div>
+                            </div>
+                        
+                        <!-- pricing and removing item button -->
+                        <div class="text-right">
+                            <p id="line-total" class="font-semibold text-lg">£69.99</p>
+                            <button class="text-xs text-blue-600 hover:underline mt-1">Remove</button>
                         </div>
-
-                        <div class="mt-3 flex items-center gap-3">
-                            <span class="text-sm">Quantity:</span>
-                            <!-- allows input of the quatity of item -->
-                            <input id="quantity"type="number" min="1" value="1"
-                                class="w-16 border border-gray-300 rounded px-2 py-1 text-center text-sm">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="text-right">
-                    <p id="line-total" class="font-semibold">£17.38</p>
-                    <button class="text-xs text-red-500 hover:underline mt-1">Remove</button>
+                    </div>  
                 </div>
             </div>
-        </div>
 
         <!-- Summary of cart section here (right side) -->
-        <div class="mt-6 md:mt-0">
+        <div class="mt-6 md:mt-0 md:col-span-2 md:pl-4">
             <div class="bg-white p-6 rounded-lg shadow-md">
 
                 <!-- https://flowbite.com/docs/forms/radio/ radio types following horizontal example-->
-                <p class="font-semibold mb-3">Choice of Delivery</p>
+                <p class="text-2x1 font-bold mb-4 text-center">Choice of Delivery</p>
 
-                <div class="flex flex-col md:flex-row gap-3">
+                <div class="flex flex-wrap gap-3 items-start justify-center">
                     <!-- Standard -->
                     <label
-                        class="delivery-option flex items-center gap-3 bg-gray-200 hover:bg-gray-50 border rounded-1g px-4 py-3 cursor-pointer w-full md:w-auto">
+                        class="delivery-option flex flex-col justify-center bg-gray-100 hover:bg-gray-200 border rounded-lg px-4 py-3 cursor-pointer min-w-[140px]">
                         <input type="radio" name="delivery" value="2.99" class="hidden" checked>
                         <div>
                             <span class="text-sm font-medium">Standard</span><br>
@@ -54,7 +54,7 @@
                     </label>
                     <!-- Express -->
                     <label
-                        class="delivery-option flex items-center gap-3 bg-gray-200 hover:bg-gray-50 border rounded-1g px-4 py-3 cursor-pointer w-full md:w-auto">
+                        class="delivery-option flex flex-col justify-center bg-gray-100 hover:bg-gray-200 border rounded-lg px-4 py-3 cursor-pointer min-w-[140px]">
                         <input type="radio" name="delivery" value="4.99" class="hidden">
                         <div>
                             <span class="text-sm font-medium">Express</span><br>
@@ -63,7 +63,7 @@
                     </label>
                     <!-- Collection (free) -->
                     <label
-                        class="delivery-option flex items-center gap-3 bg-gray-200 hover:bg-gray-50 border rounded-1g px-4 py-3 cursor-pointer w-full md:w-auto">
+                        class="delivery-option flex flex-col justify-center bg-gray-100 hover:bg-gray-200 border rounded-lg px-4 py-3 cursor-pointer min-w-[140px]">
                         <input type="radio" name="delivery" value="0.00" class="hidden">
                         <div>
                             <span class="text-sm font-medium">Click & Collect</span><br>
@@ -103,7 +103,7 @@
                     </div>
                 </div>
                 <section class="mt-6 bg-white p-4 rounded-lg shadow-md text-sm">
-                    <h2 class="font-semibold mb-2">Additional Information</h2>
+                    <h2 class="text-xl font-semibold mb-2">Additional Information</h2>
                     <p>We at Bridge 14 Games are committed to ensuring that your needs are met and that your orders are
                         fullfilled,
                         our variation in ordering options range from 0-5 working days. Standard delivery which is £2.99
@@ -151,7 +151,7 @@
                     selectedDelivery = parseFloat(radio.value);
                 }
             });
-            const price = 17.38; //EXAMPLE PRICE
+            const price = 69.99; //EXAMPLE PRICE
             const subtotal = price * qty; //quantity times by the price for total
             let deliveryCost = selectedDelivery;
             if (subtotal >= FREE_SHIPPING_THRESHOLD) {
