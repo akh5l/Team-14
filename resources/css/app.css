@@ -3,19 +3,34 @@
 @tailwind utilities;
 
 @font-face {
-    font-family: 'ZT Nature Variable';
+    font-family: 'ZT Nature';
     src: url('/public/fonts/ZT-Nature-Variable-VF.ttf') format('truetype-variations'),
          url('/public/fonts/ZT-Nature-Variable-VF.ttf') format('truetype') tech('variations');
     font-weight: 100 1000;
     font-stretch: 25% 151%;
 }
 
+@font-face {
+    font-family: 'Kikuta';
+    src: url('/public/fonts/kikutaVF.ttf') format('truetype-variations'),
+         url('/public/fonts/kikutaVF.ttf') format('truetype') tech('variations');
+    font-weight: 100 1000;
+    font-stretch: 25% 151%;
+}
+
 body {
-    font-family: 'ZT Nature Variable', sans-serif;
+    font-family: 'ZT Nature', sans-serif;
+}
+
+#logo-text {
+  font-family: 'Kikuta', sans-serif;
+  font-variation-settings: "wght" 100;
+  letter-spacing: 0.02em;
+
+  transition: font-variation-settings 0.5s ease, transform 0.5s ease, letter-spacing 0.5s ease;
 }
 
 .variable-heading {
-  font-family: 'ZT Nature Variable', sans-serif;
   font-variation-settings: "wght" 400;
   transition: font-variation-settings 0.5s ease, transform 0.5s ease, letter-spacing 0.5s ease;
 
@@ -23,7 +38,7 @@ body {
   transform: translateZ(0);
 }
 
-.variable-heading:hover {
+.variable-heading:hover, #logo-text:hover {
   font-variation-settings: "wght" 700;
   /* transform: scale(1.05);  */
   /* letter-spacing: 0.02em; */
@@ -32,13 +47,7 @@ body {
   transform: translateZ(0);
 }
 
-.variable-text {
-  font-family: 'ZT Nature Variable', sans-serif;
-  font-variation-settings: "wght" 500; /* default weight */
-  transition: font-variation-settings 0.2s ease;
-}
-
-.exclude-var-text {
-  font-family: 'ZT Nature Variable', sans-serif;
+.variable-text, .exclude-var-text {
+  font-family: 'ZT Nature', sans-serif;
   font-variation-settings: "wght" 500;
 }

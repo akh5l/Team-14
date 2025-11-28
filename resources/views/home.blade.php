@@ -1,15 +1,16 @@
 @extends('layouts.app')
 @section('content')
-    <section class="bg-cover bg-center h-96 flex items-center justify-center text-center text-black px-4"
-        style="background-image: url('/images/tabletop.jpg')">
-        <div>
-            <h1 class="text-4xl md:text-5xl font-bold mb-4 drop-shadow-lg">Discover Your New Gaming Obsession</h1>
+    <section class="relative h-96 flex items-center justify-center text-center text-black overflow-hidden">
+        <img src="/images/background.webp" class="absolute inset-0 w-full h-full object-cover -z-10"/>
 
+        <div class="backdrop-blur-xl text-white bg-black/50 rounded-full px-20 py-5">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 drop-shadow-lg">Discover Your New Gaming Obsession</h1>
             <p class="mb-6 text-lg md:text-xl drop-shadow-lg">The first stop shop for all your tabletop and video gaming
                 needs</p>
             <div class="flex justify-center space-x-4">
-                <a href="#"
-                    class="bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-6 rounded-lg transition">Shop Now</a>
+                <a href="/products"
+                    class="bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-6 rounded-lg transition">Shop
+                    Now</a>
             </div>
         </div>
     </section>
