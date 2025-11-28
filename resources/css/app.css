@@ -14,3 +14,31 @@ body {
     font-family: 'ZT Nature Variable', sans-serif;
 }
 
+.variable-heading {
+  font-family: 'ZT Nature Variable', sans-serif;
+  font-variation-settings: "wght" 400;
+  transition: font-variation-settings 0.5s ease, transform 0.5s ease, letter-spacing 0.5s ease;
+
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.variable-heading:hover {
+  font-variation-settings: "wght" 700;
+  /* transform: scale(1.05);  */
+  /* letter-spacing: 0.02em; */
+
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.variable-text {
+  font-family: 'ZT Nature Variable', sans-serif;
+  font-variation-settings: "wght" 500; /* default weight */
+  transition: font-variation-settings 0.2s ease;
+}
+
+.exclude-var-text {
+  font-family: 'ZT Nature Variable', sans-serif;
+  font-variation-settings: "wght" 500;
+}

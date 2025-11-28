@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" class="h-full">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,17 +8,27 @@
     <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
     @vite('resources/css/app.css')
 </head>
-<body class="flex flex-col h-full">
+
+<body class="flex flex-col h-full variable-text">
 
     <header class="bg-blue-600 p-4 flex justify-between items-center">
-        <a href="{{ url('/') }}" class="flex items-center gap-2 text-white font-bold text-xl sm:text-2xl">
+        <a href="{{ url('/') }}"
+            class="flex items-center gap-2 text-white font-bold text-xl sm:text-2xl variable-heading">
             <img src="{{ asset('images/logo.png') }}" alt="Logo" class="h-12 sm:h-15 w-auto">
             Bridge 14 Games
         </a>
-        <nav class="space-x-4 text-white font-semibold">
-            <a href="{{ url('/products') }}" class="hover:underline">Shop</a>
-            <a href="{{ url('/cart') }}" class="hover:underline">Cart</a>
-            <a href="#" class="hover:underline">Sign up / Sign in</a>
+        <nav class="space-x-4 text-white font-semibold flex">
+            <div class="flex items-center space-x-2 bg-white/20 rounded-xl px-3 py-2">
+                <label for="weightSlider" class="text-white text-sm font-semibold exclude-var-text">Font Weight</label>
+                <input type="range" id="weightSlider" min="500" max="800" value="500"
+                    class="h-1 w-32 rounded-full accent-yellow-400 bg-white/40">
+            </div>
+
+            <div class="flex items-center space-x-2 bg-white/20 rounded-xl px-3 py-2">
+            <a href="#" class="hover:underline variable-heading">Sign up / Sign in</a>
+            <a href="{{ url('/cart') }}" class="hover:underline variable-heading">Cart</a>
+            <a href="{{ url('/products') }}" class="hover:underline variable-heading">Shop</a>
+            </div>
         </nav>
     </header>
 
@@ -31,5 +42,18 @@
         </div>
     </footer>
 
+
+    <script>
+        const slider = document.getElementById('weightSlider');
+        const text = document.querySelector('.variable-text');
+
+        slider.addEventListener('input', () => {
+            const weight = slider.value;
+            text.style.fontVariationSettings = `"wght" ${weight}`;
+        });
+    </script>
+
+
 </body>
+
 </html>
