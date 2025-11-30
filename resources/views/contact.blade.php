@@ -21,6 +21,18 @@
 
 
   <main class="flex-grow">
+    <div class="container">
+      <div class="contact-box">
+        <div class="left">
+        <div class="right">
+          <h2>Contact Us</h2>
+          <input type="text" class="field" placeholder="Your name">
+          <input type="email" class="field" placeholder="Your email">
+          <input type="text" class="field" placeholder="Your phone number">
+          <textarea class="field" placeholder=""></textarea>
+        </div>
+      </div>
+    </div>
   </main>
 
 
