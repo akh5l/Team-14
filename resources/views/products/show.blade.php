@@ -53,6 +53,7 @@
                     @if($product->price > 40)
                         <li>Eligible for free delivery</li>
                     @endif
+                    <li>Eligible for free delivery</li>
                 </ul>
             </div>
 
