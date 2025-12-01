@@ -25,10 +25,11 @@
                     class="h-1 w-32 rounded-full accent-yellow-400 bg-white/40">
             </div>
 
-            <div class="flex items-center space-x-2 bg-white/20 rounded-xl px-3 py-2">
+            <div class="flex items-center space-x-2 bg-white/20 rounded-xl px-3 py-2 gap-x-4">
                 <a href="#" class="hover:underline variable-heading">Sign up / Sign in</a>
                 <a href="{{ url('/cart') }}" class="hover:underline variable-heading">Cart</a>
                 <a href="{{ url('/products') }}" class="hover:underline variable-heading">Shop</a>
+                <a href="{{ url('/contact-us') }}" class="hover:underline variable-heading">Contact Us</a>
             </div>
         </nav>
     </header>
