@@ -49,7 +49,10 @@
                 <ul class="list-disc list-inside mb-4">
                     <li>PLACEHOLDER Make this list specific to each product?</li>
                     <li>Durable materials</li>
-                    <li>Available for fast delivery lololol</li>
+                    <!-- If a product is above £40, add a section under 'product details' stating that is eligible for free delivery -->
+                    @if($product->price > 40)
+                        <li>Eligible for free delivery</li>
+                    @endif
                 </ul>
             </div>
 
