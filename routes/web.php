@@ -16,7 +16,9 @@ Route::get('/products/{id}', [ProductController::class, 'show'])->name('products
 Route::get('/cart', function () {
     return view('cart');
 })->name('cart');
-
+Route::get('/checkout', function () {
+    return view('checkout');
+})->name('checkout');
 
 
 Route::get('/dashboard', function () {

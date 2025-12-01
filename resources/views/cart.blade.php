@@ -97,6 +97,7 @@
 
                         <!-- button for the checkout -->
                         <button
+                            onclick="window.location.href='{{ route('checkout') }}'"
                             class="w-full mt-4 bg-red-600 hover:bg-red-700 text-white py-2.5 rounded font-semibold text-sm">
                             Proceed to checkout
                         </button>
