@@ -11,9 +11,9 @@
                     <div class="flex flex-col md:flex-row gap-4">
                         <!-- the example image and the propterties of it too -->
                          <div class="flex gap-4">
-                            <img src="/images/products/ps5-controller.png" alt="Product Image" class="w-24 h-28 object-contain rounded bg-gray-100">
+                            <img src="/images/products/d&d.png" alt="Product Image" class="w-24 h-28 object-contain rounded bg-gray-100">
                             <div>
-                                <p class="font-semibold text-xl"> PS5 DualSense Wireless Controller</p>
+                                <p class="font-semibold text-xl"> D&D Dragons of Stormwreck Isle Starter Set</p>
                                 <p class="text-gray-600 text-sm"> Product #: 12345</p>
                                 <div class="mt-3 flex items-center gap-2">
                                     <span class="text-sm">Quantity:</span>
@@ -28,7 +28,7 @@
                         
                         <!-- pricing and removing item button -->
                         <div class="text-right">
-                            <p id="line-total" class="font-semibold text-lg">£69.99</p>
+                            <p id="line-total" class="font-semibold text-lg">£19.99</p>
                             <button class="text-xs text-blue-600 hover:underline mt-1">Remove</button>
                         </div>
                     </div>  
@@ -151,7 +151,7 @@
                     selectedDelivery = parseFloat(radio.value);
                 }
             });
-            const price = 69.99; //EXAMPLE PRICE
+            const price = 19.99; //EXAMPLE PRICE
             const subtotal = price * qty; //quantity times by the price for total
             let deliveryCost = selectedDelivery;
             if (subtotal >= FREE_SHIPPING_THRESHOLD) {
