@@ -13,6 +13,10 @@ Route::get('/', [HomeController::class, 'index']);
 
 Route::get('/products', [ProductController::class, 'products'])->name('products');
 Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
+Route::get('/contact-us', function() {
+    return view('contact');
+});
+
 Route::get('/cart', function () {
     return view('cart');
 })->name('cart');
