@@ -49,7 +49,7 @@
                 <ul class="list-disc list-inside mb-4">
                     <li>PLACEHOLDER Make this list specific to each product?</li>
                     <li>Durable materials</li>
-                    <li>Available for fast delivery lololol</li>
+                    <li>Eligible for free delivery</li>
                 </ul>
             </div>
 
