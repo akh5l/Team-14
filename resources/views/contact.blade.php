@@ -13,7 +13,7 @@
                 We aim to respond promptly to all enquiries. Watch out for an email!
             </p>
 
-            <!-- Contact Information Section (added) -->
+            <!-- Contact information -->
             <div class="mb-8 text-gray-600 text-sm space-y-2">
                 <p class="flex items-center gap-2">
                     📍 <span>45 Gamer's Avenue, Birmingham, UK</span>
@@ -28,7 +28,20 @@
                     🕒 <span>Mon–Fri: 9am – 6pm | Sat-Sun: 10am - 5pm</span>
                 </p>
             </div>
-            <!-- End Contact Info -->
+            
+            <!-- Small map of where area is based -->
+            <div class="mb-6">
+                <iframe
+                    width="100%"
+                    height="180"
+                    style="border:0; border-radius: 10px;"
+                    loading="lazy"
+                    allowfullscreen
+                    referrerpolicy="no-referrer-when-downgrade"
+                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d9718.410987691119!2d-1.899497!3d52.489471!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4870bc8c33f4fd65%3A0x0!2sBirmingham%20City%20Centre!5e0!3m2!1sen!2uk!4v1700000000001">
+                </iframe>
+            </div>
+
 
             <!-- Success message when user submits the contact form -->
             @if(request()->has('success'))
