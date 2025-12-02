@@ -13,6 +13,23 @@
                 We aim to respond promptly to all enquiries. Watch out for an email!
             </p>
 
+            <!-- Contact Information Section (added) -->
+            <div class="mb-8 text-gray-600 text-sm space-y-2">
+                <p class="flex items-center gap-2">
+                    📍 <span>45 Gamer's Avenue, Birmingham, UK</span>
+                </p>
+                <p class="flex items-center gap-2">
+                    📞 <span>+44 7512 345678</span>
+                </p>
+                <p class="flex items-center gap-2">
+                    📧 <span>bridge14games@gmail.com</span>
+                </p>
+                <p class="flex items-center gap-2">
+                    🕒 <span>Mon–Fri: 9am – 6pm | Sat-Sun: 10am - 5pm</span>
+                </p>
+            </div>
+            <!-- End Contact Info -->
+
             <!-- Success message when user submits the contact form -->
             @if(request()->has('success'))
                 <div class="mb-4 bg-green-100 text-green-700 text-sm px-4 py-2 rounded">
