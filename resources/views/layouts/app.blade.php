@@ -29,6 +29,7 @@
                 <a href="#" class="hover:underline variable-heading">Sign up / Sign in</a>
                 <a href="{{ url('/cart') }}" class="hover:underline variable-heading">Cart</a>
                 <a href="{{ url('/products') }}" class="hover:underline variable-heading">Shop</a>
+                <a href="{{ url('/faq') }}" class="hover:underline variable-heading">FAQ</a>
                 <a href="{{ url('/contact-us') }}" class="hover:underline variable-heading">Contact</a>
 
                 
