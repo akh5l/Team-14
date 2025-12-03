@@ -4,7 +4,7 @@
         <img src="/images/background.webp" class="absolute inset-0 w-full h-full object-cover -z-10"/>
 
         <div class="backdrop-blur-xl text-white bg-black/50 rounded-full px-20 py-5">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4 drop-shadow-lg">Discover Your New Gaming Obsession</h1>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 drop-shadow-lg">Discover Your New Favourite Game</h1>
             <p class="mb-6 text-lg md:text-xl drop-shadow-lg">The first stop shop for all your tabletop and video gaming
                 needs</p>
             <div class="flex justify-center space-x-4">
@@ -57,11 +57,11 @@
             </div>
             <div class="bg-gray-100 p-6 rounded-lg w-full md:w-1/3 shadow hover:shadow-xl transition">
                 <h3 class="text-xl font-semibold mb-2">Expert Recommendations</h3>
-                <p>Our team will help you find the perfect game for you based on your needs</p>
+                <p>Our team will help you find the perfect game for you based on your needs. Simply drop us a message via our 'Contact Us' page, or come speak to us in store</p>
             </div>
             <div class="bg-gray-100 p-6 rounded-lg w-full md:w-1/3 shadow hover:shadow-xl transition">
                 <h3 class="text-xl font-semibold mb-2">Fast Shipping</h3>
-                <p>Quick and reliable dispatch on all orders, with free shipping on orders over £40</p>
+                <p>Quick and reliable dispatch on all orders with free shipping on orders over £40</p>
             </div>
         </div>
     </section>
@@ -69,7 +69,7 @@
     <section class="bg-gray-600 text-white py-12">
         <div class="max-w-7xl mx-auto px-4 text-center">
             <h2 class="text-3xl mb-4">Join the Bridge 14 Community</h2>
-            <p class="mb-6">Subscribe to our newsletter and receive updates on new releases and exclusive deals!</p>
+            <p class="mb-6">Subscribe to our newsletter to receive updates on new releases and exclusive deals!</p>
             <form class="flex max-w-md mx-auto space-x-2">
                 <input type="email" placeholder="Enter your email"
                     class="bg-gray-800 w-full p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
