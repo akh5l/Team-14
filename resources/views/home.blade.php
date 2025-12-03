@@ -76,6 +76,19 @@
                 <button
                     class="bg-blue-500 hover:bg-blue-600 px-4 py-3 rounded-lg font-semibold transition">Subscribe</button>
             </form>
+            <script>
+            document.querySelector('form').addEventListener('submit', function(e) {
+                e.preventDefault(); 
+                const emailInput = this.querySelector('input[type="email"]');
+                let email = emailInput.value.trim(); //removes any whitespace from the inputted email
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;  //ensures the inputted email follows the correct format (local@domain.)
+                if (!emailRegex.test(email)) {  //basic check against the regex. this ensures that the form is both valid and not null
+                alert('Enter a valid email address.'); 
+                return;
+                }
+                console.log('email:', email);   //logs the email to the developer console (right click --> inspect --> console) to confirm the form works
+            });
+            </script>
         </div>
     </section>
 @endsection
