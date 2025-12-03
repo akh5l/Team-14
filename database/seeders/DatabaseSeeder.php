@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 
+use Faker\Factory as Faker;
+
 class DatabaseSeeder extends Seeder
 {
     public function run()
@@ -23,7 +25,7 @@ class DatabaseSeeder extends Seeder
             ],
         ]);
 
-        $faker = fake('en_GB');
+        $faker = Faker::create('en_GB');
 
         $customers = [];
         for ($i = 1; $i <= 5; $i++) { // for loop -> demo customers
