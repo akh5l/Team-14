@@ -9,6 +9,7 @@ Alpine.start();
 // star background layer
 document.addEventListener("DOMContentLoaded", () => {
     const starLayer = document.getElementById("star-layer");
+    if (!starLayer) return;
 
     const numStars = 60;
 
