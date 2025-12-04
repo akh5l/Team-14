@@ -7,11 +7,14 @@
     <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
+    @vite('resources/js/app.js')
 </head>
 
-<div id="cursor-aura"></div>
+
 
 <body class="flex flex-col h-full variable-text antialiased">
+  
+    <div id="cursor-aura"></div>
 
     <header class="bg-black/90 p-4 flex justify-between items-center">
         <a href="{{ url('/home') }}"
@@ -66,7 +69,7 @@
 
     <button
         id="themeToggle"
-        class="fixed bottom-5 right-5 text-2xl bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition select-none z-50"
+        class="fixed bottom-5 right-5 text-2xl bg-gray-700 text-white p-3 rounded-full shadow-lg hover:bg-gray-500 transition select-none z-50"
     >
         🌙
     </button>
