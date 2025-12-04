@@ -9,29 +9,36 @@ Alpine.start();
 // star background layer
 document.addEventListener("DOMContentLoaded", () => {
     const starLayer = document.getElementById("star-layer");
+    if (!starLayer) return;
+    const starCount = 150;
 
-    const numStars = 60;
-
-    for (let i = 0; i < numStars; i++) {
+    for (let i = 0; i < starCount; i++) {
         const star = document.createElement("div");
-        star.classList.add("absolute", "bg-white", "rounded-full");
-        const size = Math.random() * 2 + 1; // 1px to 3px
+        const size = Math.random() * 2 + 1;
+
+        star.className = "star";
         star.style.width = `${size}px`;
         star.style.height = `${size}px`;
         star.style.top = `${Math.random() * 100}%`;
         star.style.left = `${Math.random() * 100}%`;
+
+        star.style.opacity = Math.random() * 0.8 + 0.2;
+        star.style.animationDuration = `${Math.random() * 15 + 2}s, ${
+            Math.random() * 3 + 1
+        }s`;
         starLayer.appendChild(star);
     }
 
-    // parallax
+    // mouse move parallax - too gimmicky ?
+
     // document.addEventListener("mousemove", (e) => {
     //     const stars = document.querySelectorAll("#star-layer div");
     //     const { innerWidth, innerHeight } = window;
-    //     const offsetX = (e.clientX / innerWidth - 0.5) * 20;
+    //     const offsetX = (e.clientX / innerWidth - 0.5) * 20; // adjust intensity
     //     const offsetY = (e.clientY / innerHeight - 0.5) * 20;
 
     //     stars.forEach((star, index) => {
-    //         const speed = ((index % 3) + 1) * 0.2;
+    //         const speed = ((index % 3) + 1) * 0.2; // different speed per layer
     //         star.style.transform = `translate(${offsetX * speed}px, ${
     //             offsetY * speed
     //         }px)`;
