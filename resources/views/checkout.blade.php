@@ -126,8 +126,38 @@
 
 </main>
 
-<!-- scripts for the validation rules etc.-->
- <script>
+<!-- makeing the modals (popups) using this as reference and help:
+ https://flowbite.com/docs/components/modal/#content -->
+<div id="successModal" class="hidden fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+    <div class ="bg-white rounded-lg shadow-lg p-6 w-full max-w-md text center">
+        <h2 class="text-x1 font-semibold text-green-600 mb-4 w-full text center">Checkout processed!</h2>
+        <p class= "text-sm text-gray-700 mb-6">Thank you for checking out with Bridge 14 games!<br>Your order is being processed.<br>A comfirmation will be given shortly.</p>
+        <p class ="mt-2 text-sm text-gray-600">You will be redirected to the home page in <span id = "redirectedTimer">15</span> seconds. </p>
+        <button id="successModalClose"
+                class="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg font-semibold">
+            Understood!
+        </button>
+    </div>
+</div>
+
+<script>
+    //part for the popup function 
+document.addEventListener("DOMContentLoaded", function () {
+    const closeBtn= document.getElementById("successModalClose");
+    const modal = document.getElementById("successModal"); 
+    if (!closeBtn || !modal) return;
+    //both call the modal close fucntion and success modal one i made above
+    closeBtn.addEventListener("click", function () {
+        modal.classList.add("hidden");
+        if (window.checkoutRedirectTimer) {
+            clearInterval(window.checkoutRedirectTimer);
+        }
+    });
+});
+</script>
+
+<!-- scripts for the validation rules etc.--> 
+<script>
 document.getElementById("checkoutForm").addEventListener("submit", function(e) {
     e.preventDefault();
     const expiry = document.getElementById("expiry").value;
@@ -172,7 +202,26 @@ document.getElementById("checkoutForm").addEventListener("submit", function(e) {
 
 //Otehr form validations
     errorBox.classList.add("hidden");
-    window.location.href = "/order/complete";
+    const successModal = document.getElementById("successModal");
+     const timerSpan = document.getElementById("redirectedTimer");
+    //timer
+    let secondsLeft =15;
+    if (timerSpan) {
+        timerSpan.textContent= secondsLeft;
+    }
+    if (successModal) {
+        successModal.classList.remove("hidden");
+    }
+    window.checkoutRedirectTime = setInterval(function() {
+        secondsLeft--;
+        if (timerSpan) {
+            timerSpan.textContent = secondsLeft;
+        }
+        if (secondsLeft <= 0) {
+            clearInterval(window.checkoutRedirectTimer);
+            window.location.href = "{{ url('/home') }}";
+        } //sends user back to the home page
+    }, 1000);
 });
 
 //https://syntaxsimplified.com/cheatsheet/Javascript/javascript.html some help from this site too
