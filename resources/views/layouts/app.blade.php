@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" class="h-full">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +9,8 @@
     @vite('resources/js/app.js')
 </head>
 
+<div id="cursor-aura"></div>
+
 <body class="flex flex-col h-full variable-text antialiased">
 
     <header class="bg-black/90 p-4 flex justify-between items-center">
@@ -18,11 +19,22 @@
             <img src="{{ asset('images/logo-no-text.webp') }}" alt="Logo" class="h-12 sm:h-15 w-auto">
             {{-- <p id="logo-text">Bridge 14 Games</p> --}}
         </a>
+
         <nav class="space-x-4 text-white font-semibold flex">
+
             <div class="flex items-center space-x-2 bg-white/20 rounded-xl px-3 py-2">
-                <label for="weightSlider" class="text-white text-sm font-semibold exclude-var-text">Font Weight</label>
-                <input type="range" id="weightSlider" min="500" max="800" value="500"
-                    class="h-1 w-32 rounded-full accent-yellow-400 bg-white/40">
+                <label for="weightSlider" class="text-white text-sm font-semibold exclude-var-text">
+                    Font Weight
+                </label>
+
+                <input
+                    type="range"
+                    id="weightSlider"
+                    min="500"
+                    max="800"
+                    value="500"
+                    class="h-1 w-32 rounded-full accent-yellow-400 bg-white/40"
+                >
             </div>
 
             <div class="flex items-center space-x-2 bg-white/20 rounded-xl px-3 py-2 gap-x-4">
@@ -48,20 +60,19 @@
 
 
             </div>
+
         </nav>
-
-
     </header>
 
-    <!-- Made the button for Light and Dark mode, starts with Light mode as default. -->
-    <button id="themeToggle"
-        class="fixed bottom-5 right-5 text-2xl bg-gray-700 text-white p-3 rounded-full shadow-lg hover:bg-gray-500 transition select-none z-50">
+    <button
+        id="themeToggle"
+        class="fixed bottom-5 right-5 text-2xl bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition select-none z-50"
+    >
         🌙
     </button>
 
     <main class="flex-1">
         @yield('content')
-
     </main>
 
     <footer class="bg-gray-900 text-gray-300 p-6 mt-auto">
@@ -71,5 +82,4 @@
     </footer>
 
 </body>
-
 </html>
