@@ -40,6 +40,9 @@ require __DIR__.'/auth.php';
 Route::get('/contact', function () {
     return view('contact');
 });
+Route::get('/about', function () {
+    return view('profile.about_us');
+});
 
 Route::get('/faq', function () {
     return view('faq');
