@@ -25,6 +25,19 @@ Route::get('/checkout', function () {
 })->name('checkout');
 
 
+Route::get('/contact', function () {
+    return view('contact');
+});
+Route::get('/about', function () {
+    return view('profile.about_us');
+});
+
+Route::get('/faq', function () {
+    return view('faq');
+});
+
+
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -36,14 +49,3 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
-
-Route::get('/contact', function () {
-    return view('contact');
-});
-Route::get('/about', function () {
-    return view('profile.about_us');
-});
-
-Route::get('/faq', function () {
-    return view('faq');
-});
