@@ -30,8 +30,7 @@
                 <a href="{{ url('/cart') }}" class="hover:underline variable-heading">Cart</a>
                 <a href="{{ url('/products') }}" class="hover:underline variable-heading">Shop</a>
                 <a href="{{ url('/contact-us') }}" class="hover:underline variable-heading">Contact</a>
-
-                
+                <a href="{{ url('/about') }}" class="hover:underline variable-heading">About Us</a>              
             </div>
         </nav>
 
