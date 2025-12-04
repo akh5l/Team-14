@@ -5,11 +5,11 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', function () {
+    return view('landing');
+});
 
-// Route::get('/product1-details', function () {
-//     return view('product1_details');
-// });
+Route::get('/home', [HomeController::class, 'index']);
 
 Route::get('/products', [ProductController::class, 'products'])->name('products');
 Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
