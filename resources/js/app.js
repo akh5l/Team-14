@@ -67,7 +67,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// Making the Light and Dark Mode button switch when clicked on.
 const toggle = document.getElementById("themeToggle");
 const root = document.documentElement;
 
@@ -81,3 +80,52 @@ toggle.addEventListener("click", () => {
     toggle.textContent = isDark ? "☀️" : "🌙";
     localStorage.setItem("theme", isDark ? "dark" : "light");
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const container = document.getElementById("cursor-aura");
+
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+
+    const colours = [
+        "#ff2bf5",
+        "#ff5bff",
+        "#00e5ff",
+        "#2f8bff",
+        "#8a4dff"
+    ];
+
+    document.addEventListener("mousemove", (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+
+    setInterval(() => {
+
+        const pixel = document.createElement("span");
+
+        const size = 4 + Math.random() * 4;
+        pixel.style.width  = size + "px";
+        pixel.style.height = size + "px";
+
+        const offsetX = (Math.random() - 0.5) * 40;
+        const offsetY = (Math.random() - 0.5) * 40;
+
+        pixel.style.left = (mouseX + offsetX) + "px";
+        pixel.style.top  = (mouseY + offsetY) + "px";
+
+        const colour = colours[Math.floor(Math.random() * colours.length)];
+
+        pixel.style.backgroundColor = colour;
+        pixel.style.boxShadow = `0 0 14px ${colour}`;
+
+        container.appendChild(pixel);
+
+        setTimeout(() => {
+            pixel.remove();
+        }, 1800);
+
+    }, 60);
+});
+
