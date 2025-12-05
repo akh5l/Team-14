@@ -225,7 +225,7 @@ class DatabaseSeeder extends Seeder
                 'description' => 'Random colour D&D dice set made from high‑quality resin.',
                 'category_id' => 3,
                 'price' => 10.00,
-                'image_url' => 'images/products/dice-goblin.jpg',
+                'image_url' => 'images/products/dice-goblin.webp',
             ],
             [ 
                 'product_name' => 'Dungeons & Dragons: Figurines of Adorable Plush Mind Flayer Gamer Pouch',
