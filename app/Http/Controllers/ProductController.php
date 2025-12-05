@@ -14,7 +14,14 @@ class ProductController extends Controller
 
     public function products() // all products
     {
-        $products = Product::all();
+        $query = Product::query();
+        if (request()->filled('search')) {
+            $search = request('search');
+            $query->where('product_name', 'like', "%{$search}%")
+            ->orWhere('description', 'like', "%{$search}%");
+        }
+
+        $products =$query->paginate(9);
         return view('products.products', compact('products'));
     }
 
