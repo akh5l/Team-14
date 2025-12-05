@@ -51,16 +51,39 @@
             <div>
                 <h3 class="text-2xl font-semibold mb-4">Product Details</h3>
                 <p class="mb-4">
-                    {{ $product->detailed_description ?? 'PLACEHOLDER add a detailed description field to each product, using Braden\'s trello descriptions!!!' }}
+                    {{ $product->description }}
                 </p>
 
                 <ul class="list-disc list-inside mb-4">
-                    <li>PLACEHOLDER Make this list specific to each product?</li>
                     <li>Durable materials</li>
                     <!-- If a product is above £40, add a section under 'product details' stating that is eligible for free delivery -->
                     @if ($product->price > 40)
                         <li>Eligible for free delivery</li>
                     @endif
+                    
+                    @if ($product->category_id == 5 )
+                        <li>Includes all necessary cables and controllers</li>
+                        <li>games sold separately</li>
+                    @endif
+
+                    @if ($product->category_id == 1 )
+                        <li>Includes all items and instructions necessary to begin your journey</li>
+                        <li>Suitable for ages 13 and up</li>
+                        @endif
+
+                    @if ($product->category_id == 4)
+                        <li>1-year warranty included</li>
+                        @endif
+
+                        @if ($product->category_id == 2)
+                        <li>Available on multiple platforms</li>
+                        <li>Features engaging and immersive gameplay</li>
+                        @endif
+                        @if ($product->category_id == 3)
+                        <li>Perfect for enhancing your gameplay experience </li>
+                        <li>Perfect for hobbyists and casual gamers alike</li>
+                    @endif
+                    
                 </ul>
             </div>
 
