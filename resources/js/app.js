@@ -99,15 +99,15 @@ document.addEventListener("DOMContentLoaded", () => {
             lastY = mouseY;
 
             const pixel = document.createElement("span");
-            const size = 4 + Math.random() * 4;
+            const size = 2 + Math.random() * 4;
             pixel.style.width = `${size}px`;
             pixel.style.height = `${size}px`;
             pixel.style.position = "fixed";
             pixel.style.pointerEvents = "none";
             pixel.style.borderRadius = "50%";
 
-            const offsetX = (Math.random() - 0.5) * 40;
-            const offsetY = (Math.random() - 0.5) * 40;
+            const offsetX = (Math.random() - 0.5) * 20;
+            const offsetY = (Math.random() - 0.5) * 20;
 
             pixel.style.left = `${mouseX + offsetX}px`;
             pixel.style.top = `${mouseY + offsetY}px`;
@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
             trailContainer.appendChild(pixel);
 
             setTimeout(() => pixel.remove(), 1800);
-        }, 60);
+        }, 120);
     }
 
     // card glow
