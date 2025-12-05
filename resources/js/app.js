@@ -62,7 +62,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const slider = document.getElementById("weightSlider");
         if (slider) slider.value = saved;
 
-        document.querySelector(".variable-text").style.fontVariationSettings = `"wght" ${saved}`;
+        document.querySelector(
+            ".variable-text"
+        ).style.fontVariationSettings = `"wght" ${saved}`;
     }
 });
 
@@ -85,8 +87,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let mouseX = window.innerWidth / 2;
     let mouseY = window.innerHeight / 2;
+    let lastX = mouseX;
+    let lastY = mouseY;
 
-    const colours = ["#ff2bf5", "#ff5bff", "#00e5ff", "#2f8bff", "#8a4dff"];
+    const colours = ["#ff2bf5", "#ff5bff", "#00e5ff", "#2f8bff", "#8a4dff"].map(
+        (c) => c + "99"
+    );
 
     document.addEventListener("mousemove", (e) => {
         mouseX = e.clientX;
@@ -94,30 +100,32 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     setInterval(() => {
+        if (mouseX === lastX && mouseY === lastY) return;
+        lastX = mouseX;
+        lastY = mouseY;
 
         const pixel = document.createElement("span");
 
-        const size = 2 + Math.random() * 4;
-        pixel.style.width  = size + "px";
+        const size = 1 + Math.random() * 4; // dot size
+        pixel.style.width = size + "px";
         pixel.style.height = size + "px";
+        pixel.style.position = "fixed";
+        pixel.style.pointerEvents = "none";
+        pixel.style.borderRadius = "50%";
+        pixel.style.opacity = 0.7;
 
-        const offsetX = (Math.random() - 0.5) * 20;
-        const offsetY = (Math.random() - 0.5) * 20;
+        const offsetX = (Math.random() - 0.5) * 16; // spread
+        const offsetY = (Math.random() - 0.5) * 16;
 
-        pixel.style.left = (mouseX + offsetX) + "px";
-        pixel.style.top  = (mouseY + offsetY) + "px";
+        pixel.style.left = mouseX + offsetX + "px";
+        pixel.style.top = mouseY + offsetY + "px";
 
         const colour = colours[Math.floor(Math.random() * colours.length)];
-
         pixel.style.backgroundColor = colour;
-        pixel.style.boxShadow = `0 0 14px ${colour}`;
+        pixel.style.boxShadow = `0 0 6px ${colour}`;
 
         container.appendChild(pixel);
 
-        setTimeout(() => {
-            pixel.remove();
-        }, 1800);
-
-    }, 50);
+        setTimeout(() => pixel.remove(), 1500); // lifespan
+    }, 30); // interval in ms
 });
-
