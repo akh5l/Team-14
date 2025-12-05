@@ -20,7 +20,8 @@ function loadFontWeight() {
     if (saved) {
         const slider = document.getElementById("weightSlider");
         if (slider) slider.value = saved;
-        document.querySelector(".variable-text").style.fontVariationSettings = `"wght" ${saved}`;
+        const varText = document.querySelector(".variable-text");
+        if (varText) varText.style.fontVariationSettings = `"wght" ${saved}`;
     }
 }
 
