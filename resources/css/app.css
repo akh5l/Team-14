@@ -3,53 +3,118 @@
 @tailwind utilities;
 
 @font-face {
-    font-family: 'ZT Nature';
-    src: url('/public/fonts/ZT-Nature-Variable-VF.ttf') format('truetype-variations'),
-         url('/public/fonts/ZT-Nature-Variable-VF.ttf') format('truetype') tech('variations');
+    font-family: "ZT Nature";
+    src: url("/public/fonts/ZT-Nature-Variable-VF.ttf")
+            format("truetype-variations"),
+        url("/public/fonts/ZT-Nature-Variable-VF.ttf") format("truetype")
+            tech("variations");
     font-weight: 100 1000;
     font-stretch: 25% 151%;
 }
 
 @font-face {
-    font-family: 'Kikuta';
-    src: url('/public/fonts/kikutaVF.ttf') format('truetype-variations'),
-         url('/public/fonts/kikutaVF.ttf') format('truetype') tech('variations');
+    font-family: "Kikuta";
+    src: url("/public/fonts/kikutaVF.ttf") format("truetype-variations"),
+        url("/public/fonts/kikutaVF.ttf") format("truetype") tech("variations");
     font-weight: 100 1000;
     font-stretch: 25% 151%;
 }
 
 body {
-    font-family: 'ZT Nature', sans-serif;
+    font-family: "ZT Nature", sans-serif;
 }
 
 #logo-text {
-  font-family: 'Kikuta', sans-serif;
-  font-variation-settings: "wght" 100;
-  letter-spacing: 0.02em;
+    font-family: "Kikuta", sans-serif;
+    font-variation-settings: "wght" 100;
+    letter-spacing: 0.02em;
 
-  transition: font-variation-settings 0.5s ease, transform 0.5s ease, letter-spacing 0.5s ease;
+    transition: font-variation-settings 0.5s ease, transform 0.5s ease,
+        letter-spacing 0.5s ease;
 }
 
 .variable-heading {
-  font-variation-settings: "wght" 400;
-  transition: font-variation-settings 0.5s ease, transform 0.5s ease, letter-spacing 0.5s ease;
+    font-variation-settings: "wght" 400;
+    transition: font-variation-settings 0.5s ease, transform 0.5s ease,
+        letter-spacing 0.5s ease;
 
-  will-change: transform;
-  transform: translateZ(0);
+    will-change: transform;
+    transform: translateZ(0);
 }
 
-.variable-heading:hover, #logo-text:hover {
-  font-variation-settings: "wght" 700;
-  /* transform: scale(1.05);  */
-  /* letter-spacing: 0.02em; */
+.variable-heading:hover,
+#logo-text:hover {
+    font-variation-settings: "wght" 700;
+    /* transform: scale(1.05);  */
+    /* letter-spacing: 0.02em; */
 
-  will-change: transform;
-  transform: translateZ(0);
+    will-change: transform;
+    transform: translateZ(0);
 }
 
-.variable-text, .exclude-var-text {
-  font-family: 'ZT Nature', sans-serif;
-  font-variation-settings: "wght" 500;
+.variable-text,
+.exclude-var-text {
+    font-family: "ZT Nature", sans-serif;
+    font-variation-settings: "wght" 500;
+}
+
+.star {
+    position: absolute;
+    border-radius: 50%;
+    background: white;
+    animation: drift 5s linear infinite, twinkle 3s ease-in-out infinite;
+}
+
+@keyframes drift {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    50% {
+        transform: translate(2px, -1px);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes twinkle {
+    0%,
+    100% {
+        opacity: 0.3;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+
+#cursor-aura span {
+    position: fixed;
+    width: 6px;
+    height: 6px;
+    border-radius: 2px;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0;
+    animation: auraFade 1.8s ease-in-out forwards;
+}
+
+@keyframes auraFade {
+    0% {
+        opacity: 0;
+        transform: scale(0.4);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.4);
+    }
 }
 
 #cursor-aura span {

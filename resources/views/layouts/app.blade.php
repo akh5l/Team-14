@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="logo-text">Bridge 14 Games</title>
     <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
-    <link rel="preload" href="/images/background.webp" as="image">
     @vite('resources/css/app.css')
+    @vite('resources/js/app.js')
+    @vite('resources/js/app.js')
 </head>
 
 <div id="cursor-aura"></div>
 
-<body class="flex flex-col h-full variable-text">
+<body class="flex flex-col h-full variable-text antialiased">
 
     <header class="bg-black/90 p-4 flex justify-between items-center">
         <a href="{{ url('/home') }}" class="flex items-center gap-2 text-white font-bold text-xl sm:text-2xl variable-heading">
@@ -37,8 +38,21 @@
             </div>
 
             <div class="flex items-center space-x-2 bg-white/20 rounded-xl px-3 py-2 gap-x-4">
-                <a href="#" class="hover:underline variable-heading">Sign up / Sign in</a>
-                <a href="{{ url('/cart') }}" class="hover:underline variable-heading">Cart</a>
+                @auth
+                    <a href="{{ url('/profile') }}" class="hover:underline variable-heading">Profile</a>
+
+                    <form method="POST" action=" {{ route('logout') }}">
+                        @csrf
+                        <button class="hover:underline variable-heading">Logout</button>
+                    </form>
+
+                    <a href="{{ url('/cart') }}" class="hover:underline variable-heading">Cart</a>
+                @endauth
+                @guest
+                    <a href="{{ url('/login') }}" class="hover:underline variable-heading">Sign in</a>
+                    <a href="{{ url('/register') }}" class="hover:underline variable-heading">Register</a>
+                @endguest
+
                 <a href="{{ url('/products') }}" class="hover:underline variable-heading">Shop</a>
                 <a href="{{ url('/faq') }}" class="hover:underline variable-heading">FAQ</a>
                 <a href="{{ url('/contact-us') }}" class="hover:underline variable-heading">Contact</a>
@@ -64,28 +78,6 @@
             &copy; {{ date('Y') }} Bridge 14 Games
         </div>
     </footer>
-
-
-
-    <style>
-        .star {
-            position: absolute;
-            border-radius: 50%;
-            background: white;
-            animation: drift 5s linear infinite, twinkle 3s ease-in-out infinite;
-        }
-
-        @keyframes drift {
-            0%   { transform: translate(0, 0); }
-            50%  { transform: translate(2px, -1px); }
-            100% { transform: translate(0, 0); }
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; }
-            50%      { opacity: 1; }
-        }
-    </style>
 
 </body>
 </html>
