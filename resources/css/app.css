@@ -46,7 +46,7 @@ body {
 #logo-text:hover {
     font-variation-settings: "wght" 700;
     /* transform: scale(1.05);  */
-    /* letter-spacing: 0.02em; */
+    letter-spacing: 0.05em;
 
     will-change: transform;
     transform: translateZ(0);
