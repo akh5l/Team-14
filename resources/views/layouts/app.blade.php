@@ -16,8 +16,8 @@
 
     <header class="bg-black p-4 flex justify-between items-center">
         <a href="{{ url('/home') }}" class="flex items-center gap-2 text-white font-bold text-xl sm:text-2xl variable-heading">
-            <img src="{{ asset('images/logo-dark.webp') }}" alt="Logo" class="h-12 sm:h-15 w-auto mx-2">
-            <p id="logo-text">Bridge 14 Games</p>
+            <img src="{{ asset('images/logo-dark.webp') }}" alt="Logo" class="h-12 sm:h-15 w-auto mx-8">
+            {{-- <p id="logo-text">Bridge 14 Games</p> --}}
         </a>
 
         <nav class="space-x-4 text-white font-semibold flex">
