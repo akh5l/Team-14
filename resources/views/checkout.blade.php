@@ -80,10 +80,10 @@
             </div>
 
             <!-- error message for wrong input -->
-             <p id="errorBox" class="text-red-600 text-sm font-medium hidden"></p>
+             <p id="errorBox" class="text-blue-600 text-sm font-medium hidden"></p>
             <!--Button-->
             <button type="submit"
-                    class="w-full bg-red-600 hover:bg-red-700 text-white px-2 rouded-lg font-semibold">
+                    class="w-full bg-blue-600 hover:bg-blue-700 text-white px-2 rouded-lg font-semibold">
                 Place order
             </button>
 
