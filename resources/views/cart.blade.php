@@ -12,14 +12,14 @@
 
                 @if (count($cart) > 0)
                     @foreach ($cart as $item)
-                        <div class="flex flex-col md:flex-row gap-4 cart-item" data-price="{{ $item['price'] }}">
+                        <div class="flex flex-col md:flex-row gap-4 cart-item" data-price="{{ $item['price'] }}"
+                            data-quantity="{{ $item['quantity'] }}">
                             <div class="flex gap-4">
                                 <img src="{{ $item['image_url'] }}" alt="{{ $item['product_name'] }}"
                                     class="w-24 h-28 object-contain rounded bg-gray-100">
                                 <div>
                                     <p class="font-semibold text-xl">{{ $item['product_name'] }}</p>
-                                    <input type="number" name="quantity" value="{{ $item['quantity'] }}" min="1"
-                                        class="w-16 mt-2 border rounded px-2 py-1">
+                                    <p class="text-sm text-gray-500">Quantity: {{ $item['quantity'] }}</p>
                                 </div>
                             </div>
 
@@ -109,7 +109,7 @@
 
             cartItems.forEach(item => {
                 const price = parseFloat(item.dataset.price);
-                const qty = parseInt(item.querySelector("input[name='quantity']").value) || 1;
+                const qty = parseInt(item.dataset.quantity) || 1;
                 subtotal += price * qty;
 
                 // line total
@@ -131,6 +131,11 @@
             document.getElementById("subtotal").textContent = "£" + subtotal.toFixed(2);
             document.getElementById("delivery").textContent = "£" + deliveryCost.toFixed(2);
             document.getElementById("total").textContent = "£" + (subtotal + deliveryCost).toFixed(2);
+
+            // store totals
+            document.getElementById("checkoutSubtotal").value = subtotal.toFixed(2);
+            document.getElementById("checkoutDelivery").value = deliveryCost.toFixed(2);
+            document.getElementById("checkoutTotal").value = (subtotal + deliveryCost).toFixed(2);
 
             // free shipping bar
             // const freeShippingText = document.getElementById("free-shipping-text");
