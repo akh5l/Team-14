@@ -59,7 +59,6 @@ class DatabaseSeeder extends Seeder
                 'description' => 'Epic Norse action-adventure with gods, monsters, and emotional storytelling',
                 'category_id' => 2,
                 'price' => 34.99,
-                'product_type' => 'video_games',
                 'image_url' => 'images/products/god-of-war-ragnarok.png',
             ],
             [ 
@@ -67,7 +66,6 @@ class DatabaseSeeder extends Seeder
                 'description' => 'An immersive Wild West story with action and exploration.',
                 'category_id' => 2,
                 'price' => 19.99,
-                'product_type' => 'video_games',
                 'image_url' => 'images/products/red-dead.png',
             ],
             [ 
@@ -75,7 +73,6 @@ class DatabaseSeeder extends Seeder
                 'description' => 'An open‑world cyberpunk adventure with deep storytelling.',
                 'category_id' => 2,
                 'price' => 20.99,
-                'product_type' => 'video_games',
                 'image_url' => 'images/products/cyberpunk.png',
             ],
             [ 
@@ -83,7 +80,6 @@ class DatabaseSeeder extends Seeder
                 'description' => 'Open-world adventure for Nintendo Switch',
                 'category_id' => 2,
                 'price' => 49.99,
-                'product_type' => 'video_games',
                 'image_url' => 'images/products/legend-of-zelda-botw.png',
             ],
             [
@@ -91,7 +87,6 @@ class DatabaseSeeder extends Seeder
                 'description' => 'Stunning open-world soulslike for PS5 and Xbox',
                 'category_id' => 2,
                 'price' => 50.00,
-                'product_type' => 'video_games',
                 'image_url' => 'images/products/elden-ring.png',
             ],
 
@@ -100,7 +95,6 @@ class DatabaseSeeder extends Seeder
                 'description' => 'Wireless gaming headset with immersive 3D audio for PS5.',
                 'category_id' => 4,
                 'price' => 84.99,
-                'product_type' => 'video_games_accessories',
                 'image_url' => 'images/products/3d-pulse-headset.png',
             ],
             [ 
@@ -108,7 +102,6 @@ class DatabaseSeeder extends Seeder
                 'description' => 'Comfortable wireless headset with spatial sound and built‑in mic.',
                 'category_id' => 4,
                 'price' => 89.99,
-                'product_type' => 'video_games_accessories',
                 'image_url' => 'images/products/xbox-wireless-headset.png',
             ],
             [ 
@@ -116,7 +109,6 @@ class DatabaseSeeder extends Seeder
                 'description' => 'Steering‑wheel grips for motion‑controlled racing games.',
                 'category_id' => 4,
                 'price' => 17.99,
-                'product_type' => 'video_games_accessories',
                 'image_url' => 'images/products/nintendo-joy-con.png',
             ],
             [ 
@@ -124,7 +116,6 @@ class DatabaseSeeder extends Seeder
                 'description' => 'Premium wireless controller for precise and comfortable gameplay.',
                 'category_id' => 4,
                 'price' => 64.99,
-                'product_type' => 'video_games_accessories',
                 'image_url' => 'images/products/nintendo-switch-2-pro-controller.png',
             ],
 
@@ -133,7 +124,6 @@ class DatabaseSeeder extends Seeder
                 'description' => 'DualSense Wireless Controller',
                 'category_id' => 4,
                 'price' => 59.99,
-                'product_type' => 'video_games_accessories',
                 'image_url' => 'images/products/ps5-controller.png',
             ],
 
@@ -142,7 +132,6 @@ class DatabaseSeeder extends Seeder
                 'description' => 'Next-gen Microsoft console',
                 'category_id' => 5,
                 'price' => 449.99,
-                'product_type' => 'consoles',
                 'image_url' => 'images/products/xbox.png',
             ],
             [
@@ -150,7 +139,6 @@ class DatabaseSeeder extends Seeder
                 'description' => 'Nintendo\'s flagship handheld',
                 'category_id' => 5,
                 'price' => 395.99,
-                'product_type' => 'consoles',
                 'image_url' => 'images/products/switch2.png',
             ],
             [
@@ -158,7 +146,6 @@ class DatabaseSeeder extends Seeder
                 'description' => 'Next‑gen PlayStation console built for speed, power, and immersion.',
                 'category_id' => 5,
                 'price' => 349.99,
-                'product_type' => 'consoles',
                 'image_url' => '',
             ],
             [
@@ -166,7 +153,6 @@ class DatabaseSeeder extends Seeder
                 'description' => 'Affordable next‑gen console built for fast, high‑quality digital gaming.',
                 'category_id' => 5,
                 'price' => 329.99,
-                'product_type' => 'consoles',
                 'image_url' => '',
             ],
             [
@@ -174,7 +160,6 @@ class DatabaseSeeder extends Seeder
                 'description' => 'Premium next‑gen console for smoother gameplay and sharper visuals.',
                 'category_id' => 5,
                 'price' => 699.99,
-                'product_type' => 'consoles',
                 'image_url' => '',
             ],       
             
@@ -183,7 +168,6 @@ class DatabaseSeeder extends Seeder
                 'description' => 'Explore cosmic horrors with rules, mythos, tools, and mysteries',
                 'category_id' => 1,
                 'price' => 30.00,
-                'product_type' => 'tabletop_games',
                 'image_url' => 'images/products/cthulhu.png',
             ],
             [
@@ -191,7 +175,6 @@ class DatabaseSeeder extends Seeder
                 'description' => 'Essential rules and adventures for heroic dragon quests',
                 'category_id' => 1,
                 'price' => 19.99,
-                'product_type' => 'tabletop_games',
                 'image_url' => 'images/products/d&d.png',
             ],
             [
@@ -199,7 +182,6 @@ class DatabaseSeeder extends Seeder
                 'description' => 'Complete Warhammer 40K set with miniatures and terrain',
                 'category_id' => 1,
                 'price' => 113.00,
-                'product_type' => 'tabletop_games',
                 'image_url' => 'images/products/warhammer.png',
             ],
             [
@@ -207,7 +189,6 @@ class DatabaseSeeder extends Seeder
                 'description' => 'Quick and fun Magic: The Gathering boosters for beginners',
                 'category_id' => 1,
                 'price' => 8.00,
-                'product_type' => 'tabletop_games',
                 'image_url' => 'images/products/magic.png',
             ],
             [
@@ -215,7 +196,6 @@ class DatabaseSeeder extends Seeder
                 'description' => 'A strategic fantasy card game set in The Witcher universe.',
                 'category_id' => 1,
                 'price' => 44.99,
-                'product_type' => 'tabletop_games',
                 'image_url' => '',
             ],
 
@@ -224,7 +204,6 @@ class DatabaseSeeder extends Seeder
                 'description' => 'Pack of 28.5mm bases for miniatures assembly',
                 'category_id' => 3,
                 'price' => 3.10,
-                'product_type' => 'tabletop_accessories',
                 'image_url' => 'images/products/citadel.png',
             ],
             [ 
@@ -232,7 +211,6 @@ class DatabaseSeeder extends Seeder
                 'description' => 'High‑quality dice set ideal for D&D and tabletop combat games.',
                 'category_id' => 3,
                 'price' => 3.10,
-                'product_type' => 'tabletop_accessories',
                 'image_url' => '',
             ],
             [ 
@@ -240,7 +218,6 @@ class DatabaseSeeder extends Seeder
                 'description' => 'Durable green dice set for tabletop RPGs and wargames.',
                 'category_id' => 3,
                 'price' => 3.10,
-                'product_type' => 'tabletop_accessories',
                 'image_url' => '',
             ],
             [ 
@@ -248,7 +225,6 @@ class DatabaseSeeder extends Seeder
                 'description' => 'Random colour D&D dice set made from high‑quality resin.',
                 'category_id' => 3,
                 'price' => 10.00,
-                'product_type' => 'tabletop_accessories',
                 'image_url' => '',
             ],
             [ 
@@ -256,7 +232,6 @@ class DatabaseSeeder extends Seeder
                 'description' => 'Cute zip‑up accessory pouch inspired by the iconic Mind Flayer monster.',
                 'category_id' => 3,
                 'price' => 45.00,
-                'product_type' => 'tabletop_accessories',
                 'image_url' => '',
             ]
         ];
