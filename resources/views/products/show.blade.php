@@ -65,7 +65,7 @@
                         <li>Features engaging and immersive gameplay</li>
                     @elseif ($product->category_id == 3)
                         <li>Perfect for enhancing your gameplay experience </li>
-                        <li>Perfect for hobbyists and casual gamers alike</li>
+                        <li>For hobbyists and casual gamers alike</li>
                     @elseif ($product->category_id == 4)
                         <li>1-year warranty included</li>
                     @elseif ($product->category_id == 5)
