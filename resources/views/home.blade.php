@@ -39,7 +39,7 @@
                     Gaming Accessories</div>
                 <div class="bg-yellow-500 text-white p-4 rounded-lg cursor-pointer hover:bg-yellow-600 transition">Tabletop
                     Gaming Accessories</div>
-                <div class="bg-red-500 text-white p-4 rounded-lg cursor-pointer hover:bg-yellow-600 transition">Consoles
+                <div class="bg-red-500 text-white p-4 rounded-lg cursor-pointer hover:bg-red-600 transition">Consoles
                 </div>
 
             </div>
