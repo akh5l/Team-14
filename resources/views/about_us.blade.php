@@ -57,14 +57,14 @@
         <div class="max-w-7xl mx-auto px-4 text-center">
             <h2 class="text-3xl mb-4">Join the Bridge 14 Community</h2>
             <p class="mb-6">Subscribe to our newsletter to receive updates on new releases and exclusive deals!</p>
-            <form class="flex max-w-md mx-auto space-x-2">
+            <form class="flex max-w-md mx-auto space-x-2 newsletter-form">
                 <input type="email" placeholder="Enter your email"
                     class="bg-gray-800 w-full p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
                 <button
                     class="bg-blue-500 hover:bg-blue-600 px-4 py-3 rounded-lg font-semibold transition">Subscribe</button>
             </form>
             <script>
-                document.querySelector('form').addEventListener('submit', function(e) {
+                document.querySelector('#newsletter-form').addEventListener('submit', function(e) {
                     e.preventDefault();
                     const emailInput = this.querySelector('input[type="email"]');
                     let email = emailInput.value.trim(); //removes any whitespace from the inputted email
