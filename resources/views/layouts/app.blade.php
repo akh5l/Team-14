@@ -14,9 +14,9 @@
 
 <body class="flex flex-col h-full variable-text antialiased">
 
-    <header class="bg-black/90 p-4 flex justify-between items-center">
+    <header class="bg-black p-4 flex justify-between items-center">
         <a href="{{ url('/home') }}" class="flex items-center gap-2 text-white font-bold text-xl sm:text-2xl variable-heading">
-            <img src="{{ asset('images/logo.png') }}" alt="Logo" class="h-12 sm:h-15 w-auto">
+            <img src="{{ asset('images/logo-dark.webp') }}" alt="Logo" class="h-12 sm:h-15 w-auto mx-2">
             <p id="logo-text">Bridge 14 Games</p>
         </a>
 
