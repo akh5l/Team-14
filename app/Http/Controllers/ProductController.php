@@ -15,15 +15,25 @@ class ProductController extends Controller
     public function products() // all products
     {
         $query = Product::query();
+        $currentCategory = null;
+
         if (request()->filled('search')) {
             $search = request('search');
             $query->where('product_name', 'like', "%{$search}%")
             ->orWhere('description', 'like', "%{$search}%");
         }
 
-        $products = $query->get();
+        if (request()->filled('category')) {
+        $categoryID = request('category');
+        $query->where('category_id', $categoryID);
 
-        return view('products.products', compact('products'));
+        $currentCategory = \App\Models\Category::find($categoryID);
+        }
+
+        $products = $query->get();
+        
+
+        return view('products.products', compact('products', 'currentCategory'));
     }
 
     public function show($id)

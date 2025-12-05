@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <section class="relative h-96 flex items-center justify-center text-center text-black overflow-hidden bg-black">
-      <div id="star-layer"></div>
+        <div id="star-layer"></div>
 
         <div class="backdrop-blur-xl text-white bg-black/50 rounded-full px-20 py-5">
             <h1 class="text-4xl md:text-5xl font-bold mb-4 drop-shadow-lg">Discover Your New Favourite Game</h1>
@@ -9,7 +9,8 @@
                 needs</p>
             <div class="flex justify-center space-x-4">
                 <a href="/products"
-                    class="bg-gray-800 hover:bg-gray-600 text-white font-semibold py-3 px-6 rounded-lg transition">All Products</a>
+                    class="bg-gray-800 hover:bg-gray-600 text-white font-semibold py-3 px-6 rounded-lg transition">All
+                    Products</a>
             </div>
         </div>
     </section>
@@ -31,17 +32,12 @@
         <div class="max-w-7xl mx-auto px-4 text-center">
             <h2 class="text-3xl font-bold mb-8">Categories</h2>
             <div class="flex flex-wrap justify-center gap-4">
-                <div class="bg-blue-500 text-white p-4 rounded-lg cursor-pointer hover:bg-blue-600 transition">Tabletop
-                    Games</div>
-                <div class="bg-green-500 text-white p-4 rounded-lg cursor-pointer hover:bg-green-600 transition">Video Games
-                </div>
-                <div class="bg-purple-500 text-white p-4 rounded-lg cursor-pointer hover:bg-purple-600 transition">Video
-                    Gaming Accessories</div>
-                <div class="bg-yellow-500 text-white p-4 rounded-lg cursor-pointer hover:bg-yellow-600 transition">Tabletop
-                    Gaming Accessories</div>
-                <div class="bg-red-500 text-white p-4 rounded-lg cursor-pointer hover:bg-yellow-600 transition">Consoles
-                </div>
-
+                @foreach ($categories as $category)
+                    <a href="{{ route('products', ['category' => $category->category_id]) }}"
+                        class="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700 transition">
+                        {{ $category->category_name }}
+                    </a>
+                @endforeach
             </div>
         </div>
     </section>
@@ -56,7 +52,8 @@
             </div>
             <div class="bg-gray-100 p-6 rounded-lg w-full md:w-1/3 shadow hover:shadow-xl transition">
                 <h3 class="text-xl font-semibold mb-2">Expert Recommendations</h3>
-                <p>Our team will help you find the perfect game for you based on your needs. Simply drop us a message via our 'Contact Us' page, or come speak to us in store</p>
+                <p>Our team will help you find the perfect game for you based on your needs. Simply drop us a message via
+                    our 'Contact Us' page, or come speak to us in store</p>
             </div>
             <div class="bg-gray-100 p-6 rounded-lg w-full md:w-1/3 shadow hover:shadow-xl transition">
                 <h3 class="text-xl font-semibold mb-2">Fast Shipping</h3>
@@ -76,17 +73,21 @@
                     class="bg-blue-500 hover:bg-blue-600 px-4 py-3 rounded-lg font-semibold transition">Subscribe</button>
             </form>
             <script>
-            document.querySelector('form').addEventListener('submit', function(e) {
-                e.preventDefault(); 
-                const emailInput = this.querySelector('input[type="email"]');
-                let email = emailInput.value.trim(); //removes any whitespace from the inputted email
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;  //ensures the inputted email follows the correct format (local@domain.)
-                if (!emailRegex.test(email)) {  //basic check against the regex. this ensures that the form is both valid and not null
-                alert('Enter a valid email address.'); 
-                return;
-                }
-                console.log('email:', email);   //logs the email to the developer console (right click --> inspect --> console) to confirm the form works
-            });
+                document.querySelector('form').addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const emailInput = this.querySelector('input[type="email"]');
+                    let email = emailInput.value.trim(); //removes any whitespace from the inputted email
+                    const emailRegex =
+                        /^[^\s@]+@[^\s@]+\.[^\s@]+$/; //ensures the inputted email follows the correct format (local@domain.)
+                    if (!emailRegex.test(
+                            email)) { //basic check against the regex. this ensures that the form is both valid and not null
+                        alert('Enter a valid email address.');
+                        return;
+                    }
+                    console.log('email:',
+                        email
+                    ); //logs the email to the developer console (right click --> inspect --> console) to confirm the form works
+                });
             </script>
         </div>
     </section>

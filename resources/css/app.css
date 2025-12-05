@@ -46,7 +46,7 @@ body {
 #logo-text:hover {
     font-variation-settings: "wght" 700;
     /* transform: scale(1.05);  */
-    /* letter-spacing: 0.02em; */
+    letter-spacing: 0.05em;
 
     will-change: transform;
     transform: translateZ(0);
@@ -91,14 +91,14 @@ body {
 }
 
 
-#cursor-aura span {
+#mouse-trail span {
     position: fixed;
     width: 6px;
     height: 6px;
-    border-radius: 2px;
+    border-radius: 50%;
     pointer-events: none;
     z-index: 9999;
-    opacity: 0;
+    opacity: 0.7;
     animation: auraFade 1.8s ease-in-out forwards;
 }
 
@@ -116,3 +116,12 @@ body {
         transform: scale(0.4);
     }
 }
+
+.product-card {
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+/* 
+.product-card:hover {
+    box-shadow: 0 0 20px 8px rgba(138,77,255,0.2);
+} */

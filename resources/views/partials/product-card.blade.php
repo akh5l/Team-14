@@ -1,8 +1,8 @@
 <a href="{{ route('products.show', $product->product_id) }}"
-    class="hover:scale-105 transition transform duration-200 active:scale-100">
-    <div class="bg-white rounded-lg shadow hover:shadow-lg transition p-4 flex flex-col h-full">
+    class="hover:scale-105 active:scale-100 product-card">
+    <div class="bg-gray-100/50 rounded-lg shadow hover:shadow-lg p-4 flex flex-col h-full">
         <img src="{{ $product->image_url }}" alt="{{ $product->product_name }}"
-            class="h-48 w-full object-contain bg-gray-100 rounded mb-4" />
+            class="h-48 w-full object-contain rounded mb-4 bg-white" />
 
         <h3 class="text-xl font-semibold mb-2">{{ $product->product_name }}</h3>
 

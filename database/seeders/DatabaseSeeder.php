@@ -47,8 +47,9 @@ class DatabaseSeeder extends Seeder
         DB::table('categories')->insert([
             ['category_name' => 'Tabletop Games', 'description' => 'Board games and card games'],      // Category ID 1
             ['category_name' => 'Video Games', 'description' => 'Games for 8th and 9th gen consoles'], // 2
-            ['category_name' => 'Accessories', 'description' => 'Gaming accessories'], // 3
-            ['category_name' => 'Consoles', 'description' => 'PlayStation, Xbox, Nintendo'], // 4
+            ['category_name' => 'Tabletop Game Accessories', 'description' => 'Accessories for tabletop gameplay'], // 3
+            ['category_name' => 'Video Game Accessories', 'description' => 'Video game accessories'], // 4
+            ['category_name' => 'Consoles', 'description' => 'PlayStation, Xbox, Nintendo'], // 5
         ]);
 
 
@@ -97,7 +98,7 @@ class DatabaseSeeder extends Seeder
             [ // video game accessories
                 'product_name' => 'PlayStation Pulse 3D Headset',
                 'description' => 'Wireless gaming headset with immersive 3D audio for PS5.',
-                'category_id' => 2,
+                'category_id' => 4,
                 'price' => 84.99,
                 'product_type' => 'video_games_accessories',
                 'image_url' => 'images/products/3d-pulse-headset.png',
@@ -105,7 +106,7 @@ class DatabaseSeeder extends Seeder
             [ 
                 'product_name' => 'Xbox Wireless Headset',
                 'description' => 'Comfortable wireless headset with spatial sound and built‑in mic.',
-                'category_id' => 2,
+                'category_id' => 4,
                 'price' => 89.99,
                 'product_type' => 'video_games_accessories',
                 'image_url' => 'images/products/xbox-wireless-headset.png',
@@ -113,7 +114,7 @@ class DatabaseSeeder extends Seeder
             [ 
                 'product_name' => 'Nintendo Switch Joy-Con Wheel Pair',
                 'description' => 'Steering‑wheel grips for motion‑controlled racing games.',
-                'category_id' => 2,
+                'category_id' => 4,
                 'price' => 17.99,
                 'product_type' => 'video_games_accessories',
                 'image_url' => 'images/products/nintendo-joy-con.png',
@@ -121,7 +122,7 @@ class DatabaseSeeder extends Seeder
             [ 
                 'product_name' => 'Nintendo Switch 2 Pro Controller',
                 'description' => 'Premium wireless controller for precise and comfortable gameplay.',
-                'category_id' => 2,
+                'category_id' => 4,
                 'price' => 64.99,
                 'product_type' => 'video_games_accessories',
                 'image_url' => 'images/products/nintendo-switch-2-pro-controller.png',
@@ -130,7 +131,7 @@ class DatabaseSeeder extends Seeder
             [ 
                 'product_name' => 'PlayStation 5 Controller',
                 'description' => 'DualSense Wireless Controller',
-                'category_id' => 3,
+                'category_id' => 4,
                 'price' => 59.99,
                 'product_type' => 'video_games_accessories',
                 'image_url' => 'images/products/ps5-controller.png',
@@ -139,7 +140,7 @@ class DatabaseSeeder extends Seeder
             [ // consoles
                 'product_name' => 'Xbox Series X',
                 'description' => 'Next-gen Microsoft console',
-                'category_id' => 4,
+                'category_id' => 5,
                 'price' => 449.99,
                 'product_type' => 'consoles',
                 'image_url' => 'images/products/xbox.png',
@@ -147,7 +148,7 @@ class DatabaseSeeder extends Seeder
             [
                 'product_name' => 'Nintendo Switch 2',
                 'description' => 'Nintendo\'s flagship handheld',
-                'category_id' => 4,
+                'category_id' => 5,
                 'price' => 395.99,
                 'product_type' => 'consoles',
                 'image_url' => 'images/products/switch2.png',
@@ -155,7 +156,7 @@ class DatabaseSeeder extends Seeder
             [
                 'product_name' => 'Playstation 5',
                 'description' => 'Next‑gen PlayStation console built for speed, power, and immersion.',
-                'category_id' => 4,
+                'category_id' => 5,
                 'price' => 349.99,
                 'product_type' => 'consoles',
                 'image_url' => '',
@@ -163,7 +164,7 @@ class DatabaseSeeder extends Seeder
             [
                 'product_name' => 'Xbox Series S',
                 'description' => 'Affordable next‑gen console built for fast, high‑quality digital gaming.',
-                'category_id' => 4,
+                'category_id' => 5,
                 'price' => 329.99,
                 'product_type' => 'consoles',
                 'image_url' => '',
@@ -171,7 +172,7 @@ class DatabaseSeeder extends Seeder
             [
                 'product_name' => 'Playstation 5 Pro',
                 'description' => 'Premium next‑gen console for smoother gameplay and sharper visuals.',
-                'category_id' => 4,
+                'category_id' => 5,
                 'price' => 699.99,
                 'product_type' => 'consoles',
                 'image_url' => '',
@@ -180,7 +181,7 @@ class DatabaseSeeder extends Seeder
             [ // tabletop
                 'product_name' => 'Call of Cthulhu - Core Rulebook',
                 'description' => 'Explore cosmic horrors with rules, mythos, tools, and mysteries',
-                'category_id' => 2,
+                'category_id' => 1,
                 'price' => 30.00,
                 'product_type' => 'tabletop_games',
                 'image_url' => 'images/products/cthulhu.png',
@@ -188,7 +189,7 @@ class DatabaseSeeder extends Seeder
             [
                 'product_name' => 'D&D Dragons of Stormwreck Isle Starter Set',
                 'description' => 'Essential rules and adventures for heroic dragon quests',
-                'category_id' => 2,
+                'category_id' => 1,
                 'price' => 19.99,
                 'product_type' => 'tabletop_games',
                 'image_url' => 'images/products/d&d.png',
@@ -196,7 +197,7 @@ class DatabaseSeeder extends Seeder
             [
                 'product_name' => 'Warhammer 40,000: Ultimate Starter Set ',
                 'description' => 'Complete Warhammer 40K set with miniatures and terrain',
-                'category_id' => 2,
+                'category_id' => 1,
                 'price' => 113.00,
                 'product_type' => 'tabletop_games',
                 'image_url' => 'images/products/warhammer.png',
@@ -204,7 +205,7 @@ class DatabaseSeeder extends Seeder
             [
                 'product_name' => 'Magic: The Gathering - Foundations Jumpstart Booster',
                 'description' => 'Quick and fun Magic: The Gathering boosters for beginners',
-                'category_id' => 2,
+                'category_id' => 1,
                 'price' => 8.00,
                 'product_type' => 'tabletop_games',
                 'image_url' => 'images/products/magic.png',
@@ -212,7 +213,7 @@ class DatabaseSeeder extends Seeder
             [
                 'product_name' => 'Gwent Card Game',
                 'description' => 'A strategic fantasy card game set in The Witcher universe.',
-                'category_id' => 2,
+                'category_id' => 1,
                 'price' => 44.99,
                 'product_type' => 'tabletop_games',
                 'image_url' => '',
@@ -221,7 +222,7 @@ class DatabaseSeeder extends Seeder
             [ // tabletop accessories
                 'product_name' => 'Citadel: 28.5mm Round Bases (x10)',
                 'description' => 'Pack of 28.5mm bases for miniatures assembly',
-                'category_id' => 2,
+                'category_id' => 3,
                 'price' => 3.10,
                 'product_type' => 'tabletop_accessories',
                 'image_url' => 'images/products/citadel.png',
@@ -229,7 +230,7 @@ class DatabaseSeeder extends Seeder
             [ 
                 'product_name' => 'TT Combat Green Dice (Gaming Dice)',
                 'description' => 'High‑quality dice set ideal for D&D and tabletop combat games.',
-                'category_id' => 2,
+                'category_id' => 3,
                 'price' => 3.10,
                 'product_type' => 'tabletop_accessories',
                 'image_url' => '',
@@ -237,7 +238,7 @@ class DatabaseSeeder extends Seeder
             [ 
                 'product_name' => 'TT Green Combat Dice',
                 'description' => 'Durable green dice set for tabletop RPGs and wargames.',
-                'category_id' => 2,
+                'category_id' => 3,
                 'price' => 3.10,
                 'product_type' => 'tabletop_accessories',
                 'image_url' => '',
@@ -245,7 +246,7 @@ class DatabaseSeeder extends Seeder
             [ 
                 'product_name' => 'Goblin Mystery Resin Dice Set',
                 'description' => 'Random colour D&D dice set made from high‑quality resin.',
-                'category_id' => 2,
+                'category_id' => 3,
                 'price' => 10.00,
                 'product_type' => 'tabletop_accessories',
                 'image_url' => '',
@@ -253,7 +254,7 @@ class DatabaseSeeder extends Seeder
             [ 
                 'product_name' => 'Dungeons & Dragons: Figurines of Adorable Plush Mind Flayer Gamer Pouch',
                 'description' => 'Cute zip‑up accessory pouch inspired by the iconic Mind Flayer monster.',
-                'category_id' => 2,
+                'category_id' => 3,
                 'price' => 45.00,
                 'product_type' => 'tabletop_accessories',
                 'image_url' => '',

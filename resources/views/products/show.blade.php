@@ -1,14 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-
     <section class="max-w-7xl mx-auto px-4 py-12">
         <div class="flex flex-col md:flex-row gap-8">
 
             <div class="md:w-1/2">
-                <img src="{{ asset($product->image_url) }}"
-                     alt="{{ $product->name }}"
-                     class="w-full h-auto rounded-lg shadow" />
+                <img src="{{ asset($product->image_url) }}" alt="{{ $product->name }}"
+                    class="w-full h-auto rounded-lg shadow" />
             </div>
 
             <div class="md:w-1/2 flex flex-col justify-center">
@@ -20,15 +18,25 @@
                 </p>
 
                 <div class="flex space-x-4">
-                    <a href="#"
-                        class="bg-gray-800 text-white py-3 px-6 rounded-lg hover:bg-gray-700 transition font-semibold">
-                        Add to Cart
-                    </a>
+                    @auth
+                        <a href="#"
+                            class="bg-gray-800 text-white py-3 px-6 rounded-lg hover:bg-gray-700 transition font-semibold">
+                            Add to Cart
+                        </a>
 
-                    <a href="#"
-                        class="bg-blue-500 text-white py-3 px-6 rounded-lg hover:bg-blue-600 transition font-semibold">
-                        Buy Now
-                    </a>
+                        <a href="#"
+                            class="bg-blue-500 text-white py-3 px-6 rounded-lg hover:bg-blue-600 transition font-semibold">
+                            Buy Now
+                        </a>
+                    @endauth
+
+                    @guest
+                        <a href="/login"
+                            class="bg-blue-500 text-white py-3 px-6 rounded-lg hover:bg-blue-600 transition font-semibold">
+                            Sign in to buy
+                        </a>
+                    @endguest
+
                 </div>
             </div>
 
@@ -50,7 +58,7 @@
                     <li>PLACEHOLDER Make this list specific to each product?</li>
                     <li>Durable materials</li>
                     <!-- If a product is above £40, add a section under 'product details' stating that is eligible for free delivery -->
-                    @if($product->price > 40)
+                    @if ($product->price > 40)
                         <li>Eligible for free delivery</li>
                     @endif
                 </ul>
@@ -61,7 +69,8 @@
                 <div class="space-y-4">
                     <div class="bg-gray-100 p-4 rounded-lg shadow">
                         <p class="mb-2">"Great product; highly recommend"</p>
-                        <div class="text-sm text-gray-600">- customer 1 PLACEHOLDER add dummy reviews from customers later</div>
+                        <div class="text-sm text-gray-600">- customer 1 PLACEHOLDER add dummy reviews from customers later
+                        </div>
                     </div>
 
                     <div class="bg-gray-100 p-4 rounded-lg shadow">
@@ -73,5 +82,4 @@
 
         </div>
     </section>
-
 @endsection
