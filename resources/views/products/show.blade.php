@@ -19,15 +19,21 @@
 
                 <div class="flex space-x-4">
                     @auth
-                        <a href="#"
-                            class="bg-gray-800 text-white py-3 px-6 rounded-lg hover:bg-gray-700 transition font-semibold">
-                            Add to Cart
-                        </a>
+                        <form method="POST" action="{{ route('cart.add', $product) }}">
+                            @csrf
+                            <button type="submit"
+                                class="bg-gray-800 text-white py-3 px-6 rounded-lg hover:bg-gray-700 transition font-semibold">
+                                Add to Cart
+                            </button>
+                        </form>
 
-                        <a href="#"
-                            class="bg-blue-500 text-white py-3 px-6 rounded-lg hover:bg-blue-600 transition font-semibold">
-                            Buy Now
-                        </a>
+                        <form method="POST" action="{{ route('cart.buyNow', $product) }}">
+                            @csrf
+                            <button type="submit"
+                                class="bg-blue-500 text-white py-3 px-6 rounded-lg hover:bg-blue-600 transition font-semibold">
+                                Buy Now
+                            </button>
+                        </form>
                     @endauth
 
                     @guest
