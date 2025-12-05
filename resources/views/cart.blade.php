@@ -12,32 +12,22 @@
 
                 @if (count($cart) > 0)
                     @foreach ($cart as $item)
-                        <div class="flex flex-col md:flex-row gap-4">
+                        <div class="flex flex-col md:flex-row gap-4 cart-item" data-price="{{ $item['price'] }}">
                             <div class="flex gap-4">
-                                <img src="/images/products/{{ Str::slug($item['product_name']) }}.png"
-                                    alt="{{ $item['product_name'] }}" class="w-24 h-28 object-contain rounded bg-gray-100">
+                                <img src="{{ $item['image_url'] }}" alt="{{ $item['product_name'] }}"
+                                    class="w-24 h-28 object-contain rounded bg-gray-100">
                                 <div>
                                     <p class="font-semibold text-xl">{{ $item['product_name'] }}</p>
-                                    <p class="text-gray-600 text-sm">Product #: {{ $item['product_id'] }}</p>
-                                    <div class="mt-3 flex items-center gap-2">
-                                        <span class="text-sm">Quantity:</span>
-                                        <form action="{{ route('cart.update', $item['product_id']) }}" method="POST"
-                                            class="flex items-center gap-2">
-                                            @csrf
-                                            <input type="number" name="quantity" value="{{ $item['quantity'] }}"
-                                                min="1"
-                                                class="w-16 border border-gray-300 rounded px-2 py-1 text-center text-sm">
-                                            <button type="submit"
-                                                class="text-blue-600 text-xs hover:underline">Update</button>
-                                        </form>
-                                    </div>
+                                    <input type="number" name="quantity" value="{{ $item['quantity'] }}" min="1"
+                                        class="w-16 mt-2 border rounded px-2 py-1">
                                 </div>
                             </div>
 
                             <div class="text-right">
                                 <p class="font-semibold text-lg">£{{ number_format($item['price'] * $item['quantity'], 2) }}
                                 </p>
-                                <form action="{{ route('cart.remove', $item['product_id']) }}" method="POST">
+                                <form action="{{ route('cart.remove', ['productId' => $item['product_id']]) }}"
+                                    method="POST">
                                     @csrf
                                     <button type="submit" class="text-xs text-red-600 hover:underline mt-1">Remove</button>
                                 </form>
@@ -87,7 +77,7 @@
                             $subtotal = array_sum(array_map(fn($i) => $i['price'] * $i['quantity'], $cart));
                         @endphp
                         <div class="flex justify-between">
-                            <span>Your SubTotal:</span>
+                            <span>Your Subtotal:</span>
                             <span id="subtotal">£{{ number_format($subtotal, 2) }}</span>
                         </div>
                         <div class="flex justify-between">
@@ -111,67 +101,65 @@
     </main>
 
     <script>
-    const FREE_SHIPPING_THRESHOLD = 40;
+        const FREE_SHIPPING_THRESHOLD = 40;
 
-    function updateTotals() {
-        const cartItems = document.querySelectorAll(".cart-item");
-        let subtotal = 0;
+        function updateTotals() {
+            const cartItems = document.querySelectorAll(".cart-item");
+            let subtotal = 0;
 
-        cartItems.forEach(item => {
-            const price = parseFloat(item.dataset.price);
-            const qty = parseInt(item.querySelector("input[name='quantity']").value) || 1;
-            subtotal += price * qty;
+            cartItems.forEach(item => {
+                const price = parseFloat(item.dataset.price);
+                const qty = parseInt(item.querySelector("input[name='quantity']").value) || 1;
+                subtotal += price * qty;
 
-            // Update line total
-            const lineTotalEl = item.querySelector(".line-total");
-            lineTotalEl.textContent = "£" + (price * qty).toFixed(2);
-        });
+                // line total
+                // const lineTotalEl = item.querySelector(".line-total");
+                // lineTotalEl.textContent = "£" + (price * qty).toFixed(2);
+            });
 
-        // Update delivery cost
-        const deliveryRadios = document.querySelectorAll("input[name='delivery']");
-        let deliveryCost = 0;
-        deliveryRadios.forEach(radio => {
-            if (radio.checked) {
-                deliveryCost = parseFloat(radio.value);
-            }
-        });
+            // delivery cost
+            const deliveryRadios = document.querySelectorAll("input[name='delivery']");
+            let deliveryCost = 0;
+            deliveryRadios.forEach(radio => {
+                if (radio.checked) deliveryCost = parseFloat(radio.value);
+            });
 
-        if (subtotal >= FREE_SHIPPING_THRESHOLD) {
-            deliveryCost = 0; // free shipping
+            // apply free shipping if subtotal >= threshold
+            if (subtotal >= FREE_SHIPPING_THRESHOLD) deliveryCost = 0;
+
+            // update DOM
+            document.getElementById("subtotal").textContent = "£" + subtotal.toFixed(2);
+            document.getElementById("delivery").textContent = "£" + deliveryCost.toFixed(2);
+            document.getElementById("total").textContent = "£" + (subtotal + deliveryCost).toFixed(2);
+
+            // free shipping bar
+            // const freeShippingText = document.getElementById("free-shipping-text");
+            // const freeShippingBar = document.getElementById("free-shipping-bar");
+            // let percent = (subtotal / FREE_SHIPPING_THRESHOLD) * 100;
+            // percent = Math.min(Math.max(percent, 0), 100);
+            // freeShippingBar.style.width = percent + "%";
+
+            // if (subtotal >= FREE_SHIPPING_THRESHOLD) {
+            //     freeShippingText.textContent = "Free shipping applied!";
+            // } else {
+            //     freeShippingText.textContent = "£" + (FREE_SHIPPING_THRESHOLD - subtotal).toFixed(2) +
+            //         " away from free shipping!";
+            // }
         }
 
-        // Update DOM elements
-        document.getElementById("subtotal").textContent = "£" + subtotal.toFixed(2);
-        document.getElementById("delivery").textContent = "£" + deliveryCost.toFixed(2);
-        document.getElementById("total").textContent = "£" + (subtotal + deliveryCost).toFixed(2);
+        // Attach event listeners to quantity inputs
+        document.querySelectorAll("input[name='quantity']").forEach(input => {
+            input.addEventListener("input", updateTotals);
+        });
 
-        // Update free shipping bar
-        const freeShippingText = document.getElementById("free-shipping-text");
-        const freeShippingBar = document.getElementById("free-shipping-bar");
-        let percent = (subtotal / FREE_SHIPPING_THRESHOLD) * 100;
-        percent = Math.min(Math.max(percent, 0), 100);
-        freeShippingBar.style.width = percent + "%";
+        // Attach event listeners to delivery options
+        document.querySelectorAll("input[name='delivery']").forEach(radio => {
+            radio.addEventListener("change", updateTotals);
+        });
 
-        if (subtotal >= FREE_SHIPPING_THRESHOLD) {
-            freeShippingText.textContent = "Free shipping applied!";
-        } else {
-            freeShippingText.textContent = "£" + (FREE_SHIPPING_THRESHOLD - subtotal).toFixed(2) + " away from free shipping!";
-        }
-    }
-
-    // Attach event listeners to quantity inputs
-    document.querySelectorAll("input[name='quantity']").forEach(input => {
-        input.addEventListener("input", updateTotals);
-    });
-
-    // Attach event listeners to delivery options
-    document.querySelectorAll("input[name='delivery']").forEach(radio => {
-        radio.addEventListener("change", updateTotals);
-    });
-
-    // Run on page load
-    updateTotals();
-</script>
+        // Run on page load
+        updateTotals();
+    </script>
 
 
 @endsection
