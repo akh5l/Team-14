@@ -12,8 +12,6 @@
 
 
 <body class="flex flex-col h-full variable-text antialiased">
-    <div id="mouse-trail"></div>
-
 
     <header class="bg-black p-4 flex justify-between items-center">
         <a href="{{ url('/home') }}"

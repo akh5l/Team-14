@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
             lastY = mouseY;
 
             const pixel = document.createElement("span");
-            const size = 2 + Math.random() * 4;
+            const size = 4 + Math.random() * 4;
             pixel.style.width = `${size}px`;
             pixel.style.height = `${size}px`;
             pixel.style.position = "fixed";
@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
             trailContainer.appendChild(pixel);
 
             setTimeout(() => pixel.remove(), 1800);
-        }, 120);
+        }, 30);
     }
 
     // card glow
