@@ -51,7 +51,7 @@
             <div>
                 <h3 class="text-2xl font-semibold mb-4">Product Details</h3>
                 <p class="mb-4">
-                    {{ $product->detailed_description ?? 'PLACEHOLDER add a detailed description field to each product, using Braden\'s trello descriptions!!!' }}
+                    {{ $product->description_detailed ?? 'PLACEHOLDER add a detailed description field to each product, using Braden\'s trello descriptions!!!' }}
                 </p>
 
                 <ul class="list-disc list-inside mb-4">
