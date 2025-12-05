@@ -15,15 +15,9 @@ return new class extends Migration
             $table->id('product_id');
             $table->string('product_name');
             $table->text('description')->nullable();
+            $table->text('description_detailed')->nullable();
             $table->unsignedBigInteger('category_id')->nullable();
             $table->decimal('price', 10, 2);
-            $table->enum('product_type', [
-                'tabletop_games',
-                'video_games',
-                'video_games_accessories',
-                'tabletop_accessories',
-                'consoles'
-            ]);
             $table->string('image_url')->nullable();
 
             $table->foreign('category_id')->references('category_id')->on('categories');

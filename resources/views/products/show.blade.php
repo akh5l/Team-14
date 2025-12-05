@@ -55,11 +55,6 @@
                 </p>
 
                 <ul class="list-disc list-inside mb-4">
-                    <li>Durable materials</li>
-                    <!-- If a product is above £40, add a section under 'product details' stating that is eligible for free delivery -->
-                    @if ($product->price > 40)
-                        <li>Eligible for free delivery</li>
-                    @endif
                     
                     @if ($product->category_id == 5 )
                         <li>Includes all necessary cables and controllers</li>
@@ -90,15 +85,18 @@
             <div>
                 <h3 class="text-2xl font-semibold mb-4">Customer Reviews</h3>
                 <div class="space-y-4">
+                    @php
+                        $customers = \App\Models\User::where('role', '!=', 'admin')->inRandomOrder()->take(2)->get();
+                    @endphp
                     <div class="bg-gray-100 p-4 rounded-lg shadow">
                         <p class="mb-2">"Great product; highly recommend"</p>
-                        <div class="text-sm text-gray-600">- customer 1 PLACEHOLDER add dummy reviews from customers later
+                        <div class="text-sm text-gray-600">- {{ $customers[0]->first_name . " " . $customers[0]->last_name ?? 'Anonymous' }}
                         </div>
                     </div>
 
                     <div class="bg-gray-100 p-4 rounded-lg shadow">
                         <p class="mb-2">"Good quality and fast shipping"</p>
-                        <div class="text-sm text-gray-600">- customer 2</div>
+                        <div class="text-sm text-gray-600">- {{ $customers[1]->first_name . " " . $customers[1]->last_name ?? 'Anonymous' }}</div>
                     </div>
                 </div>
             </div>
