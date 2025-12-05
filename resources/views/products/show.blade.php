@@ -73,12 +73,6 @@
                         <li>games sold separately</li>
                     @endif
 
-
-
-                    
-
-                    
-
                 </ul>
             </div>
 
