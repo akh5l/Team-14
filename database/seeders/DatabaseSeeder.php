@@ -146,21 +146,21 @@ class DatabaseSeeder extends Seeder
                 'description' => 'Next‑gen PlayStation console built for speed, power, and immersion.',
                 'category_id' => 5,
                 'price' => 349.99,
-                'image_url' => '',
+                'image_url' => 'images/products/ps5.jpg',
             ],
             [
                 'product_name' => 'Xbox Series S',
                 'description' => 'Affordable next‑gen console built for fast, high‑quality digital gaming.',
                 'category_id' => 5,
                 'price' => 329.99,
-                'image_url' => '',
+                'image_url' => 'images/products/xbox-series-s.png',
             ],
             [
                 'product_name' => 'Playstation 5 Pro',
                 'description' => 'Premium next‑gen console for smoother gameplay and sharper visuals.',
                 'category_id' => 5,
                 'price' => 699.99,
-                'image_url' => '',
+                'image_url' => 'images/products/ps5-pro.png',
             ],       
             
             [ // tabletop
@@ -196,7 +196,7 @@ class DatabaseSeeder extends Seeder
                 'description' => 'A strategic fantasy card game set in The Witcher universe.',
                 'category_id' => 1,
                 'price' => 44.99,
-                'image_url' => '',
+                'image_url' => 'images/products/gwent.jpg',
             ],
 
             [ // tabletop accessories
@@ -208,31 +208,31 @@ class DatabaseSeeder extends Seeder
             ],
             [ 
                 'product_name' => 'TT Combat Green Dice (Gaming Dice)',
-                'description' => 'High‑quality dice set ideal for D&D and tabletop combat games.',
+                'description' => 'High‑quality polyhedral dice set ideal for D&D and tabletop combat games.',
                 'category_id' => 3,
                 'price' => 3.10,
-                'image_url' => '',
+                'image_url' => 'images/products/dice-20.jpg',
             ],
             [ 
                 'product_name' => 'TT Green Combat Dice',
-                'description' => 'Durable green dice set for tabletop RPGs and wargames.',
+                'description' => 'Durable six-sided green dice set for tabletop RPGs and wargames.',
                 'category_id' => 3,
                 'price' => 3.10,
-                'image_url' => '',
+                'image_url' => 'images/products/dice-6.jpg',
             ],
             [ 
                 'product_name' => 'Goblin Mystery Resin Dice Set',
                 'description' => 'Random colour D&D dice set made from high‑quality resin.',
                 'category_id' => 3,
                 'price' => 10.00,
-                'image_url' => '',
+                'image_url' => 'images/products/dice-goblin.jpg',
             ],
             [ 
                 'product_name' => 'Dungeons & Dragons: Figurines of Adorable Plush Mind Flayer Gamer Pouch',
                 'description' => 'Cute zip‑up accessory pouch inspired by the iconic Mind Flayer monster.',
                 'category_id' => 3,
                 'price' => 45.00,
-                'image_url' => '',
+                'image_url' => 'images/products/dnd-pouch.jpg',
             ]
         ];
 
