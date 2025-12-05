@@ -2,7 +2,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
@@ -16,12 +15,15 @@ class CartController extends Controller
     {
         $cart = session()->get('cart', []);
 
-        if (isset($cart[$product->id])) {
-            $cart[$product->id]['quantity']++;
+        // dd($product->product_id, $product->product_name);
+
+        if (isset($cart[$product->product_id])) {
+            $cart[$product->product_id]['quantity']++;
         } else {
-            $cart[$product->id] = [
-                'product_id'   => $product->id,
+            $cart[$product->product_id] = [
+                'product_id'   => $product->product_id,
                 'product_name' => $product->product_name,
+                'image_url' => $product->image_url,
                 'price'        => $product->price,
                 'quantity'     => 1,
             ];
@@ -33,15 +35,28 @@ class CartController extends Controller
 
     public function buyNow(Product $product)
     {
-        $this->add($product);
-        return redirect()->route('cart');
+
+        $cart = [];
+
+        $cart[$product->product_id] = [
+            'product_id'   => $product->product_id,
+            'product_name' => $product->product_name,
+            'image_url' => $product->image_url,
+            'price'        => $product->price,
+            'quantity'     => 1,
+        ];
+
+        session()->put('cart', $cart);
+
+        return redirect()->route('checkout');
     }
 
-    public function remove(Product $product)
+    public function remove($productId)
     {
         $cart = session()->get('cart', []);
-        if (isset($cart[$product->id])) {
-            unset($cart[$product->id]);
+
+        if (isset($cart[$productId])) {
+            unset($cart[$productId]);
             session()->put('cart', $cart);
         }
         return back()->with('success', 'Item removed');
