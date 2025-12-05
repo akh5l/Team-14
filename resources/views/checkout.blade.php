@@ -100,7 +100,7 @@
                 class="w-20 h-20 rounded object-contain bg-gray-100" alt="D&D Dragons of Stormwreck Isle">
             <div class="flex-1">
                 <p class="font-semibold">D&D Dragons of Stormwreck Isle</p>
-                <p class="text-sm text-gray-500">Qauntity: 1</p>
+                <p class="text-sm text-gray-500">Quantity: 1</p>
             </div>
             <p class="font-semibold text-sm">£19.99</p>
         </div>
