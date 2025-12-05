@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" class="h-full">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,15 +8,16 @@
     <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
-    @vite('resources/js/app.js')
 </head>
 
-<div id="cursor-aura"></div>
 
 <body class="flex flex-col h-full variable-text antialiased">
+    <div id="mouse-trail"></div>
+
 
     <header class="bg-black p-4 flex justify-between items-center">
-        <a href="{{ url('/home') }}" class="flex items-center gap-2 text-white font-bold text-xl sm:text-2xl variable-heading">
+        <a href="{{ url('/home') }}"
+            class="flex items-center gap-2 text-white font-bold text-xl sm:text-2xl variable-heading">
             <img src="{{ asset('images/logo-dark.webp') }}" alt="Logo" class="h-12 sm:h-15 w-auto mx-8">
             {{-- <p id="logo-text">Bridge 14 Games</p> --}}
         </a>
@@ -27,14 +29,8 @@
                     Font Weight
                 </label>
 
-                <input
-                    type="range"
-                    id="weightSlider"
-                    min="500"
-                    max="800"
-                    value="500"
-                    class="h-1 w-32 rounded-full accent-yellow-400 bg-white/40"
-                >
+                <input type="range" id="weightSlider" min="500" max="800" value="500"
+                    class="h-1 w-32 rounded-full accent-yellow-400 bg-white/40">
             </div>
 
             <div class="flex items-center space-x-2 bg-white/20 rounded-xl px-3 py-2 gap-x-4">
@@ -62,10 +58,8 @@
         </nav>
     </header>
 
-    <button
-        id="themeToggle"
-        class="fixed bottom-5 right-5 text-2xl bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition select-none z-50"
-    >
+    <button id="themeToggle"
+        class="fixed bottom-5 right-5 text-2xl bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition select-none z-50">
         🌙
     </button>
 
@@ -80,4 +74,5 @@
     </footer>
 
 </body>
+
 </html>
