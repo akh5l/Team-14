@@ -10,17 +10,14 @@
     @vite('resources/js/app.js')
 </head>
 
-
+<div id="cursor-aura"></div>
 
 <body class="flex flex-col h-full variable-text antialiased">
-  
-    <div id="cursor-aura"></div>
 
     <header class="bg-black/90 p-4 flex justify-between items-center">
-        <a href="{{ url('/home') }}"
-            class="flex items-center gap-2 text-white font-bold text-xl sm:text-2xl variable-heading mx-5">
-            <img src="{{ asset('images/logo-no-text.webp') }}" alt="Logo" class="h-12 sm:h-15 w-auto">
-            {{-- <p id="logo-text">Bridge 14 Games</p> --}}
+        <a href="{{ url('/home') }}" class="flex items-center gap-2 text-white font-bold text-xl sm:text-2xl variable-heading">
+            <img src="{{ asset('images/logo.png') }}" alt="Logo" class="h-12 sm:h-15 w-auto">
+            <p id="logo-text">Bridge 14 Games</p>
         </a>
 
         <nav class="space-x-4 text-white font-semibold flex">
@@ -60,8 +57,6 @@
                 <a href="{{ url('/faq') }}" class="hover:underline variable-heading">FAQ</a>
                 <a href="{{ url('/contact-us') }}" class="hover:underline variable-heading">Contact</a>
                 <a href="{{ url('/about') }}" class="hover:underline variable-heading">About Us</a>
-
-
             </div>
 
         </nav>
@@ -69,7 +64,7 @@
 
     <button
         id="themeToggle"
-        class="fixed bottom-5 right-5 text-2xl bg-gray-700 text-white p-3 rounded-full shadow-lg hover:bg-gray-500 transition select-none z-50"
+        class="fixed bottom-5 right-5 text-2xl bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition select-none z-50"
     >
         🌙
     </button>

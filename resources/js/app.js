@@ -62,13 +62,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const slider = document.getElementById("weightSlider");
         if (slider) slider.value = saved;
 
-        document.querySelector(
-            ".variable-text"
-        ).style.fontVariationSettings = `"wght" ${saved}`;
+        document.querySelector(".variable-text").style.fontVariationSettings = `"wght" ${saved}`;
     }
 });
 
-// Making the Light and Dark Mode button switch when clicked on.
 const toggle = document.getElementById("themeToggle");
 const root = document.documentElement;
 
@@ -97,17 +94,18 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     setInterval(() => {
+
         const pixel = document.createElement("span");
 
         const size = 4 + Math.random() * 4;
-        pixel.style.width = size + "px";
+        pixel.style.width  = size + "px";
         pixel.style.height = size + "px";
 
         const offsetX = (Math.random() - 0.5) * 40;
         const offsetY = (Math.random() - 0.5) * 40;
 
-        pixel.style.left = mouseX + offsetX + "px";
-        pixel.style.top = mouseY + offsetY + "px";
+        pixel.style.left = (mouseX + offsetX) + "px";
+        pixel.style.top  = (mouseY + offsetY) + "px";
 
         const colour = colours[Math.floor(Math.random() * colours.length)];
 
@@ -119,5 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(() => {
             pixel.remove();
         }, 1800);
+
     }, 60);
 });
+
