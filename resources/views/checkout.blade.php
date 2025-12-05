@@ -80,10 +80,10 @@
             </div>
 
             <!-- error message for wrong input -->
-             <p id="errorBox" class="text-red-600 text-sm font-medium hidden"></p>
+             <p id="errorBox" class="text-blue-600 text-sm font-medium hidden"></p>
             <!--Button-->
             <button type="submit"
-                    class="w-full bg-red-600 hover:bg-red-700 text-white px-2 rouded-lg font-semibold">
+                    class="w-full bg-blue-600 hover:bg-blue-700 text-white px-2 rouded-lg font-semibold">
                 Place order
             </button>
 
@@ -129,8 +129,8 @@
 <!-- makeing the modals (popups) using this as reference and help:
  https://flowbite.com/docs/components/modal/#content -->
 <div id="successModal" class="hidden fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
-    <div class ="bg-white rounded-lg shadow-lg p-6 w-full max-w-md text center">
-        <h2 class="text-x1 font-semibold text-green-600 mb-4 w-full text center">Checkout processed!</h2>
+    <div class ="bg-white rounded-lg shadow-lg p-6 w-full max-w-md text-center modal-show">
+        <h2 class="text-xlfont-semibold text-green-600 mb-4">Checkout processed!</h2>
         <p class= "text-sm text-gray-700 mb-6">Thank you for checking out with Bridge 14 games!<br>Your order is being processed.<br>A comfirmation will be given shortly.</p>
         <p class ="mt-2 text-sm text-gray-600">You will be redirected to the home page in <span id = "redirectedTimer">15</span> seconds. </p>
         <button id="successModalClose"
@@ -139,6 +139,31 @@
         </button>
     </div>
 </div>
+
+<div id="errorModal" class="hidden fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+    <div class ="bg-white rounded-lg shadow-lg p-6 w-full max-w-md text-center modal-show">
+        <h2 class="text-xl font-semibold text-red-600 mb-4">Error!</h2>
+        <p id= "errorModalMessage" class= "text-sm text-gray-700 mb-6"></p>
+        <button id="errorModalClose"
+                class="w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg font-semibold">
+            Understood!
+        </button>
+    </div>
+</div>
+
+<style>
+.modal-show {
+    opacity:0;
+    transform: scale(0.95);
+    animation: popupFade 0.25s ease-out forwards; /*animation for thr popup */
+}
+@keyframes popupFade {
+    to {
+        opacity: 1;
+        transform:scale(1);
+    }
+}
+</style>
 
 <script>
     //part for the popup function 
@@ -156,6 +181,22 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 
+<script>
+// error modals (popup thingys) but for all the validations
+document.addEventListener("DOMContentLoaded", function() {
+    const errorModal = document.getElementById("errorModal");
+    const errorModalMsg = document.getElementById("errorModalMessage");
+    const errorModalClose =document.getElementById("errorModalClose");
+    window.showErrorModal = function (msg) {
+        errorModalMsg.textContent = msg;
+        errorModal.classList.remove("hidden");
+    };
+    errorModalClose.addEventListener("click", function () {
+        errorModal.classList.add("hidden");
+    });
+});
+</script>
+
 <!-- scripts for the validation rules etc.--> 
 <script>
 document.getElementById("checkoutForm").addEventListener("submit", function(e) {
@@ -169,41 +210,36 @@ document.getElementById("checkoutForm").addEventListener("submit", function(e) {
 
 //ALL CARD VALIDATIONS:
     if (name.toLowerCase() !== cardName.toLowerCase()) {
-        errorBox.textContent= "The name on the card must be the same as the one entered above!";
-        errorBox.classList.remove("hidden");
+        showErrorModal("The name on the card must be the same as the one entered above!");
         return;
     }
     const rawCardNumber = document.getElementById("cardNumber").value.replace(/\s/g, "");
     if (!/^[0-9]{16}$/.test(rawCardNumber)) {
-        errorBox.textContent = "Card number must consist of 16 digits!"
-        errorBox.classList.remove("hidden");
+        showErrorModal("Card number must consist of 16 digits!");
         return;
     }
 
     //expiry checking
     if(!/^\d{2}\/\d{2}$/.test(expiry)) {
-        errorBox.textContent = "USE MM/YY FORMAT!" 
-        errorBox.classList.remove("hidden");
+        showErrorModal("USE MM/YY FORMAT!");
         return;
     }
     const [month, year] = expiry.split("/").map(x => parseInt(x, 10));
     if (month < 1 || month > 12) { 
-        errorBox.textContent ="Month must be between 01 and 12";
-        errorBox.classList.remove("hidden");
+        showErrorModal("Month must be between 01 and 12");
         return;
     }
     const today = new Date();
     const expiryDate = new Date(2000 + year, month -1);
     if(expiryDate <= today) {
-        errorBox.textContent = "Card is expired!"
-        errorBox.classList.remove("hidden");
+        showErrorModal("Card is expired!");
         return;
     }
 
-//Otehr form validations
+//Other form validations
     errorBox.classList.add("hidden");
     const successModal = document.getElementById("successModal");
-     const timerSpan = document.getElementById("redirectedTimer");
+    const timerSpan = document.getElementById("redirectedTimer");
     //timer
     let secondsLeft =15;
     if (timerSpan) {
@@ -212,7 +248,7 @@ document.getElementById("checkoutForm").addEventListener("submit", function(e) {
     if (successModal) {
         successModal.classList.remove("hidden");
     }
-    window.checkoutRedirectTime = setInterval(function() {
+    window.checkoutRedirectTimer = setInterval(function() {
         secondsLeft--;
         if (timerSpan) {
             timerSpan.textContent = secondsLeft;
@@ -220,7 +256,7 @@ document.getElementById("checkoutForm").addEventListener("submit", function(e) {
         if (secondsLeft <= 0) {
             clearInterval(window.checkoutRedirectTimer);
             window.location.href = "{{ url('/home') }}";
-        } //sends user back to the home page
+        } //sends user back to the home page after timer ofc
     }, 1000);
 });
 
