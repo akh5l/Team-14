@@ -83,7 +83,7 @@
              <p id="errorBox" class="text-blue-600 text-sm font-medium hidden"></p>
             <!--Button-->
             <button type="submit"
-                    class="w-full bg-blue-600 hover:bg-blue-700 text-white px-2 rouded-lg font-semibold">
+                    class="w-full bg-blue-600 hover:bg-blue-700 text-white px-2 rouded-lg font-semibold hover:scale-105 hover:shadow-lg active:scale-100 transition transform duration-200 rounded-lg">
                 Place order
             </button>
 

@@ -45,7 +45,7 @@
                 <div class="flex flex-wrap gap-3 items-start justify-center">
                     <!-- Standard -->
                     <label
-                        class="delivery-option flex flex-col justify-center bg-gray-100 hover:bg-gray-200 border rounded-lg px-4 py-3 cursor-pointer min-w-[140px]">
+                        class="delivery-option flex flex-col justify-center bg-gray-100 hover:bg-gray-200 border rounded-lg px-4 py-3 cursor-pointer min-w-[140px] hover:scale-105 hover:shadow-lg active:scale-100 transition transform duration-200 rounded-lg shadow-md">
                         <input type="radio" name="delivery" value="2.99" class="hidden" checked>
                         <div>
                             <span class="text-sm font-medium">Standard</span><br>
@@ -54,7 +54,7 @@
                     </label>
                     <!-- Express -->
                     <label
-                        class="delivery-option flex flex-col justify-center bg-gray-100 hover:bg-gray-200 border rounded-lg px-4 py-3 cursor-pointer min-w-[140px]">
+                        class="delivery-option flex flex-col justify-center bg-gray-100 hover:bg-gray-200 border rounded-lg px-4 py-3 cursor-pointer min-w-[140px] hover:scale-105 hover:shadow-lg active:scale-100 transition transform duration-200 rounded-lg shadow-md">
                         <input type="radio" name="delivery" value="4.99" class="hidden">
                         <div>
                             <span class="text-sm font-medium">Express</span><br>
@@ -63,7 +63,7 @@
                     </label>
                     <!-- Collection (free) -->
                     <label
-                        class="delivery-option flex flex-col justify-center bg-gray-100 hover:bg-gray-200 border rounded-lg px-4 py-3 cursor-pointer min-w-[140px]">
+                        class="delivery-option flex flex-col justify-center bg-gray-100 hover:bg-gray-200 border rounded-lg px-4 py-3 cursor-pointer min-w-[140px] hover:scale-105 hover:shadow-lg active:scale-100 transition transform duration-200 rounded-lg shadow-md">
                         <input type="radio" name="delivery" value="0.00" class="hidden">
                         <div>
                             <span class="text-sm font-medium">Click & Collect</span><br>
@@ -98,7 +98,7 @@
                         <!-- button for the checkout -->
                         <button
                             onclick="window.location.href='{{ route('checkout') }}'"
-                            class="w-full mt-4 bg-blue-500 hover:bg-blue-600 text-white py-2.5 rounded font-semibold text-sm">
+                            class="w-full mt-4 bg-blue-500 hover:bg-blue-600 text-white py-2.5 rounded font-semibold text-sm hover:scale-105 hover:shadow-lg active:scale-100 transition transform duration-200 rounded-lg shadow-md">
                             Proceed to checkout
                         </button>
                     </div>
