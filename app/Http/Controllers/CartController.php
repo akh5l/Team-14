@@ -28,17 +28,13 @@ class CartController extends Controller
         }
 
         session()->put('cart', $cart);
-        return back()->with('success', 'Added to cart!');
+        return redirect()->back()->with('success', 'Product added to cart!');
     }
 
-    public function update(Request $request, Product $product)
+    public function buyNow(Product $product)
     {
-        $cart = session()->get('cart', []);
-        if (isset($cart[$product->id])) {
-            $cart[$product->id]['quantity'] = max(1, (int) $request->quantity);
-            session()->put('cart', $cart);
-        }
-        return back()->with('success', 'Cart updated!');
+        $this->add($product);
+        return redirect()->route('cart');
     }
 
     public function remove(Product $product)
