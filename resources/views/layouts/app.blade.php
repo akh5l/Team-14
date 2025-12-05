@@ -31,7 +31,7 @@
                     class="h-1 w-32 rounded-full accent-yellow-400 bg-white/40">
             </div>
 
-            <div class="flex items-center space-x-2 bg-white/20 rounded-xl px-3 py-2 gap-x-4">
+            <div class="flex items-center space-x-2 bg-white/20 rounded-xl px-3 py-2 gap-x-2">
                 @auth
                     <a href="{{ url('/profile') }}" class="hover:underline variable-heading">Profile</a>
 
