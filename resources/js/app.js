@@ -97,12 +97,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const pixel = document.createElement("span");
 
-        const size = 4 + Math.random() * 4;
+        const size = 2 + Math.random() * 4;
         pixel.style.width  = size + "px";
         pixel.style.height = size + "px";
 
-        const offsetX = (Math.random() - 0.5) * 40;
-        const offsetY = (Math.random() - 0.5) * 40;
+        const offsetX = (Math.random() - 0.5) * 20;
+        const offsetY = (Math.random() - 0.5) * 20;
 
         pixel.style.left = (mouseX + offsetX) + "px";
         pixel.style.top  = (mouseY + offsetY) + "px";
@@ -118,6 +118,6 @@ document.addEventListener("DOMContentLoaded", () => {
             pixel.remove();
         }, 1800);
 
-    }, 60);
+    }, 50);
 });
 

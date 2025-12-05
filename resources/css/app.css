@@ -116,29 +116,3 @@ body {
         transform: scale(0.4);
     }
 }
-
-#cursor-aura span {
-    position: fixed;
-    width: 6px;
-    height: 6px;
-    border-radius: 2px;
-    pointer-events: none;
-    z-index: 9999;
-    opacity: 0;
-    animation: auraFade 1.8s ease-in-out forwards;
-}
-
-@keyframes auraFade {
-    0% {
-        opacity: 0;
-        transform: scale(0.4);
-    }
-    50% {
-        opacity: 1;
-        transform: scale(1);
-    }
-    100% {
-        opacity: 0;
-        transform: scale(0.4);
-    }
-}
