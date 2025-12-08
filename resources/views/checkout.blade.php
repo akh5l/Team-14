@@ -75,10 +75,13 @@
 
                     @php
                         $cart = session()->get('cart', []);
-
-                        $subtotal = request()->input('subtotal', 0);
+                        $subtotal = 0;
+                        foreach ($cart as $item) {
+                            $subtotal += $item['price'] * $item['quantity'];
+                        }
                         $delivery = request()->input('delivery', 0);
-                        $total = request()->input('total', 0);
+
+                        $total = $subtotal + $delivery;
                     @endphp
 
                     @foreach ($cart as $item)
