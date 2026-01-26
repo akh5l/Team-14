@@ -17,12 +17,6 @@ class ProductController extends Controller
         $query = Product::query();
         $currentCategory = null;
 
-        if (request()->filled('search')) {
-            $search = request('search');
-            $query->where('product_name', 'like', "%{$search}%")
-            ->orWhere('description', 'like', "%{$search}%");
-        }
-
         if (request()->filled('category')) {
         $categoryID = request('category');
         $query->where('category_id', $categoryID);
