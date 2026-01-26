@@ -25,7 +25,7 @@ new class extends Component {
 
 <div>
     <div class="max-w-md mx-auto mb-8">
-        <input type="text" placeholder="Search for products!" wire:model.live.debounce.300ms="search"
+        <input type="text" placeholder="Search for products!" wire:model.live.debounce.300ms="search" autofocus
             class="w-full h-12 px-4 py-2 rounded-full">
     </div>
 
