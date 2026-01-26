@@ -8,6 +8,7 @@
     <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
+    @livewireStyles
 </head>
 
 
@@ -70,7 +71,7 @@
             &copy; {{ date('Y') }} Bridge 14 Games
         </div>
     </footer>
-
+    @livewireScripts
 </body>
 
 </html>
