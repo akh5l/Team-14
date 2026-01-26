@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Product;
@@ -14,18 +13,17 @@ class ProductController extends Controller
 
     public function products() // all products
     {
-        $query = Product::query();
+        $query           = Product::query();
         $currentCategory = null;
 
         if (request()->filled('category')) {
-        $categoryID = request('category');
-        $query->where('category_id', $categoryID);
+            $categoryID = request('category');
+            $query->where('category_id', $categoryID);
 
-        $currentCategory = \App\Models\Category::find($categoryID);
+            $currentCategory = \App\Models\Category::find($categoryID);
         }
 
         $products = $query->get();
-        
 
         return view('products.products', compact('products', 'currentCategory'));
     }
