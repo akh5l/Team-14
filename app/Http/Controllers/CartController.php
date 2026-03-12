@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
@@ -14,8 +15,6 @@ class CartController extends Controller
     public function add(Product $product)
     {
         $cart = session()->get('cart', []);
-
-        // dd($product->product_id, $product->product_name);
 
         if (isset($cart[$product->product_id])) {
             $cart[$product->product_id]['quantity']++;
@@ -51,6 +50,21 @@ class CartController extends Controller
         return redirect()->route('checkout');
     }
 
+    public function update(Request $request, $productId)
+    {
+        $cart =session()->get('cart', []);
+        if (isset($cart[$productId])) {
+            $quantity=(int)$request->quantity;
+            if ($quantity <=0) {
+                unset($cart[$productId]);
+            } else {
+                $cart[$productId]['quantity']=$quantity;
+            }
+                session()-> put('cart',$cart);
+            }
+            return back()-> with('success', 'Cart Updated!');
+    }
+
     public function remove($productId)
     {
         $cart = session()->get('cart', []);
@@ -61,4 +75,6 @@ class CartController extends Controller
         }
         return back()->with('success', 'Item removed');
     }
+
+
 }

@@ -8,6 +8,7 @@
             <div class="bg-white rounded-lg shadow p-4 md:p-6 md:col-span-1 border border-gray-100 space-y-4">
                 @php
                     $cart = session()->get('cart', []);
+
                 @endphp
 
                 @if (count($cart) > 0)
@@ -19,7 +20,15 @@
                                     class="w-24 h-28 object-contain rounded bg-gray-100">
                                 <div>
                                     <p class="font-semibold text-xl">{{ $item['product_name'] }}</p>
-                                    <p class="text-sm text-gray-500">Quantity: {{ $item['quantity'] }}</p>
+                                    <form action="{{route('cart.update', ['productId'=> $item['product_id']]) }}" method="POST" class="mt-2">
+                                        @csrf
+                                        <label class="text-sm text-gray-500"> Quantity:</label>
+                                        <input type="number" name="quantity" value="{{ $item['quantity']}}" min="1"
+                                            class="w-16 border border-gray-300 rounded px-2 py-1 text-sm">
+                                        <button type = "submit" class="text-xs text-blue-600 hover:underline ml-1">
+                                            Update
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
 
@@ -70,12 +79,21 @@
                         </label>
                     </div>
 
+                    @php
+                            $subtotal = array_sum(array_map(fn($i) => $i['price'] * $i['quantity'], $cart));
+                    @endphp
+
                     <hr class="my-4">
+                    <div class="mt-4">
+                        <p id="free-shipping-text" class= "text-sm text-gray-600 mb-2">
+                            £{{number_format(max(40 - $subtotal, 0), 2) }} away from free shipping!
+                        </p>
+                        <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+                            <div id="free-shipping-bar" class="bg-blue-500 h-3 rounded-full transition-all duration-300" style="width: 0%"></div>
+                        </div>
+                    </div>
 
                     <div class="mb-4 text-sm space-y-1">
-                        @php
-                            $subtotal = array_sum(array_map(fn($i) => $i['price'] * $i['quantity'], $cart));
-                        @endphp
                         <div class="flex justify-between">
                             <span>Your Subtotal:</span>
                             <span id="subtotal">£{{ number_format($subtotal, 2) }}</span>
@@ -124,6 +142,10 @@
                 if (radio.checked) deliveryCost = parseFloat(radio.value);
             });
 
+            if  (subtotal===0) {
+                deliveryCost=0;
+            }
+
             // apply free shipping if subtotal >= threshold
             if (subtotal >= FREE_SHIPPING_THRESHOLD) deliveryCost = 0;
 
@@ -133,28 +155,36 @@
             document.getElementById("total").textContent = "£" + (subtotal + deliveryCost).toFixed(2);
 
             // store totals
-            document.getElementById("checkoutSubtotal").value = subtotal.toFixed(2);
-            document.getElementById("checkoutDelivery").value = deliveryCost.toFixed(2);
-            document.getElementById("checkoutTotal").value = (subtotal + deliveryCost).toFixed(2);
+            // document.getElementById("checkoutSubtotal").value = subtotal.toFixed(2);
+            // document.getElementById("checkoutDelivery").value = deliveryCost.toFixed(2);
+            // document.getElementById("checkoutTotal").value = (subtotal + deliveryCost).toFixed(2);
 
             // free shipping bar
-            // const freeShippingText = document.getElementById("free-shipping-text");
-            // const freeShippingBar = document.getElementById("free-shipping-bar");
-            // let percent = (subtotal / FREE_SHIPPING_THRESHOLD) * 100;
-            // percent = Math.min(Math.max(percent, 0), 100);
-            // freeShippingBar.style.width = percent + "%";
+            const freeShippingText = document.getElementById("free-shipping-text");
+            const freeShippingBar = document.getElementById("free-shipping-bar");
+            if (freeShippingText && freeShippingBar) {
+                let percent = (subtotal / FREE_SHIPPING_THRESHOLD) * 100;
+                percent = Math.min(Math.max(percent, 0), 100);
+                freeShippingBar.style.width = percent + "%";
 
-            // if (subtotal >= FREE_SHIPPING_THRESHOLD) {
-            //     freeShippingText.textContent = "Free shipping applied!";
-            // } else {
-            //     freeShippingText.textContent = "£" + (FREE_SHIPPING_THRESHOLD - subtotal).toFixed(2) +
-            //         " away from free shipping!";
-            // }
+            if (subtotal >= FREE_SHIPPING_THRESHOLD) {
+                 freeShippingText.textContent = "Free shipping applied!";
+            } else {
+                 freeShippingText.textContent = "£" + (FREE_SHIPPING_THRESHOLD - subtotal).toFixed(2) +
+                     " away from free shipping!";
+            }
+        }
         }
 
         // Attach event listeners to quantity inputs
         document.querySelectorAll("input[name='quantity']").forEach(input => {
-            input.addEventListener("input", updateTotals);
+            input.addEventListener("input", function(){
+                const cartItem = input.closest(".cart-item");
+                if (cartItem) {
+                    cartItem.dataset.quantity=input.value;
+                }
+                updateTotals();
+            });
         });
 
         // Attach event listeners to delivery options
