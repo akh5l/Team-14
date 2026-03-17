@@ -7,7 +7,7 @@ use Illuminate∖Support∖Facades∖Auth;
 
 class OrderController extends Controller
 {
-    public function sotre(Request $request)
+    public function store(Request $request)
     {
         $cart =session() ->get('cart',[]);
         if (empty($cart)) {
