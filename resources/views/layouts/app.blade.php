@@ -12,7 +12,7 @@
 </head>
 
 
-<body class="flex flex-col h-full variable-text antialiased">
+<body class="flex flex-col h-full variable-text antialiased" id="star-layer">
 
     <header class="bg-black p-4 flex justify-between items-center">
         <a href="{{ url('/home') }}"
