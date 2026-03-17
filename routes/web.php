@@ -48,6 +48,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/cart/buyNow/{product}', [App\Http\Controllers\CartController::class, 'buyNow'])->name('cart.buyNow');
     
     Route::post('/cart/remove/{productId}', [App\Http\Controllers\CartController::class, 'remove'])->name('cart.remove');
+    Route::post('/cart/update/{productId}', [CartController::class,'update'])->name('cart.update');
 });
 
 require __DIR__ . '/auth.php';
