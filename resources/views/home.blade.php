@@ -62,7 +62,7 @@
         </div>
     </section>
 
-    <section class="bg-gray-600 text-white py-12">
+    <section class="bg-gray-900 text-white py-12">
         <div class="max-w-7xl mx-auto px-4 text-center">
             <h2 class="text-3xl mb-4">Join the Bridge 14 Community</h2>
             <p class="mb-6">Subscribe to our newsletter to receive updates on new releases and exclusive deals!</p>
