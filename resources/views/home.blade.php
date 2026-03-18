@@ -92,4 +92,51 @@
             </script>
         </div>
     </section>
+    {{-- success modal after checkout --}}
+    <div id="successModal" class="hidden fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+        <div class ="bg-white rounded-lg shadow-lg p-6 w-full max-w-md text-center modal-show">
+            <h2 class="text-xlfont-semibold text-green-600 mb-4">Checkout processed!</h2>
+            <p class= "text-sm text-gray-700 mb-6">Thank you for checking out with Bridge 14 games!<br>Your order is being
+                processed.<br>A confirmation email will be sent shortly.</p>
+
+            <button id="successModalClose"
+                class="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg font-semibold">
+                Understood!
+            </button>
+        </div>
+    </div>
+
+    <style>
+        .modal-show {
+            opacity: 0;
+            transform: scale(0.95);
+            animation: popupFade 0.25s ease-out forwards;
+            /*animation for popup */
+        }
+
+        @keyframes popupFade {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    </style>
+
+    <script>
+        @if (session('success'))
+            document.addEventListener("DOMContentLoaded", function() {
+                const modal = document.getElementById("successModal");
+
+                if (!modal) return;
+
+                // show success modal
+                modal.classList.remove("hidden");
+
+                // close button
+                document.getElementById("successModalClose").addEventListener("click", () => {
+                    modal.classList.add("hidden");
+                });
+            });
+        @endif
+    </script>
 @endsection
