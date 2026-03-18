@@ -76,7 +76,7 @@
                         <li>Built from durable materials</li>
                     @elseif ($product->category_id == 5)
                         <li>Includes all necessary cables and controllers</li>
-                        <li>games sold separately</li>
+                        <li>Games sold separately</li>
                     @endif
 
                 </ul>
