@@ -5,6 +5,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -51,6 +52,9 @@ Route::middleware('auth')->group(function () {
         ->name('checkout');
     Route::post('/checkout', [CheckoutController::class, 'processOrder'])
         ->name('checkout.processOrder');
+
+
+    Route::get('/orders', [OrderController::class, 'orderHistory'])->name('order.orderHistory');
 
 });
 
