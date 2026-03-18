@@ -12,7 +12,7 @@
 </head>
 
 
-<body class="flex flex-col h-full variable-text antialiased">
+<body class="flex flex-col h-full variable-text antialiased" id="star-layer">
 
     <header class="bg-black p-4 flex justify-between items-center">
         <a href="{{ url('/home') }}"
@@ -66,7 +66,7 @@
         @yield('content')
     </main>
 
-    <footer class="bg-gray-900 text-gray-300 p-6 mt-auto">
+    <footer class="bg-black text-gray-300 p-6 mt-auto">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0">
             &copy; {{ date('Y') }} Bridge 14 Games
         </div>
