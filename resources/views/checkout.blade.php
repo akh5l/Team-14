@@ -164,9 +164,7 @@
                 }
             });
         });
-    </script>
 
-    <script>
         // error modals (popup thingys) but for all the validations
         document.addEventListener("DOMContentLoaded", function() {
             const errorModal = document.getElementById("errorModal");
@@ -180,10 +178,9 @@
                 errorModal.classList.add("hidden");
             });
         });
-    </script>
 
     <!-- scripts for the validation rules etc.-->
-    <script>
+
         document.getElementById("checkoutForm").addEventListener("submit", function(e) {
             e.preventDefault();
             const expiry = document.getElementById("expiry").value;
@@ -246,9 +243,7 @@
         });
 
         //https://syntaxsimplified.com/cheatsheet/Javascript/javascript.html some help from this site too
-    </script>
 
-    <script>
         document.addEventListener("DOMContentLoaded", function() {
             const cardInput = document.getElementById("cardNumber");
             if (!cardInput) return;
@@ -265,9 +260,7 @@
                 cardInput.value = formatted;
             });
         });
-    </script>
 
-    <script>
         document.addEventListener("DOMContentLoaded", function() {
             const expInput = document.getElementById("expiry");
             if (!expInput) return;
