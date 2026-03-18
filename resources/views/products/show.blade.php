@@ -56,9 +56,11 @@
 
             <div>
                 <h3 class="text-2xl font-semibold mb-4">Product Details</h3>
-                <p class="mb-4">
+                {{-- showing description again is redundant here --}}
+
+                {{-- <p class="mb-4">
                     {{ $product->description }}
-                </p>
+                </p> --}}
 
                 <ul class="list-disc list-inside mb-4">
 
@@ -66,7 +68,14 @@
                         <li>Includes all items and instructions necessary to begin your journey</li>
                         <li>Suitable for ages 13 and up</li>
                     @elseif ($product->category_id == 2)
-                        <li>Available on multiple platforms</li>
+                        {{-- game specific details --}}
+                        @foreach (['platform', 'developer', 'age_rating'] as $field)
+                            @if (!empty($product->$field))
+                                <li><strong>{{ ucfirst(str_replace('_', ' ', $field)) }}:</strong> {{ $product->$field }}
+                                </li>
+                            @endif
+                        @endforeach
+                        <br>
                         <li>Features engaging and immersive gameplay</li>
                     @elseif ($product->category_id == 3)
                         <li>Perfect for enhancing your gameplay experience </li>
