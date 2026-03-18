@@ -10,7 +10,8 @@
             <div class="md:col-span-2 bg-white p-6 rounded-lg shadow">
                 <!-- contact stuff and info -->
                 <h2 class="text-xl font-semibold mb-4">Contact Information</h2>
-                <form id ="checkoutForm" class="space-y-6">
+                <form id ="checkoutForm" action="{{ route('orders.store') }}" method="POST" class="space-y-6">
+                    @csrf
 
                     <!-- Name form -->
                     <div>
@@ -232,29 +233,46 @@
 
             //Other form validations
             errorBox.classList.add("hidden");
-            const successModal = document.getElementById("successModal");
-            const timerSpan = document.getElementById("redirectedTimer");
-            //timer
-            let secondsLeft = 15;
-            if (timerSpan) {
-                timerSpan.textContent = secondsLeft;
-            }
-            if (successModal) {
-                successModal.classList.remove("hidden");
-            }
-            window.checkoutRedirectTimer = setInterval(function() {
-                secondsLeft--;
-                if (timerSpan) {
-                    timerSpan.textContent = secondsLeft;
+            const form =document.getElementById("checkoutForm");
+            fetch(form.action, {
+                method: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": document.querySelector('input[name="_token"]').value,
+                    "Accept": "application/json"
+                },
+                body: new FormData(form)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const successModal = document.getElementById("successModal");
+                    const timerSpan = document.getElementById("redirectedTimer");
+                    //timer
+                    let secondsLeft = 15;
+                    if (timerSpan) {
+                        timerSpan.textContent = secondsLeft;
+                    }
+                    if (successModal) {
+                        successModal.classList.remove("hidden");
+                    }
+                    window.checkoutRedirectTimer = setInterval(function() {
+                        secondsLeft--;
+                        if (timerSpan) {
+                            timerSpan.textContent = secondsLeft;
+                        }
+                        if (secondsLeft <= 0) {
+                            clearInterval(window.checkoutRedirectTimer);
+                            window.location.href = data.redirect;
+                        } //sends user back to the order page after timer ofc
+                    }, 1000);
+                } else {
+                    showErrorModal("Error, Try Again!");
                 }
-                if (secondsLeft <= 0) {
-                    clearInterval(window.checkoutRedirectTimer);
-                    window.location.href = "{{ url('/home') }}";
-                } //sends user back to the home page after timer ofc
-            }, 1000);
-        });
-
-        //https://syntaxsimplified.com/cheatsheet/Javascript/javascript.html some help from this site too
+            })
+            .catch(function() {
+                showErrorModal("Server Error.");
+            });
+        });    
     </script>
 
     <script>
