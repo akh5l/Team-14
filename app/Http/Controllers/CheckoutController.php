@@ -23,4 +23,12 @@ class CheckoutController extends Controller
         return view('checkout', compact('items', 'subtotal', 'delivery', 'total', 'isBuyNow'));
     }
 
+    public function processOrder(Request $request)
+    {
+
+        session()->forget('cart');
+
+        return redirect('/home')->with('success', true);
+    }
+
 }
