@@ -165,9 +165,7 @@
                 }
             });
         });
-    </script>
 
-    <script>
         // error modals (popup thingys) but for all the validations
         document.addEventListener("DOMContentLoaded", function() {
             const errorModal = document.getElementById("errorModal");
@@ -181,10 +179,9 @@
                 errorModal.classList.add("hidden");
             });
         });
-    </script>
 
     <!-- scripts for the validation rules etc.-->
-    <script>
+
         document.getElementById("checkoutForm").addEventListener("submit", function(e) {
             e.preventDefault();
             const expiry = document.getElementById("expiry").value;
@@ -224,49 +221,30 @@
 
             //Other form validations
             errorBox.classList.add("hidden");
-            const form =document.getElementById("checkoutForm");
-            fetch(form.action, {
-                method: "POST",
-                headers: {
-                    "X-CSRF-TOKEN": document.querySelector('input[name="_token"]').value,
-                    "Accept": "application/json"
-                },
-                body: new FormData(form)
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    const successModal = document.getElementById("successModal");
-                    const timerSpan = document.getElementById("redirectedTimer");
-                    //timer
-                    let secondsLeft = 15;
-                    if (timerSpan) {
-                        timerSpan.textContent = secondsLeft;
-                    }
-                    if (successModal) {
-                        successModal.classList.remove("hidden");
-                    }
-                    window.checkoutRedirectTimer = setInterval(function() {
-                        secondsLeft--;
-                        if (timerSpan) {
-                            timerSpan.textContent = secondsLeft;
-                        }
-                        if (secondsLeft <= 0) {
-                            clearInterval(window.checkoutRedirectTimer);
-                            window.location.href = data.redirect;
-                        } //sends user back to the order page after timer ofc
-                    }, 1000);
-                } else {
-                    showErrorModal("Error, Try Again!");
+            const successModal = document.getElementById("successModal");
+            const timerSpan = document.getElementById("redirectedTimer");
+            //timer
+            let secondsLeft = 15;
+            if (timerSpan) {
+                timerSpan.textContent = secondsLeft;
+            }
+            if (successModal) {
+                successModal.classList.remove("hidden");
+            }
+            window.checkoutRedirectTimer = setInterval(function() {
+                secondsLeft--;
+                if (timerSpan) {
+                    timerSpan.textContent = secondsLeft;
                 }
-            })
-            .catch(function() {
-                showErrorModal("Server Error.");
-            });
-        });    
-    </script>
+                if (secondsLeft <= 0) {
+                    clearInterval(window.checkoutRedirectTimer);
+                    window.location.href = "{{ url('/home') }}";
+                } //sends user back to the home page after timer ofc
+            }, 1000);
+        });
 
-    <script>
+        //https://syntaxsimplified.com/cheatsheet/Javascript/javascript.html some help from this site too
+
         document.addEventListener("DOMContentLoaded", function() {
             const cardInput = document.getElementById("cardNumber");
             if (!cardInput) return;
@@ -283,9 +261,7 @@
                 cardInput.value = formatted;
             });
         });
-    </script>
 
-    <script>
         document.addEventListener("DOMContentLoaded", function() {
             const expInput = document.getElementById("expiry");
             if (!expInput) return;
