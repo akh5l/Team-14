@@ -85,7 +85,7 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'product_name'         => 'Elden Ring',
-                'description'          => 'Stunning open-world soulslike for PS5 and Xbox',
+                'description'          => 'Stunning open-world soulslike for PS5',
                 'description_detailed' => 'A dark fantasy action RPG guiding the Tarnished through the Lands Between in search of the Elden Ring. The game blends intense combat, intricate world exploration, strategic progression, and deep lore across sprawling, hauntingly detailed environments filled with formidable enemies and hidden mysteries.',
                 'category_id'          => 2,
                 'price'                => 50.00,
