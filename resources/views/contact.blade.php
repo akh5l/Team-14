@@ -86,7 +86,7 @@
 
                 <!-- Input field for Message, presence check and length check is implemented. -->
                 <!-- Minimum Characters: 50 | Maximum Characters: 500 -->
-                <textarea class="w-full bg-[#292755] border border-[#6163b3] text-white rounded-lg px-4 py-2 focus:ring-2 focus:ring-[#6163b3] focus:outline-none"
+                <textarea class="w-full bg-[#292755] border border-[#6163b3] text-white rounded-lg px-4 py-2 focus:ring-2 focus:ring-[#6163b3] focus:outline-none resize-none"
                     name="message"
                     rows="6"
                     minlength="50"
