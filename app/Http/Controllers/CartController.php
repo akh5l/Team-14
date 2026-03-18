@@ -8,6 +8,7 @@ class CartController extends Controller
 {
     public function index()
     {
+        session()->forget('buy_now');
         $cart = session()->get('cart', []);
         return view('cart', compact('cart'));
     }
@@ -22,7 +23,7 @@ class CartController extends Controller
             $cart[$product->product_id] = [
                 'product_id'   => $product->product_id,
                 'product_name' => $product->product_name,
-                'image_url' => $product->image_url,
+                'image_url'    => $product->image_url,
                 'price'        => $product->price,
                 'quantity'     => 1,
             ];
@@ -34,35 +35,32 @@ class CartController extends Controller
 
     public function buyNow(Product $product)
     {
-
-        $cart = [];
-
-        $cart[$product->product_id] = [
+        $buyNowItem = [
             'product_id'   => $product->product_id,
             'product_name' => $product->product_name,
-            'image_url' => $product->image_url,
+            'image_url'    => $product->image_url,
             'price'        => $product->price,
             'quantity'     => 1,
         ];
 
-        session()->put('cart', $cart);
+        session()->put('buy_now', $buyNowItem);
 
         return redirect()->route('checkout');
     }
 
     public function update(Request $request, $productId)
     {
-        $cart =session()->get('cart', []);
+        $cart = session()->get('cart', []);
         if (isset($cart[$productId])) {
-            $quantity=(int)$request->quantity;
-            if ($quantity <=0) {
+            $quantity = (int) $request->quantity;
+            if ($quantity <= 0) {
                 unset($cart[$productId]);
             } else {
-                $cart[$productId]['quantity']=$quantity;
+                $cart[$productId]['quantity'] = $quantity;
             }
-                session()-> put('cart',$cart);
-            }
-            return back()-> with('success', 'Cart Updated!');
+            session()->put('cart', $cart);
+        }
+        return back()->with('success', 'Cart Updated!');
     }
 
     public function remove($productId)
@@ -75,6 +73,5 @@ class CartController extends Controller
         }
         return back()->with('success', 'Item removed');
     }
-
 
 }

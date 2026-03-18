@@ -74,18 +74,7 @@
                 <div class="bg-white p-6 rounded-lg shadow border border-gray-100 h-fit">
                     <h2 class="text-xl font-semibold mb-4">Order Summary</h2>
 
-                    @php
-                        $cart = session()->get('cart', []);
-                        $subtotal = 0;
-                        foreach ($cart as $item) {
-                            $subtotal += $item['price'] * $item['quantity'];
-                        }
-                        $delivery = request()->input('delivery', 0);
-
-                        $total = $subtotal + $delivery;
-                    @endphp
-
-                    @foreach ($cart as $item)
+                    @foreach ($items as $item)
                         <div class="flex items-center gap-4 mb-4">
                             <img src="{{ $item['image_url'] }}" class="w-20 h-20 rounded object-contain bg-gray-100"
                                 alt="{{ $item['product_name'] }}">
@@ -93,7 +82,9 @@
                                 <p class="font-semibold">{{ $item['product_name'] }}</p>
                                 <p class="text-sm text-gray-500">Quantity: {{ $item['quantity'] }}</p>
                             </div>
-                            <p class="font-semibold text-sm">£{{ number_format($item['price'] * $item['quantity'], 2) }}</p>
+                            <p class="font-semibold text-sm">
+                                £{{ number_format($item['price'] * $item['quantity'], 2) }}
+                            </p>
                         </div>
                     @endforeach
 
