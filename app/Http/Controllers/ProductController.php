@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 
 class ProductController extends Controller
@@ -24,8 +25,9 @@ class ProductController extends Controller
         }
 
         $products = $query->get();
+        $categories = Category::all();
 
-        return view('products.products', compact('products', 'currentCategory'));
+        return view('products.products', compact('products', 'currentCategory', 'categories'));
     }
 
     public function show($id)
