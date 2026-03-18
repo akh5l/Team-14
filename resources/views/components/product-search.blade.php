@@ -5,6 +5,7 @@ use App\Models\Product;
 
 new class extends Component {
     public string $search = '';
+    public $categories;
 
     public function getProductsProperty()
     {
@@ -25,8 +26,22 @@ new class extends Component {
 
 <div>
     <div class="max-w-md mx-auto mb-8">
-        <input type="text" placeholder="Search for products!" wire:model.live.debounce.300ms="search" autofocus
+        <input type="text" placeholder="Search for products!" wire:model.live.debounce.200ms="search" autofocus
             class="w-full h-12 px-4 py-2 rounded-full">
+    </div>
+
+    <div class="flex flex-wrap justify-center gap-4 mb-8">
+        <button wire:click="$set('search', '')"
+            class="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700 transition">
+            All Products
+        </button>
+
+        @foreach ($this->categories as $category)
+            <button wire:click="$set('search', '{{ addslashes($category->category_name) }}')"
+                class="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700 transition">
+                {{ $category->category_name }}
+            </button>
+        @endforeach
     </div>
 
     <div class="grid md:grid-cols-3 gap-8">
