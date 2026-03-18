@@ -10,7 +10,8 @@
             <div class="md:col-span-2 bg-white p-6 rounded-lg shadow">
                 <!-- contact stuff and info -->
                 <h2 class="text-xl font-semibold mb-4">Contact Information</h2>
-                <form id ="checkoutForm" class="space-y-6">
+                <form id="checkoutForm" method="POST" action="{{ route('checkout.processOrder') }}" class="space-y-6">
+                    @csrf
 
                     <!-- Name form -->
                     <div>
@@ -50,15 +51,13 @@
                         </div>
 
                     </div>
-                    <!-- name onm the card-->
+                    <!-- name on the card-->
                     <div>
                         <label class="block text-sm font-medium mb-1">Name on Card</label>
                         <input id="cardName" type="text" required placeholder="Exactly as on your card!"
                             class= "w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-blue-500 focus:outline-none">
                     </div>
 
-                    <!-- error message for wrong input -->
-                    <p id="errorBox" class="text-blue-600 text-sm font-medium hidden"></p>
                     <!--Button-->
                     <button type="submit"
                         class="w-full bg-blue-600 hover:bg-blue-700 text-white px-2 rouded-lg font-semibold hover:scale-105 hover:shadow-lg active:scale-100 transition transform duration-200 rounded-lg">
@@ -107,21 +106,10 @@
 
     </main>
 
-    <!-- makeing the modals (popups) using this as reference and help:
-                 https://flowbite.com/docs/components/modal/#content -->
-    <div id="successModal" class="hidden fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
-        <div class ="bg-white rounded-lg shadow-lg p-6 w-full max-w-md text-center modal-show">
-            <h2 class="text-xlfont-semibold text-green-600 mb-4">Checkout processed!</h2>
-            <p class= "text-sm text-gray-700 mb-6">Thank you for checking out with Bridge 14 games!<br>Your order is being
-                processed.<br>A comfirmation will be given shortly.</p>
-            <p class ="mt-2 text-sm text-gray-600">You will be redirected to the home page in <span
-                    id = "redirectedTimer">15</span> seconds. </p>
-            <button id="successModalClose"
-                class="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg font-semibold">
-                Understood!
-            </button>
-        </div>
-    </div>
+    <!-- making the modals (popups) using this as reference and help:
+                     https://flowbite.com/docs/components/modal/#content -->
+
+    {{-- success modal has been moved to home.blade.php -akhil --}}
 
     <div id="errorModal" class="hidden fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
         <div class ="bg-white rounded-lg shadow-lg p-6 w-full max-w-md text-center modal-show">
@@ -139,7 +127,7 @@
             opacity: 0;
             transform: scale(0.95);
             animation: popupFade 0.25s ease-out forwards;
-            /*animation for thr popup */
+            /*animation for popup */
         }
 
         @keyframes popupFade {
@@ -151,21 +139,8 @@
     </style>
 
     <script>
-        //part for the popup function 
-        document.addEventListener("DOMContentLoaded", function() {
-            const closeBtn = document.getElementById("successModalClose");
-            const modal = document.getElementById("successModal");
-            if (!closeBtn || !modal) return;
-            //both call the modal close fucntion and success modal one i made above
-            closeBtn.addEventListener("click", function() {
-                modal.classList.add("hidden");
-                if (window.checkoutRedirectTimer) {
-                    clearInterval(window.checkoutRedirectTimer);
-                }
-            });
-        });
 
-        // error modals (popup thingys) but for all the validations
+        // error modals for all validations
         document.addEventListener("DOMContentLoaded", function() {
             const errorModal = document.getElementById("errorModal");
             const errorModalMsg = document.getElementById("errorModalMessage");
@@ -179,70 +154,54 @@
             });
         });
 
-    <!-- scripts for the validation rules etc.-->
+        // scripts for validation
 
         document.getElementById("checkoutForm").addEventListener("submit", function(e) {
-            e.preventDefault();
             const expiry = document.getElementById("expiry").value;
             const name = document.getElementById("fullName").value.trim();
             const cardName = document.getElementById("cardName").value.trim();
             const cardNumber = document.getElementById("cardNumber").value;
             const cvv = document.getElementById("cvv").value;
-            const errorBox = document.getElementById("errorBox");
 
-            //ALL CARD VALIDATIONS:
+            let isValid = true;
+
+            // ALL CARD VALIDATIONS:
             if (name.toLowerCase() !== cardName.toLowerCase()) {
                 showErrorModal("The name on the card must be the same as the one entered above!");
-                return;
+                isValid = false;
             }
             const rawCardNumber = document.getElementById("cardNumber").value.replace(/\s/g, "");
             if (!/^[0-9]{16}$/.test(rawCardNumber)) {
                 showErrorModal("Card number must consist of 16 digits!");
-                return;
+                isValid = false;
             }
 
             //expiry checking
             if (!/^\d{2}\/\d{2}$/.test(expiry)) {
                 showErrorModal("USE MM/YY FORMAT!");
-                return;
+                isValid = false;
             }
             const [month, year] = expiry.split("/").map(x => parseInt(x, 10));
             if (month < 1 || month > 12) {
                 showErrorModal("Month must be between 01 and 12");
-                return;
+                isValid = false;
             }
             const today = new Date();
             const expiryDate = new Date(2000 + year, month - 1);
             if (expiryDate <= today) {
                 showErrorModal("Card is expired!");
-                return;
+                isValid = false;
             }
 
-            //Other form validations
-            errorBox.classList.add("hidden");
-            const successModal = document.getElementById("successModal");
-            const timerSpan = document.getElementById("redirectedTimer");
-            //timer
-            let secondsLeft = 15;
-            if (timerSpan) {
-                timerSpan.textContent = secondsLeft;
+            if (!isValid) {
+              e.preventDefault();
+              return;
             }
-            if (successModal) {
-                successModal.classList.remove("hidden");
-            }
-            window.checkoutRedirectTimer = setInterval(function() {
-                secondsLeft--;
-                if (timerSpan) {
-                    timerSpan.textContent = secondsLeft;
-                }
-                if (secondsLeft <= 0) {
-                    clearInterval(window.checkoutRedirectTimer);
-                    window.location.href = "{{ url('/home') }}";
-                } //sends user back to the home page after timer ofc
-            }, 1000);
         });
 
         //https://syntaxsimplified.com/cheatsheet/Javascript/javascript.html some help from this site too
+
+        // card input styling and formatting
 
         document.addEventListener("DOMContentLoaded", function() {
             const cardInput = document.getElementById("cardNumber");
@@ -265,11 +224,11 @@
             const expInput = document.getElementById("expiry");
             if (!expInput) return;
             expInput.addEventListener("input", function() {
-                let v = expInput.value.replace(/\D/g, ""); //makes sure that numbers only
+                let v = expInput.value.replace(/\D/g, ""); // ensure numerical input only
                 v = v.slice(0, 4);
 
                 if (v.length >= 3) {
-                    expInput.value = v.slice(0, 2) + "/" + v.slice(2); // puts the slash inbetween
+                    expInput.value = v.slice(0, 2) + "/" + v.slice(2); // puts forward slash in expiry date
                 } else {
                     expInput.value = v;
                 }

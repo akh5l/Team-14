@@ -49,6 +49,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/checkout', [CheckoutController::class, 'checkout'])
         ->name('checkout');
+    Route::post('/checkout', [CheckoutController::class, 'processOrder'])
+        ->name('checkout.processOrder');
 
 });
 
