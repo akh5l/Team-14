@@ -92,26 +92,60 @@
             </div>
 
             <div>
-                <h3 class="text-2xl font-semibold mb-4">Customer Reviews</h3>
-                <div class="space-y-4">
-                    @php
-                        $customers = \App\Models\User::where('role', '!=', 'admin')->inRandomOrder()->take(2)->get();
-                    @endphp
-                    <div class="bg-gray-100 p-4 rounded-lg shadow">
-                        <p class="mb-2">"Great product; highly recommend"</p>
-                        <div class="text-sm text-gray-600">-
-                            {{ $customers[0]->first_name . ' ' . $customers[0]->last_name ?? 'Anonymous' }}
-                        </div>
-                    </div>
 
-                    <div class="bg-gray-100 p-4 rounded-lg shadow">
-                        <p class="mb-2">"Good quality and fast shipping"</p>
-                        <div class="text-sm text-gray-600">-
-                            {{ $customers[1]->first_name . ' ' . $customers[1]->last_name ?? 'Anonymous' }}</div>
-                    </div>
-                </div>
+    <h3 class="text-2xl font-semibold mb-4">Customer Reviews</h3>
+
+    @auth
+    
+    <form method="POST" action="{{ route('reviews.store', $product->product_id) }}">
+        @csrf
+
+        <textarea name="comment"
+            class="w-full bg-[#292755] border border-[#6163b3] text-white rounded-lg px-4 py-2 mb-3"
+            placeholder="Write your review..."
+            required></textarea>
+
+        <select name="rating"
+            class="w-full bg-[#292755] border border-[#6163b3] text-white rounded-lg px-4 py-2 mb-3"
+            required>
+            <option value="">Rating</option>
+            <option value="5">⭐⭐⭐⭐⭐</option>
+            <option value="4">⭐⭐⭐⭐</option>
+            <option value="3">⭐⭐⭐</option>
+            <option value="2">⭐⭐</option>
+            <option value="1">⭐</option>
+        </select>
+
+        <button class="bg-[#6163b3] px-6 py-2 rounded-lg text-white">
+            Submit Review
+        </button>
+    </form>
+    @endauth
+
+
+    <div class="space-y-4">
+
+    @forelse($product->reviews as $review)
+        <div class="bg-[#1b193b] p-4 rounded-lg shadow">
+
+            <p class="text-yellow-400 mb-1">
+                {{ str_repeat('⭐', $review->comment) }}
+            </p>
+
+            <p class="text-white mb-2">
+                {{ $review->comment }}
+            </p>
+
+            <div class="text-sm text-gray-400">
+                - {{ $review->user->name }}
             </div>
 
         </div>
+    @empty
+        <p class="text-gray-400">No reviews yet.</p>
+    @endforelse
+
+    </div>
+</div>
     </section>
 @endsection
