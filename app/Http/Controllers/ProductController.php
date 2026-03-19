@@ -73,22 +73,4 @@ class ProductController extends Controller
 
         return view('products.show', compact('product'));
     }
-
-    public function storeReview(Request $request)
-    {
-        $request->validate([
-            'product_id' => 'required',
-            'rating' => 'required|integer|min:1|max:5',
-            'comment' => 'required|min:5|max:500',
-        ]);
-
-        Review::create([
-            'product_id' => $request->product_id,
-            'user_id' => auth()->id(),
-            'rating' => $request->rating,
-            'comment' => $request->comment,
-        ]);
-
-        return back();
-    }
 }

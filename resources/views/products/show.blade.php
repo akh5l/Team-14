@@ -88,11 +88,9 @@
         </div>
 
         <div>
-
             <h3 class="text-2xl font-semibold mb-4">Customer Reviews</h3>
 
             @auth
-
             <form method="POST" action="{{ route('reviews.store', $product->product_id) }}">
                 @csrf
 
@@ -120,7 +118,7 @@
                 <div class="bg-[#1b193b] p-4 rounded-lg shadow">
 
                     <p class="text-yellow-400 mb-1">
-                        {{ str_repeat('⭐', $review->comment) }}
+                        {{ str_repeat('⭐', $review->rating) }}
                     </p>
 
                     <p class="text-white mb-2">
@@ -128,7 +126,7 @@
                     </p>
 
                     <div class="text-sm text-gray-400">
-                        - {{ $review->user->name }}
+                        - {{ $review->user->first_name ?? 'Admin' }}
                     </div>
 
                 </div>
