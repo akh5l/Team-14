@@ -1,27 +1,23 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Review;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function index() // categories
+    public function products()
     {
-        $products = Product::with('category')->paginate(9);
-        return view('products.index', compact('products'));
-    }
-
-    public function products() // all products
-    {
-        $query           = Product::query();
+        $query = Product::query();
         $currentCategory = null;
 
         if (request()->filled('category')) {
             $categoryID = request('category');
             $query->where('category_id', $categoryID);
-
-            $currentCategory = \App\Models\Category::find($categoryID);
+            $currentCategory = Category::find($categoryID);
         }
 
         $products = $query->get();
@@ -32,7 +28,7 @@ class ProductController extends Controller
 
     public function show($id)
     {
-        $product = Product::with('category')->findOrFail($id);
+        $product = Product::with('category','reviews.user')->findOrFail($id);
 
         // game-specific details (not worth adding to DB at this stage, but possible improvement)
 

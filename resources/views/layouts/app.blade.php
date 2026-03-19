@@ -49,9 +49,10 @@
                 @endguest
 
                 <a href="{{ url('/products') }}" class="hover:underline variable-heading">Shop</a>
-                <a href="{{ url('/faq') }}" class="hover:underline variable-heading">FAQ</a>
-                <a href="{{ url('/contact-us') }}" class="hover:underline variable-heading">Contact</a>
+                <a href="{{ url('/faq') }}" class="hover:underline variable-heading">FAQs</a>
                 <a href="{{ url('/about') }}" class="hover:underline variable-heading">About Us</a>
+                <a href="{{ url('/contact-us') }}" class="hover:underline variable-heading">Contact</a>
+
             </div>
 
         </nav>

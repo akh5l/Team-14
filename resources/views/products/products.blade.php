@@ -8,6 +8,7 @@
         </h1>
 
         <livewire:product-search :categories="$categories" :category-id="$currentCategory->id ?? null" />
+        
 
     </section>
 @endsection

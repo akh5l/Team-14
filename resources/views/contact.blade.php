@@ -109,11 +109,13 @@
     </div>
 </div>
 
-@endsection
-
 <script>
     // Remove the green "Successful Submission" message once website is refreshed or navigated away from.
     if (window.location.search.includes('success=1')) {
         window.history.replaceState({}, document.title, "/contact");
     }
 </script>
+
+@endsection
+
+
