@@ -3,7 +3,7 @@
 @section('content')
     <section class="max-w-7xl mx-auto px-4 py-12">
         
-        <h1 class="text-3xl font-bold text-center mb-8">
+        <h1 class="text-black dark:text-white text-3xl font-bold text-center mb-8">
             {{ $currentCategory->category_name ?? 'All Products' }}
         </h1>
 
