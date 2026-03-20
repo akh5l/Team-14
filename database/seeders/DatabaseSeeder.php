@@ -239,9 +239,25 @@ class DatabaseSeeder extends Seeder
             ],
         ];
 
+        // assigns random weighted stock counts for the sake of showcasing stock level display
+        foreach ($products as &$product) {
+            $roll = rand(1, 100);
+
+            if ($roll <= 10) {
+                $product['stock'] = 0;
+            } elseif ($roll <= 30) {
+                $product['stock'] = rand(1, 5);
+            } elseif ($roll <= 70) {
+                $product['stock'] = rand(6, 20);
+            } else {
+                $product['stock'] = rand(21, 100);
+            }
+        }
+        unset($product); // important when using reference
+
         DB::table('products')->insert($products);
 
-        // below is all for fake/demo customers and orders
+        // below is all for fake/demo customers and orders - not needed anymore probs
 
         // $productIDs  = DB::table('products')->pluck('product_id')->toArray();
         // $customerIDs = DB::table('users')->where('role', 'customer')->pluck('user_id')->toArray();
