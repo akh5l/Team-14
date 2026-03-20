@@ -12,13 +12,13 @@
 </head>
 
 <body class="flex flex-col h-full variable-text antialiased" id="star-layer">
-    <header class="bg-black p-4 flex justify-between items-center">
+    <div class="flex flex-col lg:flex-row items-center justify-between bg-black p-4">
         <a href="{{ url('/home') }}"
             class="flex items-center gap-2 text-white font-bold text-xl sm:text-2xl variable-heading">
-            <img src="{{ asset('images/logo-dark.webp') }}" alt="Logo" class="h-12 sm:h-15 w-auto mx-8">
+            <img src="{{ asset('images/logo-dark.webp') }}" alt="Logo" class="h-auto max-h-12 sm:max-h-16 w-auto mx-8 mb-1">
             {{-- <p id="logo-text">Bridge 14 Games</p> --}}
         </a>
-        <nav class="space-x-4 text-white font-semibold flex">
+        <nav class="flex flex-col lg:flex-row gap-2 lg:gap-4 text-white font-semibold">
             <div class="flex items-center space-x-2 bg-white/20 rounded-xl px-3 py-2">
                 <label for="weightSlider" class="text-white text-sm font-semibold exclude-var-text">
                     Font Weight
@@ -42,7 +42,7 @@
 
             </div>
         </nav>
-    </header>
+    </div>
 
     <button id="themeToggle"
         class="fixed bottom-5 right-5 text-2xl bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition select-none z-50">
