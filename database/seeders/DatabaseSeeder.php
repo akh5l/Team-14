@@ -23,25 +23,6 @@ class DatabaseSeeder extends Seeder
             ],
         ]);
 
-        $faker = Faker::create('en_GB');
-
-        $customers = [];
-        for ($i = 1; $i <= 5; $i++) { // for loop -> demo customers
-            $customers[] = [
-                'username'   => "customer$i",
-                'email'      => $faker->email(),
-                'password'   => Hash::make('password'),
-                'first_name' => $faker->firstName(),
-                'last_name'  => $faker->lastName(),
-                'phone'      => $faker->phoneNumber(),
-                'address'    => $faker->address(),
-                'role'       => 'customer',
-                'created_at' => now(),
-            ];
-        }
-
-        DB::table('users')->insert($customers);
-
         DB::table('categories')->insert([
             ['category_name' => 'Tabletop Games', 'description' => 'Board games and card games'],                   // Category ID 1
             ['category_name' => 'Video Games', 'description' => 'Games for 8th and 9th gen consoles'],              // 2
@@ -260,49 +241,70 @@ class DatabaseSeeder extends Seeder
 
         DB::table('products')->insert($products);
 
-        $productIDs  = DB::table('products')->pluck('product_id')->toArray();
-        $customerIDs = DB::table('users')->where('role', 'customer')->pluck('user_id')->toArray();
+        // below is all for fake/demo customers and orders
 
-        foreach ($customerIDs as $customerId) {
-            // each customer gets a couple orders
-            $orderCount = rand(1, 2);
+        // $productIDs  = DB::table('products')->pluck('product_id')->toArray();
+        // $customerIDs = DB::table('users')->where('role', 'customer')->pluck('user_id')->toArray();
 
-            for ($i = 0; $i < $orderCount; $i++) {
-                $orderId = DB::table('orders')->insertGetId([
-                    'user_id'         => $customerId,
-                    'total_amount'    => 0,
-                    'order_status'    => $faker->randomElement(['pending', 'processing', 'shipped']),
-                    'payment_method'  => $faker->randomElement(['card', 'paypal']),
-                    'tracking_number' => Str::upper(Str::random(10)),
-                    'notes'           => $faker->optional()->sentence(),
-                    'created_at'      => now(),
-                ]);
+        // $faker = Faker::create('en_GB');
 
-                // each order gets a few items
-                $itemCount = rand(1, 3);
-                $total     = 0;
+        // $customers = [];
+        // for ($i = 1; $i <= 5; $i++) { // for loop -> demo customers
+        //     $customers[] = [
+        //         'username'   => "customer$i",
+        //         'email'      => $faker->email(),
+        //         'password'   => Hash::make('password'),
+        //         'first_name' => $faker->firstName(),
+        //         'last_name'  => $faker->lastName(),
+        //         'phone'      => $faker->phoneNumber(),
+        //         'address'    => $faker->address(),
+        //         'role'       => 'customer',
+        //         'created_at' => now(),
+        //     ];
+        // }
+        // DB::table('users')->insert($customers);
 
-                for ($j = 0; $j < $itemCount; $j++) {
-                    $productId = $faker->randomElement($productIDs);
-                    $product   = DB::table('products')->where('product_id', $productId)->first();
-                    $quantity  = rand(1, 3);
 
-                    DB::table('order_items')->insert([
-                        'order_id'   => $orderId,
-                        'product_id' => $productId,
-                        'quantity'   => $quantity,
-                        'price'      => $product->price,
-                        'created_at' => now(),
-                    ]);
+        // foreach ($customerIDs as $customerId) {
+        //     // each customer gets a couple orders
+        //     $orderCount = rand(1, 2);
 
-                    $total += $product->price * $quantity;
-                }
+        //     for ($i = 0; $i < $orderCount; $i++) {
+        //         $orderId = DB::table('orders')->insertGetId([
+        //             'user_id'         => $customerId,
+        //             'total_amount'    => 0,
+        //             'order_status'    => $faker->randomElement(['pending', 'processing', 'shipped']),
+        //             'payment_method'  => $faker->randomElement(['card', 'paypal']),
+        //             'tracking_number' => Str::upper(Str::random(10)),
+        //             'notes'           => $faker->optional()->sentence(),
+        //             'created_at'      => now(),
+        //         ]);
 
-                DB::table('orders')->where('order_id', $orderId)->update([
-                    'total_amount' => $total,
-                ]);
-            }
-        }
+        //         // each order gets a few items
+        //         $itemCount = rand(1, 3);
+        //         $total     = 0;
+
+        //         for ($j = 0; $j < $itemCount; $j++) {
+        //             $productId = $faker->randomElement($productIDs);
+        //             $product   = DB::table('products')->where('product_id', $productId)->first();
+        //             $quantity  = rand(1, 3);
+
+        //             DB::table('order_items')->insert([
+        //                 'order_id'   => $orderId,
+        //                 'product_id' => $productId,
+        //                 'quantity'   => $quantity,
+        //                 'price'      => $product->price,
+        //                 'created_at' => now(),
+        //             ]);
+
+        //             $total += $product->price * $quantity;
+        //         }
+
+        //         DB::table('orders')->where('order_id', $orderId)->update([
+        //             'total_amount' => $total,
+        //         ]);
+        //     }
+        // }
 
     }
 }
