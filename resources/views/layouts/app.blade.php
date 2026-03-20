@@ -63,6 +63,22 @@
         🌙
     </button>
 
+    <button id="chatToggle"
+        class="fixed bottom-24 right-5 bg-purple-600 text-white p-4 rounded-full shadow-xl z-50">
+        💬
+    </button>
+
+    <div id="chatBox"class="hidden fixed bottom-32 right-5 w-80 bg-white dark:bg-[#1f1f3f] rounded-xl shadow-2xl p-4 z-50">
+
+    <div id="chatMessages" class="h-64 overflow-y-auto text-sm space-y-2"></div>
+
+    <input id="chatInput"
+        class="w-full mt-3 border p-2 rounded"
+        placeholder="Ask something...">
+    </div>
+
+    
+
     <main class="flex-1">
         @yield('content')
     </main>

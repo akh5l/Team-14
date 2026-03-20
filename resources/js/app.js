@@ -50,8 +50,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         });
     }
-
 });
+
 
 
 // star background layer
@@ -157,4 +157,50 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }, 30);
+    const chatToggle = document.getElementById("chatToggle");
+const chatBox = document.getElementById("chatBox");
+const input = document.getElementById("chatInput");
+const messages = document.getElementById("chatMessages");
+
+if (chatToggle) {
+    chatToggle.onclick = () => {
+        chatBox.classList.toggle("hidden");
+    };
+}
+
+if (input) {
+    input.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") {
+
+            const text = input.value;
+
+            messages.innerHTML += `<div>You: ${text}</div>`;
+
+            let reply = "I don't understand.";
+
+            if (text.toLowerCase().includes("hours")) {
+                reply = "We are open Mon-Fri 9-6 🙂";
+            }
+
+            if (text.toLowerCase().includes("location")) {
+                reply = "We are based in Birmingham city centre.";
+            }
+
+            if (text.toLowerCase().includes("games")) {
+                reply = "We sell tabletop and video games.";
+            }
+
+            setTimeout(() => {
+                messages.innerHTML += `
+                    <div class="text-purple-600">
+                        Bot: ${reply}
+                    </div>
+                `;
+                messages.scrollTop = messages.scrollHeight;
+            }, 500);
+
+            input.value = "";
+        }
+    });
+}
 });
