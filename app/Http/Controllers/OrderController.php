@@ -7,13 +7,37 @@ use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
+
     public function store(Request $request)
     {
-        $cart =session()->get('cart', []);
+
+        if (session()->has('buy_now')) {
+            $cart = [ session('buy_now') ];
+        } else {
+            $cart = session()->get('cart', []);
+        }
+
+        try {
+            $this->createOrder(Auth::user()->user_id, $cart);
+        } catch (\Exception $e) {
+            return redirect()->route('cart.index')->with('error', $e->getMessage());
+        }
+
+        if (!session()->has('buy_now')) {
+            session()->forget('cart');
+        }
+        session()->forget('buy_now');
+
+        return redirect()->route('orders.history')->with('success', true);
+    }
+
+    public function createOrder($userId, $cart)
+    {
         if (empty($cart)) {
             return redirect()->route('cart.index')->with('error', 'Cart is empty.');
         }
-        $subtotal=0;
+
+        $subtotal = 0;
         foreach ($cart as $item) {
             $subtotal += $item['price'] * $item['quantity'];
         }
@@ -36,20 +60,17 @@ class OrderController extends Controller
                 'price' => $item['price'],
             ]);
         }
-        session()->forget('cart');
-        return response()->json([
-            'success'=> true,
-            'redirect'=> route('order.orderHistory'),
-        ]);
+
+        return $order;
     }
 
-        //basically for the orders to fetch orders from  user in the past
-        public function orderHistory()
-        { 
-            $orders= Order::with('items.product')
-                ->where('user_id', Auth::user()->user_id)
-                ->latest('order_date')
-                ->get();
-            return view('orders.orderHistory', compact('orders'));
-        }    
+    //basically for the orders to fetch orders from  user in the past
+    public function orderHistory()
+    {
+        $orders = Order::with('items.product')
+            ->where('user_id', Auth::user()->user_id)
+            ->latest('order_date')
+            ->get();
+        return view('orders.history', compact('orders'));
     }
+}

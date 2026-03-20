@@ -10,7 +10,7 @@
             <div class="md:col-span-2 bg-white p-6 rounded-lg shadow">
                 <!-- contact stuff and info -->
                 <h2 class="text-xl font-semibold mb-4">Contact Information</h2>
-                <form id="checkoutForm" method="POST" action="{{ route('checkout.processOrder') }}" class="space-y-6">
+                <form id="checkoutForm" method="POST" action="{{ route('orders.store') }}" class="space-y-6">
                     @csrf
 
                     <!-- Name form -->
