@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<section class="max-w-6xl mx-auto px-4 py-8 flex-grow">
-    <h1 class="text-3xl font-bold mb-6">Order History</h1>
+<section class="max-w-6xl mx-auto px-4 py-12 flex-grow">
+    <h1 class="text-4xl font-bold mb-11">Order History</h1>
     @if ($orders->count()>0)
     <div class="space-y-6">
         @foreach ($orders as $order)
