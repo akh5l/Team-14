@@ -45,7 +45,7 @@ class CartController extends Controller
 
         session()->put('buy_now', $buyNowItem);
 
-        return redirect()->route('checkout');
+        return redirect()->route('checkout.index');
     }
 
     public function update(Request $request, $productId)

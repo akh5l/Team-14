@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 class CheckoutController extends Controller
 {
 
-    public function checkout()
+    public function index()
     {
         if (session()->has('buy_now')) {
             $items    = [session()->get('buy_now')];
@@ -21,14 +21,6 @@ class CheckoutController extends Controller
         $total    = $subtotal + $delivery;
 
         return view('checkout', compact('items', 'subtotal', 'delivery', 'total', 'isBuyNow'));
-    }
-
-    public function processOrder(Request $request)
-    {
-
-        session()->forget('cart');
-
-        return redirect('/home')->with('success', true);
     }
 
 }

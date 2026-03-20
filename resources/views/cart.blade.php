@@ -107,7 +107,7 @@
                             <span id="total">£{{ number_format($subtotal, 2) }}</span>
                         </div>
 
-                        <button onclick="window.location.href='{{ route('checkout') }}'"
+                        <button onclick="window.location.href='{{ route('checkout.index') }}'"
                             class="w-full mt-4 bg-blue-500 hover:bg-blue-600 text-white py-2.5 rounded font-semibold text-sm hover:scale-105 hover:shadow-lg active:scale-100 transition transform duration-200 rounded-lg shadow-md">
                             Proceed to Checkout
                         </button>
