@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <main class="max-w-6xl mx-auto px-4 py-8 my-[8rem] flex-grow">
-    <h1 class="text-3xl font-bold mb-6 text-center">Frequently Asked Questions (FAQ)</h1>
+    <h1 class="text-3xl dark:text-white font-bold mb-6 text-center">Frequently Asked Questions (FAQ)</h1>
 
     <div class="flex flex-col items-center space-y-4">
         @php
@@ -24,13 +24,13 @@
         @endphp
 
         @foreach($faqs as $faq)
-        <div class="bg-white rounded-lg shadow p-6 border border-gray-100 w-2/3">
+        <div class="bg-[#e5e0f7] dark:bg-[#2c2f66] rounded-lg shadow p-6 border border-[#c5bedd] dark:border-[#565aaa] w-2/3">
             <details class="group">
-                <summary class="flex justify-between items-center cursor-pointer font-semibold">
+                <summary class="flex justify-between items-center cursor-pointer font-semibold dark:text-gray-200">
                     {{ $faq['question'] }}
                     <span class="text-lg transition-transform group-open:rotate-180 duration-500">▼</span>
                 </summary>
-                <p class="mt-2 text-md text-black max-h-0 overflow-hidden group-open:max-h-96 transition-all duration-300">
+                <p class="mt-2 text-md text-black max-h-0 overflow-hidden group-open:max-h-96 transition-all duration-300 text-gray-700 dark:text-gray-300">
                     {{ $faq['answer'] }}
                 </p>
             </details>
@@ -38,7 +38,7 @@
         @endforeach
     </div>
 
-    <div class="mt-6 text-s text-gray-800 text-center">
+    <div class="mt-6 text-s text-gray-800 dark:text-gray-300 text-center">
         Still have questions? 
         <a href="/contact-us" class="text-blue-600 hover:underline">Contact our support team</a> for further assistance.
     </div>
