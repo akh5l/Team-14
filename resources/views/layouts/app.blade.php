@@ -12,7 +12,7 @@
 </head>
 
 
-<body class="flex flex-col h-full variable-text antialiased" id="star-layer">
+<body class="flex flex-col h-full variable-text antialiased bg-[#c3b9e7] dark:bg-[#1c1b40]" id="star-layer">
 
     <header class="bg-black p-4 flex justify-between items-center">
         <a href="{{ url('/home') }}"
@@ -32,7 +32,7 @@
                     class="h-1 w-32 rounded-full accent-yellow-400 bg-white/40">
             </div>
 
-            <div class="flex items-center space-x-2 bg-white/20 rounded-xl px-3 py-2 gap-x-2">
+            <div class="flex items-center space-x-2 bg-white/30 rounded-xl px-3 py-2 gap-x-2">
                 @auth
                     <a href="{{ url('/profile') }}" class="hover:underline variable-heading">Profile</a>
 
