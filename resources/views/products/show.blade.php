@@ -38,13 +38,12 @@
                     Sign in to buy
                 </a>
                 @endguest
-
             </div>
+            <p class="text-md border-2 rounded-lg mt-12 p-10 mr-10">{{ $product->description_detailed }}</p>
         </div>
-
     </div>
 </section>
-
+<hr class="mx-20">
 <section class="max-w-7xl mx-auto px-4 py-12">
     <h2 class="text-3xl font-bold mb-8 text-center">Product Details & Reviews</h2>
 
@@ -52,14 +51,19 @@
 
         <div>
             <h3 class="text-2xl font-semibold mb-4">Product Details</h3>
-            {{-- showing description again is redundant here --}}
-
-            {{-- <p class="mb-4">
-                    {{ $product->description }}
-            </p> --}}
 
             <ul class="list-disc list-inside mb-4">
 
+                @if ($product->stock == 0)
+                <li>Currently out of stock - please check again soon</li>
+                @elseif ($product->stock == 1)
+                <li>Grab it now - only 1 unit remaining!</li>
+                @elseif ($product->stock < 16)
+                <li>Grab it now - only {{ $product->stock }} units remaining!</li>
+                @else
+                <li class="">In stock</li>
+                @endif
+                <hr class="my-2 mx-2">
                 @if ($product->category_id == 1)
                 <li>Includes all items and instructions necessary to begin your journey</li>
                 <li>Suitable for ages 13 and up</li>
@@ -71,7 +75,7 @@
                 </li>
                 @endif
                 @endforeach
-                <br>
+                <hr class="my-2 mx-2">
                 <li>Features engaging and immersive gameplay</li>
                 @elseif ($product->category_id == 3)
                 <li>Perfect for enhancing your gameplay experience </li>
