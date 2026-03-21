@@ -18,8 +18,6 @@ return new class extends Migration
             $table->decimal('total_amount', 10, 2);
             $table->enum('order_status', ['pending', 'processing', 'shipped'])->default('pending');
             $table->enum('payment_method', ['card', 'paypal']);
-            $table->string('tracking_number')->nullable();
-            $table->text('notes')->nullable();
 
             $table->foreign('user_id')->references('user_id')->on('users');
             $table->timestamps();

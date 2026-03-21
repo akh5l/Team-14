@@ -2,8 +2,9 @@
 @section('content')
     <!--Tailwind Cheat Sheet: https://nerdcave.com/tailwind-cheat-sheet*-->
     <main class="max-w-6xl mx-auto px-4 py-12 flex-grow">
+        
         <!-- inspo of this site https://www.convertcart.com/blog/checkout-page-examples-->
-        <h1 class="text-3x1 font-bold-mb-8">Checkout</h1>
+        <h1 class="text-3xl font-bold mb-8 text-center">Checkout</h1>
         <div class="md:grid md:grid-cols-3 gap-10">
 
             <!-- left side of the form with the payment form-->
@@ -16,7 +17,7 @@
                     <!-- Name form -->
                     <div>
                         <label class="block text-sm font-medium mb-1">Full Name</label>
-                        <input id="fullName" type="text" required placeholder="John Pork"
+                        <input id="fullName" type="text" required placeholder="Name"
                             class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-blue-500 focus:outline-none">
                     </div>
 
@@ -26,12 +27,44 @@
                         <input id="email" type ="email" placeholder="example@gmail.com" required
                             class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-blue-500 focus:outline-none">
                     </div>
+
+                    <hr class = "my-6"> <!--faint line below-->
+
+                    {{-- Shipping Address --}}
+                    {{-- Address line 1 --}}
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Address Line 1</label>
+                        <input id="address_line1" name="address_line1" type="text" required placeholder="Required"
+                            class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-blue-500 focus:outline-none">
+                    </div>
+
+                    {{-- Address line 2 --}}
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Address Line 2</label>
+                        <input id="address_line2" name="address_line2" type ="text"
+                            class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-blue-500 focus:outline-none">
+                    </div>
+
+                    {{-- City --}}
+                    <div>
+                        <label class="block text-sm font-medium mb-1">City</label>
+                        <input id="city" name="city" type="text" required placeholder="Required"
+                            class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-blue-500 focus:outline-none">
+                    </div>
+
+                    {{-- Postcode --}}
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Postcode</label>
+                        <input id="postcode" name="postcode" type ="text" placeholder="Required" required
+                            class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-blue-500 focus:outline-none">
+                    </div>
+
                     <hr class = "my-6"> <!--faint line below-->
 
                     <!--Card details-->
                     <div>
                         <label class="block text-sm font-medium mb-1">Card Details</label>
-                        <input id="cardNumber" type="text" required inputmode="numeric" placeholder="1234 5678 9012 3456"
+                        <input id="cardNumber" type="text" required inputmode="numeric" placeholder="**** **** **** ****"
                             class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-blue-500 focus:outline-none">
                     </div>
 
@@ -45,7 +78,7 @@
                         <!--CVV data-->
                         <div class="w-28">
                             <label class="block text-sm font-medium mb-1">CVV</label>
-                            <input id= "cvv" type="text" maxlength="3" pattern="[0-9]{3}" placeholder="123"
+                            <input id= "cvv" type="text" maxlength="3" pattern="[0-9]{3}" placeholder="***"
                                 required inputmode="numeric"
                                 class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-blue-500 focus:outline-none">
                         </div>
@@ -60,7 +93,7 @@
 
                     <!--Button-->
                     <button type="submit"
-                        class="w-full bg-blue-600 hover:bg-blue-700 text-white px-2 rouded-lg font-semibold hover:scale-105 hover:shadow-lg active:scale-100 transition transform duration-200 rounded-lg">
+                        class="w-full h-8 bg-blue-600 hover:bg-blue-700 text-white px-2 rounded-lg font-semibold hover:scale-105 hover:shadow-lg active:scale-100 transition transform duration-200">
                         Place order
                     </button>
 
@@ -109,7 +142,7 @@
     <!-- making the modals (popups) using this as reference and help:
                      https://flowbite.com/docs/components/modal/#content -->
 
-    {{-- success modal has been moved to home.blade.php -akhil --}}
+    {{-- success modal has been moved to history.blade.php -akhil --}}
 
     <div id="errorModal" class="hidden fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
         <div class ="bg-white rounded-lg shadow-lg p-6 w-full max-w-md text-center modal-show">
