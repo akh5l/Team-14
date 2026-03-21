@@ -23,7 +23,7 @@
                                     <form action="{{ route('cart.update', ['productId' => $item['product_id']]) }}"
                                         method="POST" class="mt-2 flex items-center space-x-2">
                                         @csrf
-                                        <label class="text-sm text-gray-500"> Quantity:</label>
+                                        <label class="text-md text-gray-500"> Quantity:</label>
                                         <input type="number" name="quantity" value="{{ $item['quantity'] }}" min="1"
                                             class="w-14 border border-gray-300 rounded px-2 py-1 text-sm"
                                             onchange="setTimeout(() => this.form.submit(), 300)">
@@ -57,7 +57,7 @@
                             <input type="radio" name="delivery" value="2.99" class="hidden" checked>
                             <div>
                                 <span class="text-sm font-medium">Standard</span><br>
-                                <span class="text-xs text-gray-600">(3-5 business days) £2.99</span>
+                                <span class="text-sm text-gray-600">(3-5 business days) £2.99</span>
                             </div>
                         </label>
                         <label
@@ -65,7 +65,7 @@
                             <input type="radio" name="delivery" value="4.99" class="hidden">
                             <div>
                                 <span class="text-sm font-medium">Express</span><br>
-                                <span class="text-xs text-gray-600">(1-3 business days) £4.99</span>
+                                <span class="text-sm text-gray-600">(1-3 business days) £4.99</span>
                             </div>
                         </label>
                         <label
@@ -73,7 +73,7 @@
                             <input type="radio" name="delivery" value="0.00" class="hidden">
                             <div>
                                 <span class="text-sm font-medium">Click & Collect</span><br>
-                                <span class="text-xs text-gray-600">(0-1 business days) £0.00</span>
+                                <span class="text-sm text-gray-600">(0-1 business days) £0.00</span>
                             </div>
                         </label>
                     </div>
@@ -84,7 +84,7 @@
 
                     <hr class="my-4">
                     <div class="mt-4">
-                        <p id="free-shipping-text" class= "text-sm text-gray-600 mb-2">
+                        <p id="free-shipping-text" class= "text-md text-gray-600 mb-2">
                             £{{ number_format(max(40 - $subtotal, 0), 2) }} away from free shipping!
                         </p>
                         <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
@@ -93,22 +93,24 @@
                         </div>
                     </div>
 
-                    <div class="mb-4 text-sm space-y-1">
-                        <div class="flex justify-between">
+                    <div class="my-4 text-sm space-y-1">
+                        <div class="mt-2 flex justify-between">
                             <span>Your Subtotal:</span>
                             <span id="subtotal">£{{ number_format($subtotal, 2) }}</span>
                         </div>
-                        <div class="flex justify-between">
+                        <hr>
+                        <div class="mt-2 flex justify-between">
                             <span>Your Delivery:</span>
                             <span id="delivery">£0.00</span>
                         </div>
+                        <hr>
                         <div class="flex justify-between font-bold text-lg">
                             <span>Total:</span>
                             <span id="total">£{{ number_format($subtotal, 2) }}</span>
                         </div>
 
                         <button onclick="window.location.href='{{ route('checkout.index') }}'"
-                            class="w-full mt-4 bg-blue-500 hover:bg-blue-600 text-white py-2.5 rounded font-semibold text-sm hover:scale-105 hover:shadow-lg active:scale-100 transition transform duration-200 rounded-lg shadow-md">
+                            class="w-full bg-blue-500 hover:bg-blue-600 text-lg text-white py-2.5 rounded-lg font-semibold hover:scale-105 hover:shadow-lg active:scale-100 transition transform duration-200 rounded-lg shadow-md">
                             Proceed to Checkout
                         </button>
                     </div>
