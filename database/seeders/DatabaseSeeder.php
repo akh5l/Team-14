@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
                 'first_name' => 'Admin',
                 'last_name'  => 'User',
                 'role'       => 'admin',
+                'force_password_change' => true,
                 'created_at' => now(),
             ],
         ]);
