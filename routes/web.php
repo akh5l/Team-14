@@ -37,8 +37,9 @@ Route::middleware('force.password')->group(function () { // ensures that if the 
     });
 
     Route::get('/admin/register', [AdminAuthController::class, 'showRegister'])->name('admin.register');
-    Route::post('/admin/register', [AdminAuthController::class, 'register']);
+    Route::post('/admin/register', [AdminAuthController::class, 'register'])->middleware('throttle:5,1');
 });
+
 Route::middleware('auth', 'force.password')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -46,21 +47,32 @@ Route::middleware('auth', 'force.password')->group(function () {
 
     Route::get('/cart', [App\Http\Controllers\CartController::class, 'index'])->name('cart.index');
 
-    Route::post('/cart/add/{product}', [App\Http\Controllers\CartController::class, 'add'])->name('cart.add');
-    Route::post('/cart/buyNow/{product}', [App\Http\Controllers\CartController::class, 'buyNow'])->name('cart.buyNow');
+    Route::post('/cart/add/{product}', [App\Http\Controllers\CartController::class, 'add'])
+        ->name('cart.add')
+        ->middleware('throttle:60,1');
+    Route::post('/cart/buyNow/{product}', [App\Http\Controllers\CartController::class, 'buyNow'])
+        ->name('cart.buyNow')
+        ->middleware('throttle:60,1');
 
-    Route::post('/cart/remove/{productId}', [App\Http\Controllers\CartController::class, 'remove'])->name('cart.remove');
-    Route::post('/cart/update/{productId}', [CartController::class, 'update'])->name('cart.update');
+    Route::post('/cart/remove/{productId}', [App\Http\Controllers\CartController::class, 'remove'])
+        ->name('cart.remove')
+        ->middleware('throttle:60,1');
+    Route::post('/cart/update/{productId}', [CartController::class, 'update'])
+        ->name('cart.update')
+        ->middleware('throttle:60,1');
 
     Route::get('/checkout', [CheckoutController::class, 'index'])
         ->name('checkout.index');
 
     Route::post('/orders', [OrderController::class, 'store'])
-        ->name('orders.store');
+        ->name('orders.store')
+        ->middleware('throttle:5,1');
 
     Route::get('/orders', [OrderController::class, 'orderHistory'])->name('orders.history');
 
-    Route::post('/reviews/{product_id}', [ReviewController::class, 'store'])->name('reviews.store');
+    Route::post('/reviews/{product_id}', [ReviewController::class, 'store'])
+        ->name('reviews.store')
+        ->middleware('throttle:3,1');
 
 });
 
@@ -74,7 +86,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 Route::middleware(['auth', 'admin', 'force.password'])->group(function () {
     Route::get('/admin', [AdminInviteController::class, 'index'])->name('admin.dashboard');
-    Route::post('/admin/invite', [AdminInviteController::class, 'generate'])->name('admin.invite.generate');
+    Route::post('/admin/invite', [AdminInviteController::class, 'generate'])
+        ->name('admin.invite.generate')
+        ->middleware('throttle:10,1');;
 });
 
 require __DIR__.'/auth.php';
