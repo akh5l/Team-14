@@ -74,6 +74,15 @@ class OrderController extends Controller
         return $order;
     }
 
+    public function process(Order $order)
+    {
+        foreach ($order->items as $item) {
+            $item->product->decrement('stock', $item->quantity);
+        }
+        $order->update(['order_status' => 'delivered']);
+        return back()->with('success', 'Order marked as delivered.');
+    }
+
     public function returnItems(Request $request)
     {
         $itemIds = $request->input('item_ids', []);
