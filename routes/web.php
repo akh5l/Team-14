@@ -36,7 +36,7 @@ Route::middleware('force.password')->group(function () { // ensures that if the 
         return view('faq');
     });
 
-    Route::get('/admin/register', [AdminAuthController::class, 'showRegister']);
+    Route::get('/admin/register', [AdminAuthController::class, 'showRegister'])->name('admin.register');
     Route::post('/admin/register', [AdminAuthController::class, 'register']);
 });
 Route::middleware('auth', 'force.password')->group(function () {
