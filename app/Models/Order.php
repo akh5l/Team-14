@@ -11,6 +11,10 @@ class Order extends Model
 
     protected $primaryKey = 'order_id';
 
+    protected $casts = [
+        'order_date' => 'datetime',
+    ];
+
     protected $fillable = [
         'user_id',
         'order_date',

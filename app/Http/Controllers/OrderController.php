@@ -73,6 +73,21 @@ class OrderController extends Controller
         return $order;
     }
 
+    public function returnItems(Request $request)
+    {
+        $itemIds = $request->input('item_ids', []);
+
+        OrderItem::whereIn('id', $itemIds)
+            ->whereHas('order', function ($query) {
+                $query->where('user_id', Auth::user()->user_id)
+                    ->where('order_status', 'delivered')
+                    ->where('order_date', '>=', now()->subDays(30));
+            })
+            ->update(['returned' => true]);
+
+        return back()->with('return_success', true);
+    }
+
     //basically for the orders to fetch orders from  user in the past
     public function orderHistory()
     {
@@ -80,6 +95,20 @@ class OrderController extends Controller
             ->where('user_id', Auth::user()->user_id)
             ->latest('order_date')
             ->get();
-        return view('orders.history', compact('orders'));
+        $ordersJson = $orders->map(function($order) {
+            return [
+                'id' => $order->id,
+                'items' => $order->items->map(function($item) {
+                    return [
+                        'id' => $item->id,
+                        'name' => $item->product ? $item->product->product_name : 'Product unavailable',
+                        'quantity' => $item->quantity,
+                        'returned' => $item->returned,
+                    ];
+                })
+            ];
+        });
+
+        return view('orders.history', compact('orders', 'ordersJson'));
     }
 }
