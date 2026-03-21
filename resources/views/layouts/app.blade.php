@@ -52,6 +52,11 @@
         🌙
     </button>
     <main class="flex-1">
+        @if(session('error'))
+            <div class="bg-red-100 text-red-700 p-4 rounded mb-4">
+                {{ session('error') }}
+            </div>
+        @endif
         @yield('content')
     </main>
 
