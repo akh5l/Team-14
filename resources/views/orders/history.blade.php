@@ -10,9 +10,14 @@
             <div class="flex flex-col md:flex-row md:justify-between md:items-start gap-4 mb-4">
                 <div>
                     <p class="font-semibold text-3xl mb-2">Order #{{ $loop->count - $loop->iteration + 1 }}</p> 
-                    <p class="text-sm text-gray-600">Date: {{ $order->order_date}}</p>
-                    <p class="text-sm text-gray-600">Status: {{ $order->order_status}}</p>
-                    <p class="text-sm text-gray-600">Payment Method: {{ $order->payment_method}}</p>
+                    <p class="text-md text-black">Date: {{ $order->order_date}}</p>
+                    <p class="text-md text-gray-600">Status: {{ $order->order_status}}</p>
+                    <p class="text-md text-gray-600">Payment Method: {{ $order->payment_method}}</p>
+                    <p class="text-md mt-2 text-gray-600">Address:</p>
+                    <p class="text-md px-3 text-gray-600">{{ $order->address_line1 }}</p>
+                    <p class="text-md px-3 text-gray-600">{{ $order->address_line2 }}</p>
+                    <p class="text-md px-3 text-gray-600">{{ $order->city }}</p>
+                    <p class="text-md px-3 text-gray-600">{{ $order->postcode }}</p>
                 </div>
 
                 <div class="text-left md:text-right">
@@ -23,11 +28,11 @@
             <h2 class="font-semibold mb-3">Order Items:</h2>
             <div class="space-y-4">
                 @foreach ($order->items as $item)
-                <div class="flex justify-between items-start border-b pb-3">
+                <div class="flex justify-between items-start border-b pb-3 px-3">
                     <div>
-                        <p class="font-medium"> {{ $item->product ? $item->product->product_name : 'Product is not available' }} </p>
-                        <p class="text-sm text-gray-500">Quantity: {{ $item->quantity }}</p>
-                        <p class="text-sm text-gray-500">Price: £{{ number_format($item->price, 2) }}</p>
+                        <p class="text-md"> {{ $item->product ? $item->product->product_name : 'Product is not available' }} </p>
+                        <p class="text-sm text-gray-600">Quantity: {{ $item->quantity }}</p>
+                        <p class="text-sm text-gray-600">Price: £{{ number_format($item->price, 2) }}</p>
                     </div>
                     <div class="text-right">
                         <p class="font-medium"> £{{ number_format($item->price * $item->quantity, 2) }}</p>
