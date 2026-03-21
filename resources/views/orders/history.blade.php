@@ -43,7 +43,12 @@
                         <p class="text-sm text-gray-600">Price: £{{ number_format($item->price, 2) }}</p>
                     </div>
                     <div class="text-right">
+                        @if ($item->returned)
+                        <p class="font-medium line-through"> £{{ number_format($item->price * $item->quantity, 2) }}</p>
+                        <p class="font-medium text-green-600">Returned & Refunded</p>
+                        @else
                         <p class="font-medium"> £{{ number_format($item->price * $item->quantity, 2) }}</p>
+                        @endif
                     </div>
                 </div>
                 @endforeach
