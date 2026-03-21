@@ -19,7 +19,7 @@
             {{-- <p id="logo-text">Bridge 14 Games</p> --}}
         </a>
         <nav class="flex flex-col lg:flex-row gap-2 lg:gap-4 text-white font-semibold">
-            <div class="flex items-center space-x-2 bg-white/20 rounded-xl px-3 py-2">
+            <div class="flex items-center justify-center space-x-2 bg-white/20 rounded-xl px-3 py-2">
                 <label for="weightSlider" class="text-white text-sm font-semibold exclude-var-text">
                     Font Weight
                 </label>
