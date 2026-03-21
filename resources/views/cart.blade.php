@@ -3,19 +3,18 @@
 
     <main class="max-w-6xl mx-auto px-4 py-8 flex-grow">
         <h1 class="text-3xl font-bold mb-6">Your Shopping Cart</h1>
-        <div class="md:grid md:grid-cols-3 gap-6 items-start">
+        <div class="lg:grid lg:grid-cols-3 gap-6 items-start">
 
-            <div class="bg-white rounded-lg shadow p-4 md:p-6 md:col-span-1 border border-gray-100 space-y-4">
+            <div class="bg-white rounded-lg shadow p-4 md:col-span-1 border border-gray-100 space-y-4">
                 @php
                     $cart = session()->get('cart', []);
-
                 @endphp
 
                 @if (count($cart) > 0)
                     @foreach ($cart as $item)
                         <div class="flex flex-col md:flex-row gap-4 cart-item" data-price="{{ $item['price'] }}"
                             data-quantity="{{ $item['quantity'] }}">
-                            <div class="flex gap-4">
+                            <div class="flex flex-1 gap-4 mr-20">
                                 <img src="{{ $item['image_url'] }}" alt="{{ $item['product_name'] }}"
                                     class="w-24 h-28 object-contain rounded bg-gray-100">
                                 <div>
@@ -23,7 +22,7 @@
                                     <form action="{{ route('cart.update', ['productId' => $item['product_id']]) }}"
                                         method="POST" class="mt-2 flex items-center space-x-2">
                                         @csrf
-                                        <label class="text-md text-gray-500"> Quantity:</label>
+                                        <label class="text-md text-black"> Quantity:</label>
                                         <input type="number" name="quantity" value="{{ $item['quantity'] }}" min="1"
                                             class="w-14 border border-gray-300 rounded px-2 py-1 text-sm"
                                             onchange="setTimeout(() => this.form.submit(), 300)">
@@ -31,7 +30,7 @@
                                 </div>
                             </div>
 
-                            <div class="text-right">
+                            <div class="text-right flex-col">
                                 <p class="font-semibold text-lg">£{{ number_format($item['price'] * $item['quantity'], 2) }}
                                 </p>
                                 <form action="{{ route('cart.remove', ['productId' => $item['product_id']]) }}"
@@ -84,7 +83,7 @@
 
                     <hr class="my-4">
                     <div class="mt-4">
-                        <p id="free-shipping-text" class= "text-md text-gray-600 mb-2">
+                        <p id="free-shipping-text" class= "text-md text-black mb-2">
                             £{{ number_format(max(40 - $subtotal, 0), 2) }} away from free shipping!
                         </p>
                         <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
