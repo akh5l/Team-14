@@ -53,9 +53,15 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/orders', [OrderController::class, 'orderHistory'])->name('orders.history');
 
-    Route::post('/reviews/{product_id}', [ReviewController::class, 'store'])
-        ->middleware('auth')
-        ->name('reviews.store');
+    Route::post('/reviews/{product_id}', [ReviewController::class, 'store'])->name('reviews.store');
+
+});
+
+Route::middleware(['auth', 'admin'])->group(function () {
+
+    Route::get('/admin', function () {
+        return view ('admin');
+    });
 
 });
 
