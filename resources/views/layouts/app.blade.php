@@ -28,6 +28,9 @@
             </div>
             <div class="flex items-center space-x-2 bg-white/20 rounded-xl px-3 py-2 gap-x-2">
                 @auth
+                    @if (auth()->user()->role === 'admin')
+                    <a href="{{ route('admin.dashboard') }}" class="hover:underline variable-heading">Admin</a>
+                    @endif
                     <a href="{{ route('profile.edit') }}" class="hover:underline variable-heading">Profile</a>
                     <a href="{{ url('/cart') }}" class="hover:underline variable-heading">Cart</a>
                 @endauth

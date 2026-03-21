@@ -73,7 +73,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 });
 
 Route::middleware(['auth', 'admin', 'force.password'])->group(function () {
-    Route::get('/admin', [AdminInviteController::class, 'index']);
+    Route::get('/admin', [AdminInviteController::class, 'index'])->name('admin.dashboard');
     Route::post('/admin/invite', [AdminInviteController::class, 'generate'])->name('admin.invite.generate');
 });
 
