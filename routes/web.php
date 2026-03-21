@@ -12,7 +12,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('force.password')->group(function () { // ensures that if the current user needs to change their password,
+Route::middleware('force.password')->group(function () { // ensures redirect if password should be changed
     Route::get('/', function () {
         return view('landing');
     });
@@ -89,6 +89,8 @@ Route::middleware(['auth', 'admin', 'force.password'])->group(function () {
     Route::post('/admin/invite', [AdminInviteController::class, 'generate'])
         ->name('admin.invite.generate')
         ->middleware('throttle:10,1');;
+    
+    Route::delete('/reviews/{review_id}', [ReviewController::class, 'delete'])->name('review.delete');
 });
 
 require __DIR__.'/auth.php';

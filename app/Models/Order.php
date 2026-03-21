@@ -17,8 +17,10 @@ class Order extends Model
         'total_amount',
         'order_status',
         'payment_method',
-        'tracking_number',
-        'notes',
+        'address_line1',
+        'address_line2',
+        'city',
+        'postcode',
     ];
 
     public function user()

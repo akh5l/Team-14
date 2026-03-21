@@ -65,35 +65,34 @@
                 <li>Currently out of stock - please check again soon</li>
                 @elseif ($product->stock == 1)
                 <li>Grab it now - only 1 unit remaining!</li>
-                @elseif ($product->stock < 16)
-                <li>Grab it now - only {{ $product->stock }} units remaining!</li>
-                @else
-                <li class="">In stock</li>
-                @endif
-                <hr class="my-2 mx-2">
-                @if ($product->category_id == 1)
-                <li>Includes all items and instructions necessary to begin your journey</li>
-                <li>Suitable for ages 13 and up</li>
-                @elseif ($product->category_id == 2)
-                {{-- game specific details --}}
-                @foreach (['platform', 'developer', 'age_rating'] as $field)
-                @if (!empty($product->$field))
-                <li><strong>{{ ucfirst(str_replace('_', ' ', $field)) }}:</strong> {{ $product->$field }}
-                </li>
-                @endif
-                @endforeach
-                <hr class="my-2 mx-2">
-                <li>Features engaging and immersive gameplay</li>
-                @elseif ($product->category_id == 3)
-                <li>Perfect for enhancing your gameplay experience </li>
-                <li>For hobbyists and casual gamers alike</li>
-                @elseif ($product->category_id == 4)
-                <li>1-year warranty included</li>
-                <li>Built from durable materials</li>
-                @elseif ($product->category_id == 5)
-                <li>Includes all necessary cables and controllers</li>
-                <li>Games sold separately</li>
-                @endif
+                @elseif ($product->stock < 16) <li>Grab it now - only {{ $product->stock }} units remaining!</li>
+                    @else
+                    <li class="">In stock</li>
+                    @endif
+                    <hr class="my-2 mx-2">
+                    @if ($product->category_id == 1)
+                    <li>Includes all items and instructions necessary to begin your journey</li>
+                    <li>Suitable for ages 13 and up</li>
+                    @elseif ($product->category_id == 2)
+                    {{-- game specific details --}}
+                    @foreach (['platform', 'developer', 'age_rating'] as $field)
+                    @if (!empty($product->$field))
+                    <li><strong>{{ ucfirst(str_replace('_', ' ', $field)) }}:</strong> {{ $product->$field }}
+                    </li>
+                    @endif
+                    @endforeach
+                    <hr class="my-2 mx-2">
+                    <li>Features engaging and immersive gameplay</li>
+                    @elseif ($product->category_id == 3)
+                    <li>Perfect for enhancing your gameplay experience </li>
+                    <li>For hobbyists and casual gamers alike</li>
+                    @elseif ($product->category_id == 4)
+                    <li>1-year warranty included</li>
+                    <li>Built from durable materials</li>
+                    @elseif ($product->category_id == 5)
+                    <li>Includes all necessary cables and controllers</li>
+                    <li>Games sold separately</li>
+                    @endif
 
             </ul>
         </div>
@@ -125,20 +124,26 @@
             </form>
             @endauth
 
-
             <div class="flex flex-col sm:flex-row items-center gap-3">
-
                 @forelse($product->reviews as $review)
                 <div class="bg-[#1b193b] p-4 rounded-lg shadow w-full h-full">
-
-                    <p class="text-yellow-400 mb-1">
-                        {{ str_repeat('⭐', $review->rating) }}
-                    </p>
-
+                    <div class="flex justify-between items-start mb-1">
+                        <p class="text-yellow-400">
+                            {{ str_repeat('⭐', $review->rating) }}
+                        </p>
+                        @if (auth()->user()->role === 'admin')
+                        <form method="POST" action="/reviews/{{ $review->id }}">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" onclick="return confirm('Are you sure?')" class="px-3 py-1 bg-red-600 text-white text-sm rounded hover:bg-red-700">
+                                Delete
+                            </button>
+                        </form>
+                        @endif
+                    </div>
                     <p class="text-white mb-2">
                         {{ $review->comment }}
                     </p>
-
                     <div class="text-sm text-gray-300">
                         - {{ $review->user?->first_name ?? 'Admin' }}
                     </div>
@@ -146,7 +151,6 @@
                 @empty
                 <p class="text-gray-800">No reviews yet.</p>
                 @endforelse
-
             </div>
         </div>
 </section>

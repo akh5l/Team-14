@@ -11,6 +11,13 @@ class OrderController extends Controller
     public function store(Request $request)
     {
 
+        $request->validate([
+            'address_line1' => 'required|string|max:255',
+            'address_line2' => 'nullable|string|max:255',
+            'city' => 'required|string|max:255',
+            'postcode' => 'required|string|max:10',
+        ]);
+
         if (session()->has('buy_now')) {
             $cart = [ session('buy_now') ];
         } else {
@@ -18,7 +25,7 @@ class OrderController extends Controller
         }
 
         try {
-            $this->createOrder(Auth::user()->user_id, $cart);
+            $this->createOrder($request, $cart);
         } catch (\Exception $e) {
             return redirect()->route('cart.index')->with('error', $e->getMessage());
         }
@@ -31,7 +38,7 @@ class OrderController extends Controller
         return redirect()->route('orders.history')->with('success', true);
     }
 
-    public function createOrder($userId, $cart)
+    public function createOrder($request, $cart)
     {
         if (empty($cart)) {
             return redirect()->route('cart.index')->with('error', 'Cart is empty.');
@@ -48,8 +55,10 @@ class OrderController extends Controller
             'total_amount' => $subtotal,
             'order_status' => 'pending',
             'payment_method' => 'card',
-            'tracking_number' => null,
-            'notes' => null,
+            'address_line1' => $request->address_line1,
+            'address_line2' => $request->address_line2,
+            'city' => $request->city,
+            'postcode' => $request->postcode,
         ]);
 
         foreach ($cart as $item) {
