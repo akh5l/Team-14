@@ -98,10 +98,10 @@
                         <td colspan="6" class="px-4 py-3">
                             <table class="w-full text-sm">
                                 @foreach($order->items as $item)
-                                <tr class="border-b border-gray-100 last:border-0 rounded-lg">
-                                    <td class="py-1 pr-4">{{ $item->product ? $item->product->product_name : 'Product unavailable' }}</td>
-                                    <td class="py-1 pr-4 text-gray-500">Qty: {{ $item->quantity }}</td>
-                                    <td class="py-1 text-gray-500">£{{ number_format($item->price, 2) }} each</td>
+                                <tr class="border-b border-gray-100 last:border-0">
+                                    <td class="py-1 w-1/3">{{ $item->product ? $item->product->product_name : 'Product unavailable' }}</td>
+                                    <td class="py-1 w-1/4 text-gray-500">Qty: {{ $item->quantity }}</td>
+                                    <td class="py-1 w-1/4 text-gray-500">£{{ number_format($item->price, 2) }} each</td>
                                 </tr>
                                 @endforeach
                             </table>
