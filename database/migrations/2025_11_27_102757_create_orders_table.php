@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->dateTime('order_date')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->decimal('total_amount', 10, 2);
-            $table->enum('order_status', ['pending', 'processing', 'shipped'])->default('pending');
+            $table->enum('order_status', ['processing', 'shipped','delivered'])->default('processing');
             $table->enum('payment_method', ['card', 'paypal']);
 
             $table->foreign('user_id')->references('user_id')->on('users');

@@ -84,7 +84,7 @@
                     $returnable = $order->order_status === 'delivered' &&
                     $order->order_date->diffInDays(now()) <= 30 && $order->items->contains(fn($i) => !$i->returned); // cheeky lambda
                         @endphp
-                        <button @if($returnable) onclick="selectOrder({{ $order->id }})" @else disabled @endif class="w-full text-left px-4 py-3 rounded-lg border
+                        <button @if($returnable) onclick="selectOrder({{ $order->order_id }})" @else disabled @endif class="w-full text-left px-4 py-3 rounded-lg border
                             {{ $returnable ? 'hover:bg-gray-50 cursor-pointer border-gray-200' : 'opacity-40 cursor-not-allowed border-gray-100 bg-gray-50' }}">
                             <p class="font-medium">Order #{{ $loop->count - $loop->iteration + 1 }}</p>
                             <p class="text-sm text-gray-500">{{ $order->order_date }} · £{{ number_format($order->total_amount, 2) }}</p>

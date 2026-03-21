@@ -53,7 +53,7 @@ class OrderController extends Controller
             'user_id' => Auth::user()->user_id,
             'order_date' => now(),
             'total_amount' => $subtotal,
-            'order_status' => 'pending',
+            'order_status' => 'processing',
             'payment_method' => 'card',
             'address_line1' => $request->address_line1,
             'address_line2' => $request->address_line2,
@@ -67,6 +67,7 @@ class OrderController extends Controller
                 'product_id' => $item['product_id'],
                 'quantity' => $item['quantity'],
                 'price' => $item['price'],
+                'returned' => false,
             ]);
         }
 
@@ -77,7 +78,7 @@ class OrderController extends Controller
     {
         $itemIds = $request->input('item_ids', []);
 
-        OrderItem::whereIn('id', $itemIds)
+        OrderItem::whereIn('order_item_id', $itemIds)
             ->whereHas('order', function ($query) {
                 $query->where('user_id', Auth::user()->user_id)
                     ->where('order_status', 'delivered')
@@ -97,10 +98,10 @@ class OrderController extends Controller
             ->get();
         $ordersJson = $orders->map(function($order) {
             return [
-                'id' => $order->id,
+                'id' => $order->order_id,
                 'items' => $order->items->map(function($item) {
                     return [
-                        'id' => $item->id,
+                        'id' => $item->order_item_id,
                         'name' => $item->product ? $item->product->product_name : 'Product unavailable',
                         'quantity' => $item->quantity,
                         'returned' => $item->returned,
