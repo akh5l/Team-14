@@ -17,7 +17,9 @@
             </p>
 
             <div class="flex space-x-4">
+
                 @auth
+                @if ($product->stock > 0)
                 <form method="POST" action="{{ route('cart.add', $product) }}">
                     @csrf
                     <button type="submit" class="bg-gray-800 text-white py-3 px-6 rounded-lg hover:bg-gray-700 transition font-semibold">
@@ -31,6 +33,11 @@
                         Buy Now
                     </button>
                 </form>
+                @else
+                <button class="bg-gray-800 text-white py-3 px-6 rounded-lg hover:bg-gray-700 transition font-semibold">
+                    Out of stock
+                </button>
+                @endif
                 @endauth
 
                 @guest
