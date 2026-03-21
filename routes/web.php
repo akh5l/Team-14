@@ -1,38 +1,45 @@
 <?php
 
+use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\AdminInviteController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\AdminPasswordController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('landing');
-});
+Route::middleware('force.password')->group(function () { // ensures that if the current user needs to change their password,
+    Route::get('/', function () {
+        return view('landing');
+    });
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::get('/products', [ProductController::class, 'products'])->name('products');
-Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
-Route::get('/contact-us', function () {
-    return view('contact');
-});
+    Route::get('/products', [ProductController::class, 'products'])->name('products');
+    Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
+    Route::get('/contact-us', function () {
+        return view('contact');
+    });
 
-Route::get('/contact', function () {
-    return view('contact');
-});
-Route::get('/about', function () {
-    return view('about_us');
-});
+    Route::get('/contact', function () {
+        return view('contact');
+    });
+    Route::get('/about', function () {
+        return view('about_us');
+    });
 
-Route::get('/faq', function () {
-    return view('faq');
-});
+    Route::get('/faq', function () {
+        return view('faq');
+    });
 
-Route::middleware('auth')->group(function () {
+    Route::get('/admin/register', [AdminAuthController::class, 'showRegister']);
+    Route::post('/admin/register', [AdminAuthController::class, 'register']);
+});
+Route::middleware('auth', 'force.password')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -59,10 +66,15 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'admin'])->group(function () {
 
-    Route::get('/admin', function () {
-        return view ('admin');
-    });
+    Route::get('/password/change', [AdminPasswordController::class, 'show']);
+    Route::put('/password/change', [AdminPasswordController::class, 'update'])
+        ->name('admin.password.update');
 
+});
+
+Route::middleware(['auth', 'admin', 'force.password'])->group(function () {
+    Route::get('/admin', [AdminInviteController::class, 'index']);
+    Route::post('/admin/invite', [AdminInviteController::class, 'generate'])->name('admin.invite.generate');
 });
 
 require __DIR__.'/auth.php';

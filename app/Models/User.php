@@ -21,6 +21,7 @@ class User extends Authenticatable
         'phone',
         'address',
         'role',
+        'force_password_change',
     ];
 
     public function orders()
