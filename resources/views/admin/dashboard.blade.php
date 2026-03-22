@@ -4,10 +4,10 @@
         <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-8">
             <h1 class="text-4xl font-bold text-gray-900">Admin Dashboard</h1>
             <div class="flex gap-3 mt-4 md:mt-0">
-                <button action="{{ route('admin.inventory') }}"
+                <a href="{{ route('admin.inventory') }}"
                     class="w-full md:w-auto px-6 py-3 bg-blue-600 text-white text-lg font-semibold rounded-lg shadow-lg hover:bg-blue-700 transition transform hover:-translate-y-1">
                     Inventory Management
-                </button>
+                </a>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit"
