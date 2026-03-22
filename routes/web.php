@@ -71,6 +71,7 @@ Route::middleware('auth', 'force.password')->group(function () {
         ->middleware('throttle:10,1');
 
     Route::get('/orders', [OrderController::class, 'orderHistory'])->name('orders.history');
+    Route::post('/orders/return', [OrderController::class, 'returnItems'])->name('orders.return');
 
     Route::post('/reviews/{product_id}', [ReviewController::class, 'store'])
         ->name('reviews.store')
@@ -93,7 +94,6 @@ Route::middleware(['auth', 'admin', 'force.password'])->group(function () {
         ->middleware('throttle:10,1');
 
     Route::delete('/reviews/{review_id}', [ReviewController::class, 'delete'])->name('review.delete');
-    Route::post('/orders/return', [OrderController::class, 'returnItems'])->name('orders.return');
     Route::post('/admin/orders/{order}/process', [OrderController::class, 'process'])->name('orders.process');
 
     Route::put('/admin/customers/{user}', [CustomerController::class, 'update'])->name('admin.customers.update');
