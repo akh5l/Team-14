@@ -22,6 +22,7 @@ class User extends Authenticatable
         'address',
         'role',
         'force_password_change',
+        'remember_token'
     ];
 
     public function orders()
