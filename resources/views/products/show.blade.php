@@ -131,7 +131,7 @@
                         <p class="text-yellow-400">
                             {{ str_repeat('⭐', $review->rating) }}
                         </p>
-                        @if (auth()->user()->role === 'admin')
+                        @if (auth()->user()?->role === 'admin')
                         <form method="POST" action="/reviews/{{ $review->id }}">
                             @csrf
                             @method('DELETE')
