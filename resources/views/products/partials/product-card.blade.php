@@ -1,12 +1,12 @@
 <a href="{{ route('products.show', $product->product_id) }}"
     class="hover:scale-105 active:scale-100 product-card">
-    <div class="bg-gray-100/50 bg-gray-100/20 rounded-lg shadow hover:shadow-lg p-4 flex flex-col h-full">
+    <div class="bg-gray-100/50 dark:bg-gray-100/20 rounded-lg shadow hover:shadow-lg p-4 flex flex-col h-full">
         <img src="{{ $product->image_url }}" alt="{{ $product->product_name }}"
             class="h-48 w-full object-contain rounded mb-4 bg-white" />
 
         <h3 class="text-xl font-semibold mb-2">{{ $product->product_name }}</h3>
 
-        <p class="text-gray-700 dark:text-gray-200 mb-2 text-sm flex-grow" style="font-weight: 500">{{ $product->description }}</p>
+        <p class="text-gray-700 dark:text-white mb-2 text-sm flex-grow" style="font-weight: 500">{{ $product->description }}</p>
 
         <p class="text-blue-500 dark:text-blue-300 mb-4 text-lg mt-auto">
             £{{ number_format($product->price, 2) }}

@@ -45,17 +45,17 @@
     <section class="max-w-7xl mx-auto px-4 py-12 text-center">
         <h2 class="text-3xl font-bold mb-8">Why Choose Bridge 14 Games?</h2>
         <div class="flex flex-wrap justify-center gap-6">
-            <div class="bg-gray-100/50 bg-gray-100/20 p-6 rounded-lg w-full md:w-1/3 shadow hover:shadow-xl transition">
+            <div class="bg-gray-100/50 dark:bg-gray-100/20 p-6 rounded-lg w-full md:w-1/3 shadow hover:shadow-xl transition">
                 <h3 class="text-xl font-semibold mb-2">Wide Selection</h3>
                 <p>Explore our vast collection of tabletop and gaming paraphernalia.<br>From tabletop games to video games
                     and consoles, we're sure that we have something you'll love</p>
             </div>
-            <div class="bg-gray-100/50 bg-gray-100/20 p-6 rounded-lg w-full md:w-1/3 shadow hover:shadow-xl transition">
+            <div class="bg-gray-100/50 dark:bg-gray-100/20 p-6 rounded-lg w-full md:w-1/3 shadow hover:shadow-xl transition">
                 <h3 class="text-xl font-semibold mb-2">Expert Recommendations</h3>
                 <p>Our team will help you find the perfect game for you based on your needs. Simply drop us a message via
                     our 'Contact Us' page, or come speak to us in store</p>
             </div>
-            <div class="bg-gray-100/50 bg-gray-100/20 p-6 rounded-lg w-full md:w-1/3 shadow hover:shadow-xl transition">
+            <div class="bg-gray-100/50 dark:bg-gray-100/20 p-6 rounded-lg w-full md:w-1/3 shadow hover:shadow-xl transition">
                 <h3 class="text-xl font-semibold mb-2">Fast Shipping</h3>
                 <p>Quick and reliable dispatch on all orders with free shipping on orders over £40</p>
             </div>

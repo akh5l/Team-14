@@ -104,10 +104,10 @@
             <form method="POST" action="{{ route('reviews.store', $product->product_id) }}">
                 @csrf
 
-                <textarea name="comment" class="w-full bg-[#292755] border border-[#6163b3] text-white placeholder-gray-200 rounded-lg px-4 py-2 mb-3" placeholder="Write your review..." required></textarea>
+                <textarea name="comment" class="w-full bg-gray-100 dark:bg-gray-300 border border-gray-300 text-gray-800 dark:text-black placeholder-gray-600 dark:placeholder-gray-800 rounded-lg px-4 py-2 mb-3" placeholder="Write your review..." required></textarea>
 
                 <div class="flex flex-col sm:flex-row gap-3 mb-8">
-                    <select name="rating" class="w-1/2 bg-[#292755] border border-[#6163b3] text-white rounded-lg px-4 py-2" required>
+                    <select name="rating" class="w-1/2 bg-gray-100 dark:bg-[#292755] border dark:border-[#6163b3] text-gray-800 dark:text-gray-200 rounded-lg px-4 py-2" required>
                         <option value="">Rating</option>
                         <option value="5">⭐⭐⭐⭐⭐</option>
                         <option value="4">⭐⭐⭐⭐</option>
@@ -116,7 +116,7 @@
                         <option value="1">⭐</option>
                     </select>
 
-                    <button class="bg-[#6163b3] w-1/2 px-4 py-2 rounded-lg text-white">
+                    <button class="bg-blue-500 dark:bg-[#6163b3] w-1/2 px-4 py-2 rounded-lg text-white">
                         Submit Review
                     </button>
                 </div>
@@ -126,7 +126,7 @@
 
             <div class="flex flex-col sm:flex-row items-center gap-3">
                 @forelse($product->reviews as $review)
-                <div class="bg-[#1b193b] p-4 rounded-lg shadow w-full h-full">
+                <div class="bg-gray-100 dark:bg-[#1a173b] p-4 rounded-lg shadow w-full h-full">
                     <div class="flex justify-between items-start mb-1">
                         <p class="text-yellow-400">
                             {{ str_repeat('⭐', $review->rating) }}
@@ -141,10 +141,10 @@
                         </form>
                         @endif
                     </div>
-                    <p class="text-white mb-2">
+                    <p class="text-black dark:text-white mb-2">
                         {{ $review->comment }}
                     </p>
-                    <div class="text-sm text-gray-300">
+                    <div class="text-sm text-gray-700 dark:text-gray-300">
                         - {{ $review->user?->first_name ?? 'Admin' }}
                     </div>
                 </div>
