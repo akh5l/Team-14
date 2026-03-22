@@ -2,7 +2,7 @@
     <div class="flex justify-between items-center cursor-pointer mb-4" onclick="toggleSection('orders')">
         <h2 class="text-xl font-semibold text-gray-800 mb-4">
             Orders
-            @if($orders->count() > 0)
+            @if($orders->where('order_status', 'processing')->count() > 0)
             <span class="text-sm bg-red-100 text-red-600 px-2 py-0.5 rounded-full">{{ $orders->count() }}</span>
             @endif
         </h2>
