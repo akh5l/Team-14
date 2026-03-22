@@ -36,8 +36,8 @@ class RegisteredUserController extends Controller
 
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
-
-            'phone' => ['nullable', 'string', 'max:20'],
+             // regex from regexlib.com
+            'phone' => ['nullable', 'string', 'max:20', 'regex:/^(((\+44\s?\d{4}|\(?0\d{4}\)?)\s?\d{3}\s?\d{3})|((\+44\s?\d{3}|\(?0\d{3}\)?)\s?\d{3}\s?\d{4})|((\+44\s?\d{2}|\(?0\d{2}\)?)\s?\d{4}\s?\d{4}))(\s?\#(\d{4}|\d{3}))?$/'],
         ]);
 
         $user = User::create([
