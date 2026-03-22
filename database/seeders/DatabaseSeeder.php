@@ -138,7 +138,7 @@ class DatabaseSeeder extends Seeder
                 'description_detailed' => 'A ninth-generation console by Sony delivering 4K graphics, fast SSD load times, and a wide library of exclusive games. It supports ray tracing, high frame rates, and backwards compatibility, ideal for immersive next-gen gaming and console exclusives.',
                 'category_id'          => 5,
                 'price'                => 349.99,
-                'image_url'            => 'images/products/ps5.jpg',
+                'image_url'            => 'images/products/ps5.png',
             ],
             [
                 'product_name'         => 'Xbox Series S',
@@ -212,7 +212,7 @@ class DatabaseSeeder extends Seeder
                 'description_detailed' => 'TT Combat Green Dice are high-quality gaming dice featuring a vibrant green color, perfect for tabletop RPGs, board games, and miniature wargaming. Crafted for durability and precision, these dice enhance your gaming experience with their striking appearance and reliable roll results.',
                 'category_id'          => 3,
                 'price'                => 3.10,
-                'image_url'            => 'images/products/dice-20.jpg',
+                'image_url'            => 'images/products/dice-20.png',
             ],
             [
                 'product_name'         => 'TT Green Combat Dice',
@@ -220,7 +220,7 @@ class DatabaseSeeder extends Seeder
                 'description_detailed' => 'TT Combat Green Dice are high-quality gaming dice featuring a vibrant green color, perfect for tabletop RPGs, board games, and miniature wargaming. Crafted for durability and precision, these dice enhance your gaming experience with their striking appearance and reliable roll results.',
                 'category_id'          => 3,
                 'price'                => 3.10,
-                'image_url'            => 'images/products/dice-6.jpg',
+                'image_url'            => 'images/products/dice-6.png',
             ],
             [
                 'product_name'         => 'Goblin Mystery Resin Dice Set',
@@ -236,7 +236,7 @@ class DatabaseSeeder extends Seeder
                 'description_detailed' => 'This is a plush D&D-themed gamer pouch designed to hold dice, coins, or small gaming accessories. It features a zippered inner compartment, a carabiner hook for easy attachment, and is made of soft plush material. Measuring about 6 x 4 x 3 inches, it\'s an officially licensed accessory perfect for RPG fans and dice enthusiasts. (Dice not included)',
                 'category_id'          => 3,
                 'price'                => 45.00,
-                'image_url'            => 'images/products/dnd-pouch.jpg',
+                'image_url'            => 'images/products/dnd-pouch.png',
             ],
         ];
 
