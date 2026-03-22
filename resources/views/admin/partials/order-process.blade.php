@@ -3,7 +3,7 @@
         <h2 class="text-xl font-semibold text-gray-800 mb-4">
             Orders
             @if($orders->where('order_status', 'processing')->count() > 0)
-            <span class="text-sm bg-red-100 text-red-600 px-2 py-0.5 rounded-full">{{ $orders->count() }}</span>
+            <span class="text-sm bg-red-100 text-red-600 px-2 py-0.5 rounded-full">{{ $orders->where('order_status', 'processing')->count() }}</span>
             @endif
         </h2>
         <svg id="chevron-orders" class="w-5 h-5 text-gray-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
