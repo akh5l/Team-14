@@ -7,6 +7,8 @@
     <title id="logo-text">Bridge 14 Games</title>
     <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
     @vite('resources/css/app.css')
+    {{-- chartjs for stock report chart --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.0/chart.umd.min.js"></script>
     @vite('resources/js/app.js')
     @livewireStyles
 </head>

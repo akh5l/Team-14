@@ -1,12 +1,14 @@
 <?php
 
 use App\Http\Controllers\AdminAuthController;
-use App\Http\Controllers\AdminInviteController;
+use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\AdminPasswordController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\OrderController;
-use App\Http\Controllers\AdminPasswordController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReviewController;
@@ -85,12 +87,19 @@ Route::middleware(['auth', 'admin'])->group(function () {
 });
 
 Route::middleware(['auth', 'admin', 'force.password'])->group(function () {
-    Route::get('/admin', [AdminInviteController::class, 'index'])->name('admin.dashboard');
-    Route::post('/admin/invite', [AdminInviteController::class, 'generate'])
+    Route::get('/admin', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+    Route::post('/admin/invite', [AdminDashboardController::class, 'generateInvite'])
         ->name('admin.invite.generate')
-        ->middleware('throttle:10,1');;
-    
+        ->middleware('throttle:10,1');
+
     Route::delete('/reviews/{review_id}', [ReviewController::class, 'delete'])->name('review.delete');
+    Route::post('/orders/return', [OrderController::class, 'returnItems'])->name('orders.return');
+    Route::post('/admin/orders/{order}/process', [OrderController::class, 'process'])->name('orders.process');
+
+    Route::put('/admin/customers/{user}', [CustomerController::class, 'update'])->name('admin.customers.update');
+    Route::delete('/admin/customers/{user}', [CustomerController::class, 'destroy'])->name('admin.customers.destroy');
+
+    Route::get('/admin/inventory', fn() => view('admin.inventory'))->name('admin.inventory');
 });
 
 require __DIR__.'/auth.php';

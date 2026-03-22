@@ -33,6 +33,11 @@ class Product extends Model
 
     public function reviews()
     {
-        return $this->hasMany(\App\Models\Review::class,'product_id','product_id');
+        return $this->hasMany(Review::class,'product_id','product_id');
+    }
+
+    public function stockLogs()
+    {
+        return $this->hasMany(StockLog::class, 'product_id', 'product_id');
     }
 }

@@ -46,7 +46,7 @@ new class extends Component {
 
     <div class="grid md:grid-cols-3 gap-8">
         @forelse ($this->products as $product)
-            @include('partials.product-card', ['product' => $product])
+            @include('products.partials.product-card', ['product' => $product])
         @empty
             <p class="col-span-3 text-center text-gray-500">
                 No products found.

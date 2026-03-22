@@ -56,7 +56,6 @@ class AdminAuthController extends Controller
             'last_name' => $request->last_name,
 
             'phone' => $request->phone,
-            'address' => $request->address,
 
             'role' => 'admin',
             'force_password_change' => true,
@@ -66,6 +65,6 @@ class AdminAuthController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('password.change')->with('success', 'Admin created');
+        return redirect()->route('admin.password.update')->with('success', 'Admin created');
     }
 }

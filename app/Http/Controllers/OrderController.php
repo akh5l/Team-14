@@ -2,6 +2,8 @@
 namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Product;
+use App\Models\StockLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -44,6 +46,13 @@ class OrderController extends Controller
             return redirect()->route('cart.index')->with('error', 'Cart is empty.');
         }
 
+        foreach ($cart as $item) {
+            $product = Product::findOrFail($item['product_id']);
+            if ($item['quantity'] > $product->stock) {
+                throw new \Exception("Sorry, only {$product->stock} units of {$product->product_name} are available.");
+            }
+        }
+
         $subtotal = 0;
         foreach ($cart as $item) {
             $subtotal += $item['price'] * $item['quantity'];
@@ -53,7 +62,7 @@ class OrderController extends Controller
             'user_id' => Auth::user()->user_id,
             'order_date' => now(),
             'total_amount' => $subtotal,
-            'order_status' => 'pending',
+            'order_status' => 'processing',
             'payment_method' => 'card',
             'address_line1' => $request->address_line1,
             'address_line2' => $request->address_line2,
@@ -67,10 +76,40 @@ class OrderController extends Controller
                 'product_id' => $item['product_id'],
                 'quantity' => $item['quantity'],
                 'price' => $item['price'],
+                'returned' => false,
             ]);
         }
 
         return $order;
+    }
+
+    public function process(Order $order)
+    {
+        foreach ($order->items as $item) {
+            $item->product->decrement('stock', $item->quantity);
+            StockLog::create([
+                'product_id' => $item->product->product_id,
+                'change' => -$item->quantity,
+                'reason' => 'order',
+            ]);
+        }
+        $order->update(['order_status' => 'delivered']);
+        return back()->with('success');
+    }
+
+    public function returnItems(Request $request)
+    {
+        $itemIds = $request->input('item_ids', []);
+
+        OrderItem::whereIn('order_item_id', $itemIds)
+            ->whereHas('order', function ($query) {
+                $query->where('user_id', Auth::user()->user_id)
+                    ->where('order_status', 'delivered')
+                    ->where('order_date', '>=', now()->subDays(30));
+            })
+            ->update(['returned' => true]);
+
+        return back()->with('return_success', true);
     }
 
     //basically for the orders to fetch orders from  user in the past
@@ -80,6 +119,20 @@ class OrderController extends Controller
             ->where('user_id', Auth::user()->user_id)
             ->latest('order_date')
             ->get();
-        return view('orders.history', compact('orders'));
+        $ordersJson = $orders->map(function($order) {
+            return [
+                'id' => $order->order_id,
+                'items' => $order->items->map(function($item) {
+                    return [
+                        'id' => $item->order_item_id,
+                        'name' => $item->product ? $item->product->product_name : 'Product unavailable',
+                        'quantity' => $item->quantity,
+                        'returned' => $item->returned,
+                    ];
+                })
+            ];
+        });
+
+        return view('orders.history', compact('orders', 'ordersJson'));
     }
 }
