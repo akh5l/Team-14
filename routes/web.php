@@ -39,7 +39,7 @@ Route::middleware('force.password')->group(function () { // ensures redirect if 
     });
 
     Route::get('/admin/register', [AdminAuthController::class, 'showRegister'])->name('admin.register');
-    Route::post('/admin/register', [AdminAuthController::class, 'register'])->middleware('throttle:5,1');
+    Route::post('/admin/register', [AdminAuthController::class, 'register'])->middleware('throttle:10,1');
 });
 
 Route::middleware('auth', 'force.password')->group(function () {
@@ -68,13 +68,13 @@ Route::middleware('auth', 'force.password')->group(function () {
 
     Route::post('/orders', [OrderController::class, 'store'])
         ->name('orders.store')
-        ->middleware('throttle:5,1');
+        ->middleware('throttle:10,1');
 
     Route::get('/orders', [OrderController::class, 'orderHistory'])->name('orders.history');
 
     Route::post('/reviews/{product_id}', [ReviewController::class, 'store'])
         ->name('reviews.store')
-        ->middleware('throttle:3,1');
+        ->middleware('throttle:10,1');
 
 });
 
