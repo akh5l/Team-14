@@ -5,7 +5,7 @@
         <h1 class="text-3xl font-bold mb-6">Your Shopping Cart</h1>
         <div class="lg:grid lg:grid-cols-3 gap-6 items-start">
 
-            <div class="bg-white rounded-lg shadow p-4 md:col-span-1 border border-gray-100 space-y-4">
+            <div class="bg-white rounded-lg shadow p-4 md:col-span-1 border border-gray-100 space-y-4 dark:text-gray-900">
                 @php
                     $cart = session()->get('cart', []);
                 @endphp
@@ -47,7 +47,7 @@
             </div>
 
             <div class="mt-6 md:mt-0 md:col-span-2 md:pl-4">
-                <div class="bg-white p-6 rounded-lg shadow-md">
+                <div class="bg-white p-6 rounded-lg shadow-md dark:text-gray-900">
 
                     <p class="text-2xl font-bold mb-4 text-center">Choice of Delivery</p>
                     <div class="flex flex-wrap gap-3 items-start justify-center">

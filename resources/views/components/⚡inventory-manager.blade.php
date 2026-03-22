@@ -181,7 +181,7 @@ new class extends Component {
 
 <div>
     {{-- alerts --}}
-    <div class="mb-6 bg-white shadow rounded-lg border border-gray-100">
+    <div class="mb-6 bg-white dark:bg-gray-200 shadow rounded-lg border border-gray-100">
         <div class="p-6 flex justify-between items-center cursor-pointer" wire:click="$toggle('showAlerts')">
             <h2 class="text-xl font-semibold text-gray-800 flex items-center gap-2">
                 Stock Alerts
@@ -196,7 +196,7 @@ new class extends Component {
         @if($showAlerts)
         <div class="px-6 pb-6">
             @forelse($this->alerts as $product)
-            <div class="flex items-center justify-between py-2 border-b border-gray-100 last:border-0">
+            <div class="flex items-center justify-between py-2 border-b border-gray-100 last:border-0 text-gray-800">
                 <div class="flex items-center gap-3">
                     <img src="/{{ $product->image_url }}" class="w-10 h-10 object-contain rounded bg-gray-50">
                     <span class="font-medium">{{ $product->product_name }}</span>
@@ -215,7 +215,7 @@ new class extends Component {
     </div>
 
     {{-- products --}}
-    <div class="mb-6 bg-white shadow rounded-lg border border-gray-100">
+    <div class="mb-6 bg-white dark:bg-gray-200 shadow rounded-lg border border-gray-100">
         <div class="p-6 flex justify-between items-center cursor-pointer" wire:click="$toggle('showProducts')">
             <h2 class="text-xl font-semibold text-gray-800">Products</h2>
             <div class="flex items-center gap-3" @click.stop>
@@ -234,7 +234,7 @@ new class extends Component {
             @endif
             <div class="flex flex-col md:flex-row gap-3 mb-4">
                 <input type="text" wire:model.live.debounce.200ms="search" placeholder="Search products..." class="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none">
-                <select wire:model.live="filter" class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none">
+                <select wire:model.live="filter" class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none dark:text-gray-600">
                     <option value="">All</option>
                     <option value="in_stock">In Stock</option>
                     <option value="low_stock">Low Stock</option>
@@ -288,7 +288,7 @@ new class extends Component {
 
 
     {{-- restocking --}}
-    <div class="mb-6 bg-white shadow rounded-lg border border-gray-100">
+    <div class="mb-6 bg-white dark:bg-gray-200 shadow rounded-lg border border-gray-100">
         <div class="p-6 flex justify-between items-center cursor-pointer" wire:click="$toggle('showRestock')">
             <h2 class="text-xl font-semibold text-gray-800">Restock</h2>
             <svg class="{{ $showRestock ? 'rotate-180' : '' }} w-5 h-5 text-gray-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -298,13 +298,13 @@ new class extends Component {
         @if($showRestock)
         <div class="px-6 pb-6">
             <div class="flex flex-col md:flex-row gap-3 w-full justify-between items-center">
-                <select wire:model="restockProductId" class="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none">
+                <select wire:model="restockProductId" class="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none dark:text-gray-600">
                     <option value="">Select a product</option>
                     @foreach(Product::orderBy('product_name')->get() as $product)
                     <option value="{{ $product->product_id }}">{{ $product->product_name }} ({{ $product->stock }} in stock)</option>
                     @endforeach
                 </select>
-                <input type="number" wire:model="restockQuantity" min="1" placeholder="Quantity" class="w-32 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none">
+                <input type="number" wire:model="restockQuantity" min="1" placeholder="Quantity" class="w-32 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none dark:text-gray-600">
                 <button wire:click="restock" class="px-4 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700">
                     Add Stock
                 </button>
@@ -316,7 +316,7 @@ new class extends Component {
     </div>
 
     {{-- reports - chart --}}
-    <div class="mb-6 bg-white shadow rounded-lg border border-gray-100">
+    <div class="mb-6 bg-white dark:bg-gray-200 shadow rounded-lg border border-gray-100">
         <div class="p-6 flex justify-between items-center cursor-pointer" wire:click="$toggle('showReports')">
             <h2 class="text-xl font-semibold text-gray-800">Reports</h2>
             <svg class="{{ $showReports ? 'rotate-180' : '' }} w-5 h-5 text-gray-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -407,14 +407,14 @@ new class extends Component {
     {{-- add product modal --}}
     @if($showAddModal)
     <div class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
-        <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-lg max-h-screen overflow-y-auto">
-            <h2 class="text-xl font-semibold mb-4">Add Product</h2>
+        <div class="bg-white dark:bg-gray-200 rounded-lg shadow-lg p-6 w-full max-w-lg max-h-screen overflow-y-auto">
+            <h2 class="text-xl font-semibold mb-4 dark:text-gray-600">Add Product</h2>
             <div class="space-y-3">
                 <input type="text" wire:model="newName" placeholder="Product name" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none">
                 @error('newName') <p class="text-red-500 text-sm">{{ $message }}</p> @enderror
                 <textarea wire:model="newDescription" placeholder="Short description" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none"></textarea>
                 <textarea wire:model="newDescriptionDetailed" placeholder="Detailed description" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none"></textarea>
-                <select wire:model="newCategoryId" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none">
+                <select wire:model="newCategoryId" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none dark:text-gray-500">
                     <option value="">No category</option>
                     @foreach(Category::all() as $category)
                     <option value="{{ $category->category_id }}">{{ $category->category_name }}</option>
@@ -424,12 +424,12 @@ new class extends Component {
                 @error('newPrice') <p class="text-red-500 text-sm">{{ $message }}</p> @enderror
                 <input type="number" wire:model="newStock" placeholder="Initial stock" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none">
                 @error('newStock') <p class="text-red-500 text-sm">{{ $message }}</p> @enderror
-                <input type="file" wire:model="newImage" accept="image/*" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none">
+                <input type="file" wire:model="newImage" accept="image/*" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none dark:text-gray-600">
                 @error('newImage') <p class="text-red-500 text-sm">{{ $message }}</p> @enderror
             </div>
             <div class="flex gap-2 mt-4">
                 <button wire:click="addProduct" class="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-semibold">Add</button>
-                <button wire:click="$set('showAddModal', false)" class="flex-1 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">Cancel</button>
+                <button wire:click="$set('showAddModal', false)" class="flex-1 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 dark:bg-gray-500 dark:hover:bg-gray-600">Cancel</button>
             </div>
         </div>
     </div>
@@ -438,32 +438,32 @@ new class extends Component {
     {{-- edit product modal --}}
     @if($showEditModal)
     <div class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
-        <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-lg max-h-screen overflow-y-auto">
-            <h2 class="text-xl font-semibold mb-4">Edit Product</h2>
+        <div class="bg-white dark:bg-gray-200 rounded-lg shadow-lg p-6 w-full max-w-lg max-h-screen overflow-y-auto">
+            <h2 class="text-xl font-semibold mb-4 dark:text-black">Edit Product</h2>
             <div class="space-y-3">
-                <input type="text" wire:model="editName" placeholder="Product name" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none">
+                <input type="text" wire:model="editName" placeholder="Product name" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none dark:text-gray-700">
                 @error('editName') <p class="text-red-500 text-sm">{{ $message }}</p> @enderror
-                <textarea wire:model="editDescription" placeholder="Short description" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none"></textarea>
-                <textarea wire:model="editDescriptionDetailed" placeholder="Detailed description" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none"></textarea>
-                <select wire:model="editCategoryId" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none">
+                <textarea wire:model="editDescription" placeholder="Short description" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none dark:text-gray-700"></textarea>
+                <textarea wire:model="editDescriptionDetailed" placeholder="Detailed description" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none dark:text-gray-600"></textarea>
+                <select wire:model="editCategoryId" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none dark:text-gray-600">
                     <option value="">No category</option>
                     @foreach(Category::all() as $category)
                     <option value="{{ $category->category_id }}">{{ $category->category_name }}</option>
                     @endforeach
                 </select>
-                <input type="number" wire:model="editPrice" placeholder="Price" step="0.01" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none">
+                <input type="number" wire:model="editPrice" placeholder="Price" step="0.01" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none dark:text-gray-600">
                 @error('editPrice') <p class="text-red-500 text-sm">{{ $message }}</p> @enderror
-                <input type="number" wire:model="editStock" placeholder="Stock" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none">
+                <input type="number" wire:model="editStock" placeholder="Stock" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none dark:text-gray-600">
                 @error('editStock') <p class="text-red-500 text-sm">{{ $message }}</p> @enderror
                 @if($editImageUrl)
                 <img src="/{{ $editImageUrl }}" class="w-20 h-20 object-contain rounded bg-gray-50">
                 @endif
-                <input type="file" wire:model="editImage" accept="image/*" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none">
+                <input type="file" wire:model="editImage" accept="image/*" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none dark:text-gray-600">
                 @error('editImage') <p class="text-red-500 text-sm">{{ $message }}</p> @enderror
             </div>
             <div class="flex gap-2 mt-4">
                 <button wire:click="updateProduct" class="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-semibold">Save</button>
-                <button wire:click="$set('showEditModal', false)" class="flex-1 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">Cancel</button>
+                <button wire:click="$set('showEditModal', false)" class="flex-1 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 dark:bg-gray-500 dark:hover:bg-gray-600">Cancel</button>
             </div>
         </div>
     </div>

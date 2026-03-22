@@ -11,7 +11,7 @@
 
     <section class="max-w-7xl mx-auto px-4 py-12 bg-gradient-to-r from-gray-50 via-gray-100 to-gray-50 rounded-lg shadow-lg my-6">
         <h2 class="text-3xl font-bold text-center mb-8 text-gray-800 uppercase tracking-wide">Our Story</h2>
-        <div class="prose mx-auto text-center text-gray-700 max-w-3xl">
+        <div class="prose mx-auto text-center text-gray-700 dark:text-gray-800 max-w-3xl">
             <p class="mb-4">
                 Founded in 2025, Bridge 14 Games started as a small local shop in Birmingham dedicated to providing
                 high-quality tabletop and video games to casual gamers and hobbyists alike. Over the years, we've grown into
@@ -40,8 +40,8 @@
 
     <section class="py-12 bg-white-100">
         <div class="max-w-7xl mx-auto px-4 text-center">
-            <h2 class="text-3xl font-bold mb-8 text-gray-800">What Our Community Says</h2>
-            <div class="grid md:grid-cols-2 gap-8">
+            <h2 class="text-3xl font-bold mb-8 text-gray-800 dark:text-gray-200">What Our Community Says</h2>
+            <div class="grid md:grid-cols-2 gap-8 dark:text-gray-800">
                 @foreach ([['quote' => 'Bridge 14 Games is my second home. The community is welcoming, and the staff always go above and beyond!', 'name' => 'John Doe'], ['quote' => 'I couldn\'t recommend this place enough! It is the perfect place to find fellow enthusiasts.', 'name' => 'Jane Doe']] as $testimonial)
                     <div
                         class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition transform hover:-translate-y-1 duration-300">

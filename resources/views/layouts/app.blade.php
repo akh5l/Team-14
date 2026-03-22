@@ -13,10 +13,10 @@
     @livewireStyles
 </head>
 
-<body class="flex flex-col h-full variable-text antialiased" id="star-layer">
+<body class="flex flex-col h-full variable-text antialiased dark:bg-[#1c1b40] text-black dark:text-white" id="star-layer">
     <div class="flex flex-col lg:flex-row items-center justify-between bg-black p-4">
         <a href="{{ url('/home') }}"
-            class="flex items-center gap-2 text-white font-bold text-xl sm:text-2xl variable-heading">
+            class="flex items-center gap-2 text-white dark:text-black font-bold text-xl sm:text-2xl variable-heading">
             <img src="{{ asset('images/logo-dark.webp') }}" alt="Logo" class="h-auto max-h-12 sm:max-h-16 w-auto mx-8 mb-1">
             {{-- <p id="logo-text">Bridge 14 Games</p> --}}
         </a>
@@ -50,7 +50,7 @@
     </div>
 
     <button id="themeToggle"
-        class="fixed bottom-5 right-5 text-2xl bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition select-none z-50">
+        class="fixed bottom-5 right-5 text-2xl bg-blue-600 text-white dark:text-black p-3 rounded-full shadow-lg hover:bg-blue-700 transition select-none z-50">
         🌙
     </button>
     <main class="flex-1">

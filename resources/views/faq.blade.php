@@ -3,7 +3,7 @@
 <main class="max-w-6xl mx-auto px-4 py-8 my-[8rem] flex-grow">
     <h1 class="text-3xl font-bold mb-6 text-center">Frequently Asked Questions (FAQ)</h1>
 
-    <div class="flex flex-col items-center space-y-4">
+    <div class="flex flex-col items-center space-y-4 dark:text-gray-900">
         @php
             $faqs = [
                 ['question' => 'Do you offer official Nintendo products?', 
@@ -38,9 +38,9 @@
         @endforeach
     </div>
 
-    <div class="mt-6 text-s text-gray-800 text-center">
+    <div class="mt-6 text-s text-gray-800 text-center dark:text-gray-200">
         Still have questions? 
-        <a href="/contact-us" class="text-blue-600 hover:underline">Contact our support team</a> for further assistance.
+        <a href="/contact-us" class="text-blue-600 dark:text-blue-400 hover:underline">Contact our support team</a> for further assistance.
     </div>
 </main>
 @endsection
