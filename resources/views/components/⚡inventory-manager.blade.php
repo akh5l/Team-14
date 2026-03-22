@@ -233,7 +233,7 @@ new class extends Component {
             <div class="mb-4 p-3 bg-green-100 text-green-700 rounded-lg text-sm">{{ session('success') }}</div>
             @endif
             <div class="flex flex-col md:flex-row gap-3 mb-4">
-                <input type="text" wire:model.live.debounce.200ms="search" placeholder="Search products..." class="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none">
+                <input type="text" wire:model.live.debounce.200ms="search" placeholder="Search products..." class="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none dark:text-gray-800">
                 <select wire:model.live="filter" class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none dark:text-gray-600">
                     <option value="">All</option>
                     <option value="in_stock">In Stock</option>
@@ -412,17 +412,17 @@ new class extends Component {
             <div class="space-y-3">
                 <input type="text" wire:model="newName" placeholder="Product name" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none dark:text-gray-800">
                 @error('newName') <p class="text-red-500 text-sm">{{ $message }}</p> @enderror
-                <textarea wire:model="newDescription" placeholder="Short description" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none"></textarea>
-                <textarea wire:model="newDescriptionDetailed" placeholder="Detailed description" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none"></textarea>
+                <textarea wire:model="newDescription" placeholder="Short description" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none dark:text-gray-800"></textarea>
+                <textarea wire:model="newDescriptionDetailed" placeholder="Detailed description" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none dark:text-gray-800"></textarea>
                 <select wire:model="newCategoryId" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none dark:text-gray-500">
                     <option value="">No category</option>
                     @foreach(Category::all() as $category)
                     <option value="{{ $category->category_id }}">{{ $category->category_name }}</option>
                     @endforeach
                 </select>
-                <input type="number" wire:model="newPrice" placeholder="Price" step="0.01" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none">
+                <input type="number" wire:model="newPrice" placeholder="Price" step="0.01" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none dark:text-gray-800">
                 @error('newPrice') <p class="text-red-500 text-sm">{{ $message }}</p> @enderror
-                <input type="number" wire:model="newStock" placeholder="Initial stock" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none">
+                <input type="number" wire:model="newStock" placeholder="Initial stock" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none dark:text-gray-800">
                 @error('newStock') <p class="text-red-500 text-sm">{{ $message }}</p> @enderror
                 <input type="file" wire:model="newImage" accept="image/*" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none dark:text-gray-600">
                 @error('newImage') <p class="text-red-500 text-sm">{{ $message }}</p> @enderror
