@@ -3,6 +3,7 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\StockLog;
 
 new class extends Component {
     use WithFileUploads;
@@ -23,6 +24,34 @@ new class extends Component {
             ->when($this->filter === 'low_stock', fn($q) => $q->whereBetween('stock', [1, 15]))
             ->when($this->filter === 'in_stock', fn($q) => $q->where('stock', '>=', 16))
             ->get();
+    }
+
+    public function getAlertsProperty()
+    {
+        return Product::where('stock', '<', 16)->orderBy('stock')->get();
+    }
+
+    public string $restockProductId = '';
+    public int $restockQuantity = 0;
+
+    public function restock()
+    {
+        $this->validate([
+            'restockProductId' => 'required|exists:products,product_id',
+            'restockQuantity'  => 'required|integer|min:1',
+        ]);
+
+        $product = Product::findOrFail($this->restockProductId);
+        $product->increment('stock', $this->restockQuantity);
+
+        StockLog::create([
+            'product_id' => $product->product_id,
+            'change'     => $this->restockQuantity,
+            'reason'     => 'restock',
+        ]);
+
+        $this->reset(['restockProductId', 'restockQuantity']);
+        session()->flash('success', 'Stock updated.');
     }
 
     public function addProduct()
@@ -58,7 +87,7 @@ new class extends Component {
 
     public function deleteProduct()
     {
-        
+
     }
 
 };
@@ -70,14 +99,33 @@ new class extends Component {
     {{-- alerts --}}
     <div class="mb-6 bg-white shadow rounded-lg border border-gray-100">
         <div class="p-6 flex justify-between items-center cursor-pointer" wire:click="$toggle('showAlerts')">
-            <h2 class="text-xl font-semibold text-gray-800">Stock Alerts</h2>
+            <h2 class="text-xl font-semibold text-gray-800 flex items-center gap-2">
+                Stock Alerts
+                @if($this->alerts->count() > 0)
+                <span class="text-sm bg-red-100 text-red-600 px-2 py-0.5 rounded-full">{{ $this->alerts->count() }}</span>
+                @endif
+            </h2>
             <svg class="{{ $showAlerts ? 'rotate-180' : '' }} w-5 h-5 text-gray-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
         </div>
         @if($showAlerts)
         <div class="px-6 pb-6">
-            <p class="text-gray-500 text-sm">No alerts yet.</p>
+            @forelse($this->alerts as $product)
+            <div class="flex items-center justify-between py-2 border-b border-gray-100 last:border-0">
+                <div class="flex items-center gap-3">
+                    <img src="{{ $product->image_url }}" class="w-10 h-10 object-contain rounded bg-gray-50">
+                    <span class="font-medium">{{ $product->product_name }}</span>
+                </div>
+                @if($product->stock === 0)
+                <span class="text-sm font-semibold text-red-600 bg-red-50 px-3 py-1 rounded-full">Out of stock</span>
+                @else
+                <span class="text-sm font-semibold text-yellow-600 bg-yellow-50 px-3 py-1 rounded-full">Low stock — {{ $product->stock }} left</span>
+                @endif
+            </div>
+            @empty
+            <p class="text-gray-500 text-sm">All products are well stocked.</p>
+            @endforelse
         </div>
         @endif
     </div>
@@ -165,15 +213,20 @@ new class extends Component {
         </div>
         @if($showRestock)
         <div class="px-6 pb-6">
-            <div class="flex flex-col md:flex-row gap-3 max-w-lg">
-                <select class="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none">
+            <div class="flex flex-col md:flex-row gap-3 w-full justify-between items-center">
+                <select wire:model="restockProductId" class="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none">
                     <option value="">Select a product</option>
+                    @foreach(Product::orderBy('product_name')->get() as $product)
+                    <option value="{{ $product->product_id }}">{{ $product->product_name }} ({{ $product->stock }} in stock)</option>
+                    @endforeach
                 </select>
-                <input type="number" min="1" placeholder="Quantity" class="w-32 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none">
-                <button class="px-4 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700">
+                <input type="number" wire:model="restockQuantity" min="1" placeholder="Quantity" class="w-32 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none">
+                <button wire:click="restock" class="px-4 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700">
                     Add Stock
                 </button>
             </div>
+            @error('restockProductId') <p class="text-red-500 text-sm mt-2">{{ $message }}</p> @enderror
+            @error('restockQuantity') <p class="text-red-500 text-sm mt-2">{{ $message }}</p> @enderror
         </div>
         @endif
     </div>
