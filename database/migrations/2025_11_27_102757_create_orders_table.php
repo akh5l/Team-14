@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id('order_id');
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedInteger('user_id');
             $table->dateTime('order_date')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->decimal('total_amount', 10, 2);
             $table->enum('order_status', ['processing', 'shipped','delivered'])->default('processing');
