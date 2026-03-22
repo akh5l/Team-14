@@ -12,7 +12,7 @@
             <h1 class="text-4xl font-bold mb-4">{{ $product->product_name }}</h1>
             <p class="text-lg mb-4">{{ $product->description }}</p>
 
-            <p class="text-2xl font-semibold mb-6 text-red-500">
+            <p class="text-2xl font-semibold mb-6 text-blue-500 dark:text-blue-300">
                 £{{ number_format($product->price, 2) }}
             </p>
 
