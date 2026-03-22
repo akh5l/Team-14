@@ -410,7 +410,7 @@ new class extends Component {
         <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-lg max-h-screen overflow-y-auto">
             <h2 class="text-xl font-semibold mb-4 dark:text-gray-600">Add Product</h2>
             <div class="space-y-3">
-                <input type="text" wire:model="newName" placeholder="Product name" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none">
+                <input type="text" wire:model="newName" placeholder="Product name" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none dark:text-gray-800">
                 @error('newName') <p class="text-red-500 text-sm">{{ $message }}</p> @enderror
                 <textarea wire:model="newDescription" placeholder="Short description" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none"></textarea>
                 <textarea wire:model="newDescriptionDetailed" placeholder="Detailed description" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none"></textarea>
