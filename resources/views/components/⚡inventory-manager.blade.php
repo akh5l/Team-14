@@ -14,7 +14,7 @@ new class extends Component {
     public bool $showAlerts = true;
     public bool $showProducts = false;
     public bool $showRestock = false;
-    public bool $showReports = false;
+    public bool $showReports = true;
 
     public function getProductsProperty()
     {
@@ -29,6 +29,11 @@ new class extends Component {
     public function getAlertsProperty()
     {
         return Product::where('stock', '<', 16)->orderBy('stock')->get();
+    }
+
+    public function getStockLogsProperty()
+    {
+        return StockLog::with('product')->latest()->take(50)->get();
     }
 
     public string $restockProductId = '';
@@ -50,7 +55,7 @@ new class extends Component {
             'reason'     => 'restock',
         ]);
 
-        $this->reset(['restockProductId', 'restockQuantity']);
+        // $this->reset(['restockProductId', 'restockQuantity']);
         session()->flash('success', 'Stock updated.');
     }
 
@@ -94,8 +99,6 @@ new class extends Component {
 ?>
 
 <div>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
     {{-- alerts --}}
     <div class="mb-6 bg-white shadow rounded-lg border border-gray-100">
         <div class="p-6 flex justify-between items-center cursor-pointer" wire:click="$toggle('showAlerts')">
@@ -241,24 +244,27 @@ new class extends Component {
         </div>
         @if($showReports)
         <div class="px-6 pb-6">
+            {{-- summary cards --}}
             <div class="grid grid-cols-3 gap-4 mb-6">
                 <div class="bg-gray-50 rounded-lg p-4 text-center">
                     <p class="text-sm text-gray-500 mb-1">Total Products</p>
-                    <p class="text-2xl font-bold text-gray-800">—</p>
+                    <p class="text-2xl font-bold text-gray-800">{{ Product::count() }}</p>
                 </div>
                 <div class="bg-yellow-50 rounded-lg p-4 text-center">
                     <p class="text-sm text-gray-500 mb-1">Low Stock</p>
-                    <p class="text-2xl font-bold text-yellow-600">—</p>
+                    <p class="text-2xl font-bold text-yellow-600">{{ Product::whereBetween('stock', [1, 15])->count() }}</p>
                 </div>
                 <div class="bg-red-50 rounded-lg p-4 text-center">
                     <p class="text-sm text-gray-500 mb-1">Out of Stock</p>
-                    <p class="text-2xl font-bold text-red-600">—</p>
+                    <p class="text-2xl font-bold text-red-600">{{ Product::where('stock', 0)->count() }}</p>
                 </div>
             </div>
+
             <div class="mb-6">
-                <h3 class="text-md font-semibold text-gray-700 mb-3">Stock Changes</h3>
-                <canvas id="stockChart" class="w-full" height="100"></canvas>
+                <h3 class="text-md font-semibold text-gray-700 mb-3">Stock Changes (last 50 entries)</h3>
+                <canvas id="stockChart" class="w-full" height="200" data-logs='@json($this->stockLogs->reverse()->values())'></canvas>
             </div>
+
             <h3 class="text-md font-semibold text-gray-700 mb-3">Stock Log</h3>
             <table class="w-full text-left text-sm text-gray-600">
                 <thead>
@@ -270,11 +276,50 @@ new class extends Component {
                     </tr>
                 </thead>
                 <tbody>
+                    @forelse($this->stockLogs as $log)
+                    <tr class="border-b">
+                        <td class="py-2 pr-4">{{ $log->product?->product_name ?? '—' }}</td>
+                        <td class="py-2 pr-4 {{ $log->change > 0 ? 'text-green-600' : 'text-red-600' }}">
+                            {{ $log->change > 0 ? '+' : '' }}{{ $log->change }}
+                        </td>
+                        <td class="py-2 pr-4 capitalize">{{ $log->reason }}</td>
+                        <td class="py-2">{{ $log->created_at->format('d M Y, H:i') }}</td>
+                    </tr>
+                    @empty
                     <tr>
                         <td colspan="4" class="py-4 text-gray-400">No stock changes recorded yet.</td>
                     </tr>
+                    @endforelse
                 </tbody>
             </table>
+        </div>
+
+        {{-- run with alpine because won't load otherwise --}}
+        <div class="w-2/3 mx-auto" x-data x-init="
+            setTimeout(function() {
+                const canvas = document.getElementById('stockChart');
+                if (!canvas) return;
+                const logs = JSON.parse(canvas.dataset.logs);
+                const labels = logs.map(l => l.created_at.substring(0, 10));
+                const incoming = logs.map(l => l.change > 0 ? l.change : 0);
+                const outgoing = logs.map(l => l.change < 0 ? Math.abs(l.change) : 0);
+                new Chart(canvas, {
+                    type: 'bar',
+                    data: {
+                        labels,
+                        datasets: [
+                            { label: 'Incoming', data: incoming, backgroundColor: 'rgba(34, 197, 94, 0.6)' },
+                            { label: 'Outgoing', data: outgoing, backgroundColor: 'rgba(239, 68, 68, 0.6)' }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: { legend: { position: 'top' } },
+                        scales: { x: { stacked: false }, y: { beginAtZero: true } }
+                    }
+                });
+            }, 100)
+        ">
         </div>
         @endif
     </div>
