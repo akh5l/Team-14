@@ -1,80 +1,51 @@
-# First-Time Setup: Cloning the Repo into VS Code
-### (Windows)
+# Bridge 14 Games
 
-## 1. Install the Tools
-- Watch this tutorial and follow the instructions to install php https://www.youtube.com/watch?v=n04w2SzGr_U
-- Install nvm https://github.com/coreybutler/nvm-windows/releases/download/1.2.2/nvm-setup.exe
-- Open command prompt and run ```nvm install lts``` then follow the on-screen instructions (don't forget to run ```nvm use 22.20.0``` or whatever number it says)
-- Install composer https://getcomposer.org/Composer-Setup.exe
-- Install VS Code https://code.visualstudio.com/download
+A full-stack e-commerce web app for purchasing video games, tabletop games, consoles and respective accessories. Built with Laravel, Tailwind CSS and Livewire as a university team project.
 
+## Stack
 
+- **Backend:** Laravel >=12, PHP
+- **Frontend:** Blade, Tailwind CSS, Alpine.js, Livewire
+- **Database:** SQLite
+- **Auth:** Laravel Breeze
 
-## 2. Sign In to GitHub in VS Code
+## Features
 
-- Bottom-left corner, click **Accounts** → **Sign in with GitHub**
-- A browser opens → log in → allow access
-- Now VS Code is connected to GitHub
+- Product listing with live search and category filtering
+- Product pages with descriptions, ratings and reviews
+- Session-based cart with quantity management
+- Checkout with UK address capture
+- Order history with a 30-day per-item returns system
+- User profile management
+- Contact form
 
+**Admin:**
+- Invite-token based admin registration (single-use, 24hr expiry)
+- Force password change on first login
+- Order management and processing
+- Customer management (view, edit, delete)
+- Full inventory management system - stock tracking, low stock alerts, product CRUD with image upload, restock logging, and a Chart.js stock report
 
+## Setup
 
-## 3. Clone the Project Repo
+```bash
+git clone <repo-url>
+cd <project-folder>
 
-1. Copy the repo link: [https://github.com/akh5l/CS2-TP.git](https://github.com/akh5l/CS2-TP.git "‌")
-2. In VS Code, open **Command Palette** (`Ctrl + Shift + P`)
-   - Type **Git: Clone** → paste the repo link
-   - Choose a folder on your computer (e.g., `Documents/CS-Project`)
-3. VS Code asks: _“Open cloned repo?”_ → Click **Yes**
+cp .env.example .env
+composer install
+npm install
 
+php artisan key:generate
+php artisan migrate --seed
+php artisan storage:link
 
-
-## 4. Install Dependencies and Configure Git
-1. Go to VS Code settings and search ```powershell```
-2. Open the dropdown and select ```Command Prompt```
-3. Open a terminal in VS Code (**View → Terminal**)
-4. In the terminal, run ```git config --global user.name YOUR_NAME``` making sure to replace YOUR_NAME with your github username
-5. Run ```git config --global user.email YOUR_EMAIL``` making sure to replace YOUR_EMAIL with the email your GitHub account uses
-6. In the same terminal, run ```php.ini``` and use ```Ctrl+F``` to find ```;extension=fileinfo``` and ```;extension=pdo_sqlite``` then delete the ```;``` before both of these
-7. Run ```composer install```
-8. Run ```npm install```
-
-
-
-## 5. Set Up Project
-
-1. In the same VS Code terminal, copy the example .env file:
-   ```
-   copy .env.example .env
-
-   ```
-2. Generate app key:
-   ```
-   php artisan key:generate
-
-   ```
-3. Copy the sample database file:
-   ```
-   copy database\database.sqlite.example database\database.sqlite
-
-   ```
-4. Generate database migrations:
-   ```
-   php artisan migrate
-
-   ```
-
-
-## 6. Run the Project
-
-Two terminals needed (**View → Terminal then Ctrl+Shift+5**):
-
-```
-# Terminal 1 → run Laravel
-php artisan serve
-
-# Terminal 2 → run Tailwind/Vite
 npm run dev
+php artisan serve
 ```
 
-- Now visit [**http://localhost:8000**](http://localhost:8000 "‌") in your browser.
-- You can see changes made to CSS/JS update the website in real time!
+## Notes
+
+- PHP 8.2+
+- Node 18+
+- .env is obviously not committed. Copy `.env.example` and fill in your own values
