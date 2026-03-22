@@ -114,7 +114,7 @@ new class extends Component {
             @forelse($this->alerts as $product)
             <div class="flex items-center justify-between py-2 border-b border-gray-100 last:border-0">
                 <div class="flex items-center gap-3">
-                    <img src="{{ $product->image_url }}" class="w-10 h-10 object-contain rounded bg-gray-50">
+                    <img src="/{{ $product->image_url }}" class="w-10 h-10 object-contain rounded bg-gray-50">
                     <span class="font-medium">{{ $product->product_name }}</span>
                 </div>
                 @if($product->stock === 0)
@@ -172,7 +172,7 @@ new class extends Component {
                     <tr class="border-b">
                         <td class="py-2 pr-4">
                             <div class="flex items-center gap-3">
-                                <img src="{{ $product->image_url }}" class="w-10 h-10 object-contain rounded bg-gray-50">
+                                <img src="/{{ $product->image_url }}" class="w-10 h-10 object-contain rounded bg-gray-50">
                                 <span>{{ $product->product_name }}</span>
                             </div>
                         </td>
