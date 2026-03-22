@@ -45,6 +45,13 @@ class OrderController extends Controller
             return redirect()->route('cart.index')->with('error', 'Cart is empty.');
         }
 
+        foreach ($cart as $item) {
+            $product = Product::findOrFail($item['product_id']);
+            if ($item['quantity'] > $product->stock) {
+                throw new \Exception("Sorry, only {$product->stock} units of {$product->product_name} are available.");
+            }
+        }
+
         $subtotal = 0;
         foreach ($cart as $item) {
             $subtotal += $item['price'] * $item['quantity'];
