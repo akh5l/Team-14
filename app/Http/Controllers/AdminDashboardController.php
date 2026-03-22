@@ -25,6 +25,6 @@ class AdminDashboardController extends Controller
             'expires_at' => now()->addHours(24),
         ]);
 
-        return redirect('/admin')->with('success', 'Invite token generated.');
+        return redirect('/admin')->with('success');
     }
 }
