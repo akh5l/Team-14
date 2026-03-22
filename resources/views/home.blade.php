@@ -21,7 +21,7 @@
         <div class="grid md:grid-cols-3 gap-8">
 
             @foreach ($featured as $product)
-                @include('partials.product-card', ['product' => $product])
+                @include('products.partials.product-card', ['product' => $product])
             @endforeach
 
         </div>
