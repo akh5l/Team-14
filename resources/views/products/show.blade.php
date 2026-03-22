@@ -46,7 +46,7 @@
                 </a>
                 @endguest
             </div>
-            <p class="text-md border-2 rounded-lg mt-12 p-10 mr-10">{{ $product->description_detailed }}</p>
+            <p class="text-md border-2 rounded-lg mt-12 p-10 mr-10 bg-gray-100/50 dark:bg-gray-100/10">{{ $product->description_detailed }}</p>
         </div>
     </div>
 </section>
@@ -126,7 +126,7 @@
 
             <div class="flex flex-col sm:flex-row items-center gap-3">
                 @forelse($product->reviews as $review)
-                <div class="bg-gray-100 dark:bg-[#1a173b] p-4 rounded-lg shadow w-full h-full">
+                <div class="bg-gray-100 dark:bg-gray-100/20 p-4 rounded-lg shadow w-full h-full">
                     <div class="flex justify-between items-start mb-1">
                         <p class="text-yellow-400">
                             {{ str_repeat('⭐', $review->rating) }}
