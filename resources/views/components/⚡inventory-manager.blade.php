@@ -1,7 +1,56 @@
 <?php
 use Livewire\Component;
+use Livewire\WithFileUploads;
+use App\Models\Product;
+use App\Models\Category;
 
 new class extends Component {
+    use WithFileUploads;
+
+    public string $search = '';
+    public string $filter = '';
+
+    public function getProductsProperty()
+    {
+        return Product::with('category')
+            ->when($this->search, fn($q) => $q->where('product_name', 'like', "%{$this->search}%"))
+            ->when($this->filter === 'out_of_stock', fn($q) => $q->where('stock', 0))
+            ->when($this->filter === 'low_stock', fn($q) => $q->whereBetween('stock', [1, 15]))
+            ->when($this->filter === 'in_stock', fn($q) => $q->where('stock', '>=', 16))
+            ->get();
+    }
+
+    public function addProduct()
+    {
+        $this->validate([
+            'newName'                => 'required|string|max:255',
+            'newDescription'         => 'nullable|string',
+            'newDescriptionDetailed' => 'nullable|string',
+            'newCategoryId'          => 'nullable|exists:categories,category_id',
+            'newPrice'               => 'required|numeric|min:0',
+            'newStock'               => 'required|integer|min:0',
+            'newImage'               => 'nullable|image|max:2048',
+        ]);
+
+        $imageUrl = null;
+        if ($this->newImage) {
+            $path = $this->newImage->store('products', 'public');
+            $imageUrl = '/storage/' . $path;
+        }
+
+        Product::create([
+            'product_name'         => $this->newName,
+            'description'          => $this->newDescription,
+            'description_detailed' => $this->newDescriptionDetailed,
+            'category_id'          => $this->newCategoryId ?: null,
+            'price'                => $this->newPrice,
+            'stock'                => $this->newStock,
+            'image_url'            => $imageUrl,
+        ]);
+
+        session()->flash('success', 'Product added.');
+    }
+
 };
 ?>
 
@@ -9,6 +58,7 @@ new class extends Component {
     sections: { alerts: true, products: true, restock: false, reports: false },
     toggle(s) { this.sections[s] = !this.sections[s]; }
 }">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     {{-- alerts --}}
     <div class="mb-6 bg-white shadow rounded-lg border border-gray-100">
@@ -37,9 +87,13 @@ new class extends Component {
             </div>
         </div>
         <div x-show="sections.products" class="px-6 pb-6">
+            @if(session('success'))
+                <div class="mb-4 p-3 bg-green-100 text-green-700 rounded-lg text-sm">{{ session('success') }}</div>
+            @endif
             <div class="flex flex-col md:flex-row gap-3 mb-4">
-                <input type="text" placeholder="Search products..." class="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none">
-                <select class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none">
+                <input type="text" wire:model.live.debounce.200ms="search" placeholder="Search products..."
+                    class="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none">
+                <select wire:model.live="filter" class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none">
                     <option value="">All</option>
                     <option value="in_stock">In Stock</option>
                     <option value="low_stock">Low Stock</option>
@@ -57,13 +111,40 @@ new class extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td colspan="5" class="py-4 text-gray-400">No products yet.</td>
+                    @forelse($this->products as $product)
+                    <tr class="border-b">
+                        <td class="py-2 pr-4">
+                            <div class="flex items-center gap-3">
+                                <img src="{{ $product->image_url }}" class="w-10 h-10 object-contain rounded bg-gray-50">
+                                <span>{{ $product->product_name }}</span>
+                            </div>
+                        </td>
+                        <td class="py-2 pr-4">{{ $product->category?->category_name ?? '—' }}</td>
+                        <td class="py-2 pr-4">£{{ number_format($product->price, 2) }}</td>
+                        <td class="py-2 pr-4">
+                            @if($product->stock === 0)
+                                <span class="text-red-600 font-semibold">Out of stock</span>
+                            @elseif($product->stock < 16)
+                                <span class="text-yellow-600 font-semibold">Low — {{ $product->stock }}</span>
+                            @else
+                                <span class="text-green-600">{{ $product->stock }}</span>
+                            @endif
+                        </td>
+                        <td class="py-2 flex gap-2">
+                            <button class="px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700">Edit</button>
+                            <button class="px-3 py-1 bg-red-600 text-white text-sm rounded hover:bg-red-700">Delete</button>
+                        </td>
                     </tr>
+                    @empty
+                    <tr>
+                        <td colspan="5" class="py-4 text-gray-400">No products found.</td>
+                    </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>
     </div>
+
 
     {{-- restocking --}}
     <div class="mb-6 bg-white shadow rounded-lg border border-gray-100">
@@ -86,7 +167,7 @@ new class extends Component {
         </div>
     </div>
 
-    {{-- reports - chart? --}}
+    {{-- reports - chart --}}
     <div class="mb-6 bg-white shadow rounded-lg border border-gray-100">
         <div class="p-6 flex justify-between items-center cursor-pointer" @click="toggle('reports')">
             <h2 class="text-xl font-semibold text-gray-800">Reports</h2>
