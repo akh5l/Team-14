@@ -80,7 +80,7 @@ class OrderController extends Controller
             $item->product->decrement('stock', $item->quantity);
         }
         $order->update(['order_status' => 'delivered']);
-        return back()->with('success', 'Order marked as delivered.');
+        return back()->with('success');
     }
 
     public function returnItems(Request $request)

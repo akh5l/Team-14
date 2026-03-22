@@ -13,6 +13,7 @@
     <div class="space-y-6">
         @include('admin.partials.invite-token')
         @include('admin.partials.order-process')
+        @include('admin.partials.customer-info')
     </div>
 </main>
 
@@ -29,6 +30,19 @@
         const chevron = document.getElementById('chevron-' + id);
         section.classList.toggle('hidden');
         chevron.classList.toggle('rotate-180');
+    }
+
+    function openEditModal(id, firstName, lastName, email, phone) {
+        document.getElementById('edit_first_name').value = firstName;
+        document.getElementById('edit_last_name').value = lastName;
+        document.getElementById('edit_email').value = email;
+        document.getElementById('edit_phone').value = phone;
+        document.getElementById('editCustomerForm').action = '/admin/customers/' + id;
+        document.getElementById('editCustomerModal').classList.remove('hidden');
+    }
+
+    function closeEditModal() {
+        document.getElementById('editCustomerModal').classList.add('hidden');
     }
 
 </script>

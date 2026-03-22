@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\AdminInvite;
 use App\Models\Order;
+use App\Models\User;
 
 class AdminDashboardController extends Controller
 {
@@ -13,7 +14,8 @@ class AdminDashboardController extends Controller
     {
         $invites = AdminInvite::latest()->get();
         $orders = Order::with('items.product', 'user')->latest('order_date')->get();
-        return view('admin.dashboard', compact('invites', 'orders'));
+        $customers = User::where('role', 'customer')->get();
+        return view('admin.dashboard', compact('invites', 'orders', 'customers'));
     }
 
     public function generateInvite()
