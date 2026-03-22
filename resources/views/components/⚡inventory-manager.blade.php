@@ -10,6 +10,11 @@ new class extends Component {
     public string $search = '';
     public string $filter = '';
 
+    public bool $showAlerts = true;
+    public bool $showProducts = false;
+    public bool $showRestock = false;
+    public bool $showReports = false;
+
     public function getProductsProperty()
     {
         return Product::with('category')
@@ -51,48 +56,52 @@ new class extends Component {
         session()->flash('success', 'Product added.');
     }
 
+    public function deleteProduct()
+    {
+        
+    }
+
 };
 ?>
 
-<div x-data="{
-    sections: { alerts: true, products: true, restock: false, reports: false },
-    toggle(s) { this.sections[s] = !this.sections[s]; }
-}">
+<div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     {{-- alerts --}}
     <div class="mb-6 bg-white shadow rounded-lg border border-gray-100">
-        <div class="p-6 flex justify-between items-center cursor-pointer" @click="toggle('alerts')">
+        <div class="p-6 flex justify-between items-center cursor-pointer" wire:click="$toggle('showAlerts')">
             <h2 class="text-xl font-semibold text-gray-800">Stock Alerts</h2>
-            <svg :class="sections.alerts ? 'rotate-180' : ''" class="w-5 h-5 text-gray-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            <svg class="{{ $showAlerts ? 'rotate-180' : '' }} w-5 h-5 text-gray-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
         </div>
-        <div x-show="sections.alerts" class="px-6 pb-6">
+        @if($showAlerts)
+        <div class="px-6 pb-6">
             <p class="text-gray-500 text-sm">No alerts yet.</p>
         </div>
+        @endif
     </div>
 
     {{-- products --}}
     <div class="mb-6 bg-white shadow rounded-lg border border-gray-100">
-        <div class="p-6 flex justify-between items-center cursor-pointer" @click="toggle('products')">
+        <div class="p-6 flex justify-between items-center cursor-pointer" wire:click="$toggle('showProducts')">
             <h2 class="text-xl font-semibold text-gray-800">Products</h2>
             <div class="flex items-center gap-3" @click.stop>
                 <button class="px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700">
                     Add Product
                 </button>
-                <svg :class="sections.products ? 'rotate-180' : ''" class="w-5 h-5 text-gray-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                <svg class="{{ $showProducts ? 'rotate-180' : '' }} w-5 h-5 text-gray-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                 </svg>
             </div>
         </div>
-        <div x-show="sections.products" class="px-6 pb-6">
+        @if($showProducts)
+        <div class="px-6 pb-6">
             @if(session('success'))
-                <div class="mb-4 p-3 bg-green-100 text-green-700 rounded-lg text-sm">{{ session('success') }}</div>
+            <div class="mb-4 p-3 bg-green-100 text-green-700 rounded-lg text-sm">{{ session('success') }}</div>
             @endif
             <div class="flex flex-col md:flex-row gap-3 mb-4">
-                <input type="text" wire:model.live.debounce.200ms="search" placeholder="Search products..."
-                    class="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none">
+                <input type="text" wire:model.live.debounce.200ms="search" placeholder="Search products..." class="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none">
                 <select wire:model.live="filter" class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none">
                     <option value="">All</option>
                     <option value="in_stock">In Stock</option>
@@ -123,16 +132,15 @@ new class extends Component {
                         <td class="py-2 pr-4">£{{ number_format($product->price, 2) }}</td>
                         <td class="py-2 pr-4">
                             @if($product->stock === 0)
-                                <span class="text-red-600 font-semibold">Out of stock</span>
-                            @elseif($product->stock < 16)
-                                <span class="text-yellow-600 font-semibold">Low — {{ $product->stock }}</span>
-                            @else
+                            <span class="text-red-600 font-semibold">Out of stock</span>
+                            @elseif($product->stock < 16) <span class="text-yellow-600 font-semibold">Low — {{ $product->stock }}</span>
+                                @else
                                 <span class="text-green-600">{{ $product->stock }}</span>
-                            @endif
+                                @endif
                         </td>
                         <td class="py-2 flex gap-2">
                             <button class="px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700">Edit</button>
-                            <button class="px-3 py-1 bg-red-600 text-white text-sm rounded hover:bg-red-700">Delete</button>
+                            <button wire:click="deleteProduct({{ $product->product_id }})" wire:confirm="Are you sure you want to delete this product?" class="px-3 py-1 bg-red-600 text-white text-sm rounded hover:bg-red-700">Delete</button>
                         </td>
                     </tr>
                     @empty
@@ -143,18 +151,20 @@ new class extends Component {
                 </tbody>
             </table>
         </div>
+        @endif
     </div>
 
 
     {{-- restocking --}}
     <div class="mb-6 bg-white shadow rounded-lg border border-gray-100">
-        <div class="p-6 flex justify-between items-center cursor-pointer" @click="toggle('restock')">
+        <div class="p-6 flex justify-between items-center cursor-pointer" wire:click="$toggle('showRestock')">
             <h2 class="text-xl font-semibold text-gray-800">Restock</h2>
-            <svg :class="sections.restock ? 'rotate-180' : ''" class="w-5 h-5 text-gray-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            <svg class="{{ $showRestock ? 'rotate-180' : '' }} w-5 h-5 text-gray-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
         </div>
-        <div x-show="sections.restock" class="px-6 pb-6">
+        @if($showRestock)
+        <div class="px-6 pb-6">
             <div class="flex flex-col md:flex-row gap-3 max-w-lg">
                 <select class="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none">
                     <option value="">Select a product</option>
@@ -165,17 +175,19 @@ new class extends Component {
                 </button>
             </div>
         </div>
+        @endif
     </div>
 
     {{-- reports - chart --}}
     <div class="mb-6 bg-white shadow rounded-lg border border-gray-100">
-        <div class="p-6 flex justify-between items-center cursor-pointer" @click="toggle('reports')">
+        <div class="p-6 flex justify-between items-center cursor-pointer" wire:click="$toggle('showReports')">
             <h2 class="text-xl font-semibold text-gray-800">Reports</h2>
-            <svg :class="sections.reports ? 'rotate-180' : ''" class="w-5 h-5 text-gray-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            <svg class="{{ $showReports ? 'rotate-180' : '' }} w-5 h-5 text-gray-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
         </div>
-        <div x-show="sections.reports" class="px-6 pb-6">
+        @if($showReports)
+        <div class="px-6 pb-6">
             <div class="grid grid-cols-3 gap-4 mb-6">
                 <div class="bg-gray-50 rounded-lg p-4 text-center">
                     <p class="text-sm text-gray-500 mb-1">Total Products</p>
@@ -211,5 +223,6 @@ new class extends Component {
                 </tbody>
             </table>
         </div>
+        @endif
     </div>
 </div>
