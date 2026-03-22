@@ -15,6 +15,26 @@ new class extends Component {
     public bool $showProducts = false;
     public bool $showRestock = false;
     public bool $showReports = true;
+    public bool $showAddModal = false;
+    public bool $showEditModal = false;
+
+    public $newName = '';
+    public $newDescription = '';
+    public $newDescriptionDetailed = '';
+    public $newCategoryId = '';
+    public $newPrice = '';
+    public $newStock = '';
+    public $newImage;
+
+    public $editProductId;
+    public $editName = '';
+    public $editDescription = '';
+    public $editDescriptionDetailed = '';
+    public $editCategoryId = '';
+    public $editPrice = '';
+    public $editStock = '';
+    public $editImage;
+    public $editImageUrl = '';
 
     public function getProductsProperty()
     {
@@ -77,7 +97,7 @@ new class extends Component {
             $imageUrl = '/storage/' . $path;
         }
 
-        Product::create([
+        $product = Product::create([
             'product_name'         => $this->newName,
             'description'          => $this->newDescription,
             'description_detailed' => $this->newDescriptionDetailed,
@@ -87,14 +107,75 @@ new class extends Component {
             'image_url'            => $imageUrl,
         ]);
 
+        StockLog::create([
+            'product_id' => $product->product_id,
+            'change'     => $this->newStock,
+            'reason'     => 'initial stock',
+        ]);
+    }
+    public function updateProduct()
+    {
+        $this->validate([
+            'editName'                => 'required|string|max:255',
+            'editDescription'         => 'nullable|string',
+            'editDescriptionDetailed' => 'nullable|string',
+            'editCategoryId'          => 'nullable|exists:categories,category_id',
+            'editPrice'               => 'required|numeric|min:0',
+            'editStock'               => 'required|integer|min:0',
+            'editImage'               => 'nullable|image|max:2048',
+        ]);
+
+        $product = Product::findOrFail($this->editProductId);
+        $oldStock = $product->stock;
+
+        $imageUrl = $product->image_url;
+        if ($this->editImage) {
+            $path = $this->editImage->store('products', 'public');
+            $imageUrl = '/storage/' . $path;
+        }
+
+        $product->update([
+            'product_name'         => $this->editName,
+            'description'          => $this->editDescription,
+            'description_detailed' => $this->editDescriptionDetailed,
+            'category_id'          => $this->editCategoryId ?: null,
+            'price'                => $this->editPrice,
+            'stock'                => $this->editStock,
+            'image_url'            => $imageUrl,
+        ]);
+
+        $change = $this->editStock - $oldStock;
+        if ($change !== 0) {
+            StockLog::create([
+                'product_id' => $product->product_id,
+                'change'     => $change,
+                'reason'     => 'manual update',
+            ]);
+        }
+
+        $this->reset(['editProductId', 'editName', 'editDescription', 'editDescriptionDetailed', 'editCategoryId', 'editPrice', 'editStock', 'editImage', 'editImageUrl', 'showEditModal']);
         session()->flash('success', 'Product added.');
     }
 
-    public function deleteProduct()
+    public function deleteProduct($productId)
     {
-
+        Product::findOrFail($productId)->delete();
+        session()->flash('success', 'Product deleted.');
     }
 
+    public function openEditModal($productId)
+    {
+        $product = Product::findOrFail($productId);
+        $this->editProductId = $productId;
+        $this->editName = $product->product_name;
+        $this->editDescription = $product->description;
+        $this->editDescriptionDetailed = $product->description_detailed;
+        $this->editCategoryId = $product->category_id;
+        $this->editPrice = $product->price;
+        $this->editStock = $product->stock;
+        $this->editImageUrl = $product->image_url;
+        $this->showEditModal = true;
+    }
 };
 ?>
 
@@ -138,7 +219,7 @@ new class extends Component {
         <div class="p-6 flex justify-between items-center cursor-pointer" wire:click="$toggle('showProducts')">
             <h2 class="text-xl font-semibold text-gray-800">Products</h2>
             <div class="flex items-center gap-3" @click.stop>
-                <button class="px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700">
+                <button wire:click="$set('showAddModal', true)" class="px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-lg hover:bg-blue-700">
                     Add Product
                 </button>
                 <svg class="{{ $showProducts ? 'rotate-180' : '' }} w-5 h-5 text-gray-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -190,7 +271,7 @@ new class extends Component {
                                 @endif
                         </td>
                         <td class="py-2 flex gap-2">
-                            <button class="px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700">Edit</button>
+                            <button wire:click="openEditModal({{ $product->product_id }})" class="px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700">Edit</button>
                             <button wire:click="deleteProduct({{ $product->product_id }})" wire:confirm="Are you sure you want to delete this product?" class="px-3 py-1 bg-red-600 text-white text-sm rounded hover:bg-red-700">Delete</button>
                         </td>
                     </tr>
@@ -323,4 +404,68 @@ new class extends Component {
         </div>
         @endif
     </div>
+    {{-- add product modal --}}
+    @if($showAddModal)
+    <div class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-lg max-h-screen overflow-y-auto">
+            <h2 class="text-xl font-semibold mb-4">Add Product</h2>
+            <div class="space-y-3">
+                <input type="text" wire:model="newName" placeholder="Product name" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none">
+                @error('newName') <p class="text-red-500 text-sm">{{ $message }}</p> @enderror
+                <textarea wire:model="newDescription" placeholder="Short description" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none"></textarea>
+                <textarea wire:model="newDescriptionDetailed" placeholder="Detailed description" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none"></textarea>
+                <select wire:model="newCategoryId" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none">
+                    <option value="">No category</option>
+                    @foreach(Category::all() as $category)
+                    <option value="{{ $category->category_id }}">{{ $category->category_name }}</option>
+                    @endforeach
+                </select>
+                <input type="number" wire:model="newPrice" placeholder="Price" step="0.01" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none">
+                @error('newPrice') <p class="text-red-500 text-sm">{{ $message }}</p> @enderror
+                <input type="number" wire:model="newStock" placeholder="Initial stock" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none">
+                @error('newStock') <p class="text-red-500 text-sm">{{ $message }}</p> @enderror
+                <input type="file" wire:model="newImage" accept="image/*" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none">
+                @error('newImage') <p class="text-red-500 text-sm">{{ $message }}</p> @enderror
+            </div>
+            <div class="flex gap-2 mt-4">
+                <button wire:click="addProduct" class="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-semibold">Add</button>
+                <button wire:click="$set('showAddModal', false)" class="flex-1 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">Cancel</button>
+            </div>
+        </div>
+    </div>
+    @endif
+
+    {{-- edit product modal --}}
+    @if($showEditModal)
+    <div class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-lg max-h-screen overflow-y-auto">
+            <h2 class="text-xl font-semibold mb-4">Edit Product</h2>
+            <div class="space-y-3">
+                <input type="text" wire:model="editName" placeholder="Product name" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none">
+                @error('editName') <p class="text-red-500 text-sm">{{ $message }}</p> @enderror
+                <textarea wire:model="editDescription" placeholder="Short description" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none"></textarea>
+                <textarea wire:model="editDescriptionDetailed" placeholder="Detailed description" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none"></textarea>
+                <select wire:model="editCategoryId" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none">
+                    <option value="">No category</option>
+                    @foreach(Category::all() as $category)
+                    <option value="{{ $category->category_id }}">{{ $category->category_name }}</option>
+                    @endforeach
+                </select>
+                <input type="number" wire:model="editPrice" placeholder="Price" step="0.01" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none">
+                @error('editPrice') <p class="text-red-500 text-sm">{{ $message }}</p> @enderror
+                <input type="number" wire:model="editStock" placeholder="Stock" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none">
+                @error('editStock') <p class="text-red-500 text-sm">{{ $message }}</p> @enderror
+                @if($editImageUrl)
+                <img src="/{{ $editImageUrl }}" class="w-20 h-20 object-contain rounded bg-gray-50">
+                @endif
+                <input type="file" wire:model="editImage" accept="image/*" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none">
+                @error('editImage') <p class="text-red-500 text-sm">{{ $message }}</p> @enderror
+            </div>
+            <div class="flex gap-2 mt-4">
+                <button wire:click="updateProduct" class="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-semibold">Save</button>
+                <button wire:click="$set('showEditModal', false)" class="flex-1 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">Cancel</button>
+            </div>
+        </div>
+    </div>
+    @endif
 </div>
