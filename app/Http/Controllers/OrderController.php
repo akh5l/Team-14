@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\StockLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -78,6 +79,11 @@ class OrderController extends Controller
     {
         foreach ($order->items as $item) {
             $item->product->decrement('stock', $item->quantity);
+            StockLog::create([
+                'product_id' => $item->product->product_id,
+                'change' => -$item->quantity,
+                'reason' => 'order',
+            ]);
         }
         $order->update(['order_status' => 'delivered']);
         return back()->with('success');

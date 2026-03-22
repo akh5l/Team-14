@@ -7,6 +7,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -97,6 +98,8 @@ Route::middleware(['auth', 'admin', 'force.password'])->group(function () {
 
     Route::put('/admin/customers/{user}', [CustomerController::class, 'update'])->name('admin.customers.update');
     Route::delete('/admin/customers/{user}', [CustomerController::class, 'destroy'])->name('admin.customers.destroy');
+
+    Route::get('/admin/inventory', fn() => view('admin.inventory'))->name('admin.inventory');
 });
 
 require __DIR__.'/auth.php';
