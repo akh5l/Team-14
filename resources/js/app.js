@@ -27,21 +27,31 @@ function loadFontWeight() {
 
 // theme toggle
 
-const toggle = document.getElementById("themeToggle");
-const root = document.documentElement;
+document.addEventListener("DOMContentLoaded", () => {
 
-if (localStorage.getItem("theme") === "dark") {
-    root.classList.add("dark");
-    if (toggle) toggle.textContent = "☀️";
-}
+    const toggle = document.getElementById("themeToggle");
+    const root = document.documentElement;
 
-if (toggle) {
-    toggle.addEventListener("click", () => {
-        const isDark = root.classList.toggle("dark");
-        toggle.textContent = isDark ? "☀️" : "🌙";
-        localStorage.setItem("theme", isDark ? "dark" : "light");
-    });
-}
+    const savedTheme = localStorage.getItem("theme");
+
+    if (savedTheme === "dark") {
+        root.classList.add("dark");
+        if (toggle) toggle.textContent = "☀️";
+    }
+
+    if (toggle) {
+        toggle.addEventListener("click", () => {
+
+            const isDark = root.classList.toggle("dark");
+
+            toggle.textContent = isDark ? "☀️" : "🌙";
+
+            localStorage.setItem("theme", isDark ? "dark" : "light");
+
+        });
+    }
+
+});
 
 // star background layer
 
