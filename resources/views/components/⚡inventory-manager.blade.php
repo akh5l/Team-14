@@ -181,7 +181,7 @@ new class extends Component {
 
 <div>
     {{-- alerts --}}
-    <div class="mb-6 bg-white dark:bg-gray-200 shadow rounded-lg border border-gray-100">
+    <div class="mb-6 bg-white shadow rounded-lg border border-gray-100">
         <div class="p-6 flex justify-between items-center cursor-pointer" wire:click="$toggle('showAlerts')">
             <h2 class="text-xl font-semibold text-gray-800 flex items-center gap-2">
                 Stock Alerts
@@ -215,7 +215,7 @@ new class extends Component {
     </div>
 
     {{-- products --}}
-    <div class="mb-6 bg-white dark:bg-gray-200 shadow rounded-lg border border-gray-100">
+    <div class="mb-6 bg-white shadow rounded-lg border border-gray-100">
         <div class="p-6 flex justify-between items-center cursor-pointer" wire:click="$toggle('showProducts')">
             <h2 class="text-xl font-semibold text-gray-800">Products</h2>
             <div class="flex items-center gap-3" @click.stop>
@@ -288,7 +288,7 @@ new class extends Component {
 
 
     {{-- restocking --}}
-    <div class="mb-6 bg-white dark:bg-gray-200 shadow rounded-lg border border-gray-100">
+    <div class="mb-6 bg-white shadow rounded-lg border border-gray-100">
         <div class="p-6 flex justify-between items-center cursor-pointer" wire:click="$toggle('showRestock')">
             <h2 class="text-xl font-semibold text-gray-800">Restock</h2>
             <svg class="{{ $showRestock ? 'rotate-180' : '' }} w-5 h-5 text-gray-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -316,7 +316,7 @@ new class extends Component {
     </div>
 
     {{-- reports - chart --}}
-    <div class="mb-6 bg-white dark:bg-gray-200 shadow rounded-lg border border-gray-100">
+    <div class="mb-6 bg-white shadow rounded-lg border border-gray-100">
         <div class="p-6 flex justify-between items-center cursor-pointer" wire:click="$toggle('showReports')">
             <h2 class="text-xl font-semibold text-gray-800">Reports</h2>
             <svg class="{{ $showReports ? 'rotate-180' : '' }} w-5 h-5 text-gray-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -407,7 +407,7 @@ new class extends Component {
     {{-- add product modal --}}
     @if($showAddModal)
     <div class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
-        <div class="bg-white dark:bg-gray-200 rounded-lg shadow-lg p-6 w-full max-w-lg max-h-screen overflow-y-auto">
+        <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-lg max-h-screen overflow-y-auto">
             <h2 class="text-xl font-semibold mb-4 dark:text-gray-600">Add Product</h2>
             <div class="space-y-3">
                 <input type="text" wire:model="newName" placeholder="Product name" class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none">
