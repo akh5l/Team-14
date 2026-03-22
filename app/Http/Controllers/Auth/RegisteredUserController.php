@@ -38,8 +38,6 @@ class RegisteredUserController extends Controller
             'last_name' => ['required', 'string', 'max:255'],
 
             'phone' => ['nullable', 'string', 'max:20'],
-            'address' => ['nullable', 'string'],
-
         ]);
 
         $user = User::create([
@@ -51,7 +49,6 @@ class RegisteredUserController extends Controller
             'last_name' => $request->last_name,
 
             'phone' => $request->phone,
-            'address' => $request->address,
 
             'role' => 'customer',
         ]);
