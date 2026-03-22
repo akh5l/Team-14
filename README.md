@@ -29,8 +29,8 @@ A full-stack e-commerce web app for purchasing video games, tabletop games, cons
 ## Setup
 
 ```bash
-git clone <repo-url>
-cd <project-folder>
+git clone https://github.com/akh5l/Team-14.git
+cd laravel
 
 cp .env.example .env
 composer install
