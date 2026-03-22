@@ -34,13 +34,15 @@
                     <a href="{{ route('admin.dashboard') }}" class="hover:underline variable-heading">Admin</a>
                     @endif
                     <a href="{{ route('profile.edit') }}" class="hover:underline variable-heading">Profile</a>
+                @endauth
+                    <a href="{{ url('/products') }}" class="hover:underline variable-heading">Shop</a>
+                @auth
                     <a href="{{ url('/cart') }}" class="hover:underline variable-heading">Cart</a>
                 @endauth
                 @guest
                     <a href="{{ url('/login') }}" class="hover:underline variable-heading">Sign in</a>
                     <a href="{{ url('/register') }}" class="hover:underline variable-heading">Register</a>
                 @endguest
-                <a href="{{ url('/products') }}" class="hover:underline variable-heading">Shop</a>
                 <a href="{{ url('/faq') }}" class="hover:underline variable-heading">FAQs</a>
                 <a href="{{ url('/about') }}" class="hover:underline variable-heading">About Us</a>
                 <a href="{{ url('/contact-us') }}" class="hover:underline variable-heading">Contact</a>
