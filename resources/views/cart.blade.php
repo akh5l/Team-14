@@ -92,7 +92,7 @@
                         </div>
                     </div>
 
-                    <div class="my-4 text-sm space-y-1">
+                    <div class="my-8 text-sm space-y-2">
                         <div class="mt-2 flex justify-between">
                             <span>Your Subtotal:</span>
                             <span id="subtotal">£{{ number_format($subtotal, 2) }}</span>
@@ -108,10 +108,16 @@
                             <span id="total">£{{ number_format($subtotal, 2) }}</span>
                         </div>
 
+                        @if (count($cart) > 0)
                         <button onclick="window.location.href='{{ route('checkout.index') }}'"
                             class="w-full bg-blue-500 hover:bg-blue-600 text-lg text-white py-2.5 rounded-lg font-semibold hover:scale-105 hover:shadow-lg active:scale-100 transition transform duration-200 rounded-lg shadow-md">
                             Proceed to Checkout
                         </button>
+                        @else
+                        <button class="w-full bg-blue-500 hover:bg-blue-600 text-lg text-white py-2.5 rounded-lg font-semibold rounded-lg shadow-md">
+                            Your cart is empty.
+                        </button>
+                        @endif
                     </div>
 
                 </div>
