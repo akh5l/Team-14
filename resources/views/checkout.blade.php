@@ -8,7 +8,7 @@
     <div class="md:grid md:grid-cols-3 gap-10">
 
         <!-- left side of the form with the payment form-->
-        <div class="md:col-span-2 bg-white p-6 rounded-lg shadow">
+        <div class="md:col-span-2 bg-white p-6 rounded-lg shadow dark:text-gray-900">
             <!-- contact stuff and info -->
             <h2 class="text-xl font-semibold mb-4">Shipping Address</h2>
             <form id="checkoutForm" method="POST" action="{{ route('orders.store') }}" class="space-y-6">
@@ -77,7 +77,7 @@
 
         <!-- right side for summary of product(s)-->
         <div class="md:grid md:cols-span-1">
-            <div class="bg-white p-6 rounded-lg shadow border border-gray-100 h-fit">
+            <div class="bg-white p-6 rounded-lg shadow border border-gray-100 h-fit dark:text-gray-900">
                 <h2 class="text-xl font-semibold mb-4">Order Summary</h2>
 
                 @foreach ($items as $item)

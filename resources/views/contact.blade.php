@@ -4,7 +4,7 @@
 <div class="flex-grow flex justify-center items-center py-12">
     <div class="flex gap-12 items-center">
 
-        <img src="/images/contact_question.png" class="w-[800px] h-auto object-contain">
+        <img src="/images/contact_question.png" class="w-[800px] h-auto object-contain rounded-lg">
 
         <div class="w-full max-w-xl bg-[#2c2f66] shadow-2xl rounded-2xl p-8 text-white">
 

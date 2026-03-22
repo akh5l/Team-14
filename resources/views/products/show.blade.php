@@ -97,7 +97,7 @@
             </ul>
         </div>
 
-        <div>
+        <div class="border-2 rounded-lg p-3">
             <h3 class="text-2xl font-semibold mb-4">Customer Reviews</h3>
 
             @auth
@@ -149,7 +149,7 @@
                     </div>
                 </div>
                 @empty
-                <p class="text-gray-800">No reviews yet.</p>
+                <p class="text-gray-800 dark:text-gray-300">No reviews yet.</p>
                 @endforelse
             </div>
         </div>

@@ -17,7 +17,7 @@
         <div class="bg-white rounded-lg shadow p-6 border border-gray-100">
             <div class="flex flex-col md:flex-row md:justify-between md:items-start gap-4 mb-4">
                 <div>
-                    <p class="font-semibold text-3xl mb-2">Order #{{ $loop->count - $loop->iteration + 1 }}</p>
+                    <p class="font-semibold text-3xl mb-2 dark:text-gray-900">Order #{{ $loop->count - $loop->iteration + 1 }}</p>
                     <p class="text-md text-black">Date: {{ $order->order_date}}</p>
                     <p class="text-md text-gray-600">Status: {{ $order->order_status}}</p>
                     <p class="text-md text-gray-600">Payment Method: {{ $order->payment_method}}</p>
@@ -33,8 +33,8 @@
                 </div>
             </div>
             <hr class="my-4">
-            <h2 class="font-semibold mb-3">Order Items:</h2>
-            <div class="space-y-4">
+            <h2 class="font-semibold mb-3 dark:text-gray-900">Order Items:</h2>
+            <div class="space-y-4 dark:text-gray-900">
                 @foreach ($order->items as $item)
                 <div class="flex justify-between items-start border-b pb-3 px-3">
                     <div>
@@ -78,19 +78,19 @@
     {{-- return orderItems modal --}}
     <div id="returnModal" class="hidden fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
         <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-lg modal-show">
-            <h2 class="text-xl font-semibold mb-4">Return Items</h2>
+            <h2 class="text-xl font-semibold mb-4 dark:text-gray-900">Return Items</h2>
 
             {{-- order selection --}}
             <div id="returnStep1">
                 <p class="text-sm text-black mb-3">Select an order to return items from:</p>
-                <div class="space-y-2 max-h-72 overflow-y-auto">
+                <div class="space-y-2 max-h-72 overflow-y-auto dark:text-gray-900">
                     @foreach($orders as $order)
                     @php
                     $returnable = $order->order_status === 'delivered' &&
                     $order->order_date->diffInDays(now()) <= 30 && $order->items->contains(fn($i) => !$i->returned); // cheeky lambda
                         @endphp
                         <button @if($returnable) onclick="selectOrder({{ $order->order_id }})" @else disabled @endif class="w-full text-left px-4 py-3 rounded-lg border
-                            {{ $returnable ? 'hover:bg-gray-50 cursor-pointer border-gray-200' : 'opacity-40 cursor-not-allowed border-gray-100 bg-gray-50' }}">
+                            {{ $returnable ? 'hover:bg-gray-50 cursor-pointer border-gray-200' : 'opacity-60 cursor-not-allowed border-gray-100 bg-gray-200' }}">
                             <p class="font-medium">Order #{{ $loop->count - $loop->iteration + 1 }}</p>
                             <p class="text-sm text-gray-500">{{ $order->order_date }} · £{{ number_format($order->total_amount, 2) }}</p>
                             @if(!$returnable)
@@ -113,7 +113,7 @@
             </div>
 
             {{-- item selection --}}
-            <div id="returnStep2" class="hidden">
+            <div id="returnStep2" class="hidden dark:text-gray-900">
                 <button onclick="backToStep1()" class="text-sm text-blue-600 hover:underline mb-3 inline-block">← Back</button>
                 <p class="text-sm text-black mb-3">Select items to return:</p>
                 <form method="POST" action="{{ route('orders.return') }}">
