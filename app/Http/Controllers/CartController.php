@@ -17,6 +17,13 @@ class CartController extends Controller
     {
         $cart = session()->get('cart', []);
 
+        $currentQty = isset($cart[$product->product_id]) ? $cart[$product->product_id]['quantity'] : 0;
+
+        if ($currentQty >= $product->stock) {
+            return redirect()->back()->with('error', 'Sorry, no more stock available for this product.');
+        }
+
+
         if (isset($cart[$product->product_id])) {
             $cart[$product->product_id]['quantity']++;
         } else {
@@ -53,10 +60,11 @@ class CartController extends Controller
         $cart = session()->get('cart', []);
         if (isset($cart[$productId])) {
             $quantity = (int) $request->quantity;
+            $product = Product::findOrFail($productId);
             if ($quantity <= 0) {
                 unset($cart[$productId]);
             } else {
-                $cart[$productId]['quantity'] = $quantity;
+                $cart[$productId]['quantity'] = min($quantity, $product->stock);
             }
             session()->put('cart', $cart);
         }
